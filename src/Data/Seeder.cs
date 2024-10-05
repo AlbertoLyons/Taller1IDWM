@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.OpenApi.Writers;
 using Bogus;
 using Taller_1_IDWM.src.Models;
 
@@ -10,16 +5,17 @@ namespace Taller_1_IDWM.src.Data
 {
     public class Seeder
     {
-         public static void Initialize(IServiceProvider serviceProvider)
+        public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var scope = serviceProvider.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<DataContext>();
+                var customersContext = services.GetRequiredService<DataContext>();
+                var adminContext = services.GetRequiredService<AdminContext>();
 
-                if (!context.Users.Any())
+                if (!adminContext.Admin.Any())
                 {
-                    context.Users.AddRange(
+                    adminContext.Admin.AddRange(
                         new User
                         {
                             Rut = "20416699-4",
@@ -30,6 +26,11 @@ namespace Taller_1_IDWM.src.Data
                             Password = "P4ssw0rd",
                         }
                     );
+                    adminContext.SaveChanges();
+                }
+
+                if (!customersContext.Users.Any())
+                {
                     List<string> genders = new List<string> { "Masculino", "Femenino", "Prefiero no decirlo", "Otro" };
                     Random random = new Random();
                     var userFaker = new Faker<User>()
@@ -42,10 +43,10 @@ namespace Taller_1_IDWM.src.Data
                     .RuleFor(u => u.Password, f => f.Internet.Password());
 
                     var users = userFaker.Generate(100);
-                    context.Users.AddRange(users);
-                    context.SaveChanges();
+                    customersContext.Users.AddRange(users);
+                    customersContext.SaveChanges();
                 }
-                if (!context.Products.Any()) 
+                if (!customersContext.Products.Any()) 
                 {
                     var productFaker = new Faker<Product>()
                     
@@ -56,11 +57,11 @@ namespace Taller_1_IDWM.src.Data
                     .RuleFor(p => p.Image, f => "");
 
                     var products = productFaker.Generate(100);
-                    context.Products.AddRange(products);
-                    context.SaveChanges();
+                    customersContext.Products.AddRange(products);
+                    customersContext.SaveChanges();
                 }
 
-                context.SaveChanges();
+                customersContext.SaveChanges();
             }
         }
     }

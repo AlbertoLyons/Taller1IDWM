@@ -1,11 +1,12 @@
 using Taller_1_IDWM.src.Data;
 using Microsoft.EntityFrameworkCore;
+using Taller_1_IDWM.src.Data.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite("Data Source = customers.db"));
-builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite("Data Source = admin.db"));
+builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite(builder.Configuration.GetConnectionString("CustomersConnection")));
+builder.Services.AddDbContext<AdminContext>(opt => opt.UseSqlite(builder.Configuration.GetConnectionString("AdminConnection")));
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<Seeder>();
 
