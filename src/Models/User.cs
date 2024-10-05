@@ -5,16 +5,20 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Taller_1_IDWM.src.Models
+
 {
     public class User
     {
         [Key]
         public int Id { get; set; }
         public string Rut { get; set; } = string.Empty;
-        public int Birthdate { get; set; }
-        public int Mail { get; set; }
-        public int MyProperty { get; set; }
-        public int Gender { get; set; }
-        public int Password { get; set; }
+        public DateTime Birthdate { get; set; }
+        public string Mail { get; set; } = string.Empty;
+        [StringLength(255, MinimumLength = 8)]
+        public string Name { get; set; } = string.Empty;
+         [RegularExpression(@"Masculino|Femenino|Prefiero no decirlo|otro")]
+        public string Gender { get; set; } = string.Empty;
+        [StringLength(20, MinimumLength = 8)]
+        public string Password { get; set; } = string.Empty;
     }
 }
