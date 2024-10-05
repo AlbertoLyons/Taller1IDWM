@@ -3,17 +3,23 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite("Data Source = customers.db"));
 builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite("Data Source = admin.db"));
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<Seeder>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Seed the database
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;   
+    var context = services.GetRequiredService<DataContext>();
+    await context.Database.MigrateAsync();
+    Seeder.Initialize(services);
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

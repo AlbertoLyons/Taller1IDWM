@@ -12,11 +12,11 @@ namespace Taller_1_IDWM.src.Models
         [Key]
         public int Id { get; set; }
         public string Rut { get; set; } = string.Empty;
-        public DateOnly Birthdate { get; set; }
+        public DateTime Birthdate { get; set; }
         public string Mail { get; set; } = string.Empty;
         [StringLength(255, MinimumLength = 8)]
         public string Name { get; set; } = string.Empty;
-         [RegularExpression(@"MASCULINO|FEMENINO|PREFIERO NO DECIRLO|OTRO")]
+         [RegularExpression(@"Masculino|Femenino|Prefiero no decirlo|otro")]
         public string Gender { get; set; } = string.Empty;
         [StringLength(20, MinimumLength = 8)]
         public string Password { get; set; } = string.Empty;

@@ -12,7 +12,7 @@ namespace Taller_1_IDWM.src.Models
         public int ID { get; set; }
         [StringLength(64, MinimumLength = 10)]
         public string Name { get; set; } = string.Empty;
-        [RegularExpression(@"Poleras|Gorros|Jugueterpia|Alimentación|Libros")]
+        [RegularExpression(@"Poleras|Gorros|Jugueteria|Alimentacion|Libros")]
         public string Type { get; set; } = string.Empty;
         [Range(1, 100000000)]
         public int Price { get; set; }

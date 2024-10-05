@@ -256,3 +256,4 @@ C:\Users\nikol\Documents\Universidad\IntroDesarrolloWebMovil\Taller1\Taller1IDWM
 C:\Users\nikol\Documents\Universidad\IntroDesarrolloWebMovil\Taller1\Taller1IDWM\obj\Debug\net8.0\Taller-1.39B92BA5.Up2Date
 C:\Users\nikol\Documents\Universidad\IntroDesarrolloWebMovil\Taller1\Taller1IDWM\obj\Debug\net8.0\Taller-1-IDWM.genruntimeconfig.cache
 C:\Users\nikol\Documents\Universidad\IntroDesarrolloWebMovil\Taller1\Taller1IDWM\obj\Debug\net8.0\ref\Taller-1-IDWM.dll
+C:\Users\Alberto\Desktop\Informatica\Introduccion al desarrollo web movil\Taller-1-IDWM\bin\Debug\net8.0\Bogus.dll
