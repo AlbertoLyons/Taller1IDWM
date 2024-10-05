@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Taller_1_IDWM.Models
+namespace Taller_1_IDWM.src.Models
+
 {
     public class User
     {
