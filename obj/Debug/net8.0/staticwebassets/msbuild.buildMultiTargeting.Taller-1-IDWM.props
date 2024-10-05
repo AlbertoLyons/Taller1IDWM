@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Taller-1-IDWM.props" />
+</Project>
