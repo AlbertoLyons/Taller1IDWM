@@ -9,16 +9,16 @@ namespace Taller_1_IDWM.src.Models
     public class Product
     {
         [Key]
-        int ID { get; set; }
+        public int ID { get; set; }
         [StringLength(64, MinimumLength = 10)]
-        string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [RegularExpression(@"Poleras|Gorros|Jugueterpia|Alimentación|Libros")]
-        string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
         [Range(1, 100000000)]
-        int Price { get; set; }
+        public int Price { get; set; }
         [Range(1, 100000)]
-        int Stock { get; set; }
+        public int Stock { get; set; }
         [StringLength(256, MinimumLength = 10)]
-        string Image { get; set; }
+        public string Image { get; set; } = string.Empty;
     }
 }

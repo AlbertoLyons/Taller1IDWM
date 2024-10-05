@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alberto\\Desktop\\Informatica\\Introduccion al desarrollo web movil\\Taller-1-IDWM\\Taller-1-IDWM.csproj": {}
+    "C:\\Users\\nikol\\Documents\\Universidad\\IntroDesarrolloWebMovil\\Taller1\\Taller1IDWM\\Taller-1-IDWM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alberto\\Desktop\\Informatica\\Introduccion al desarrollo web movil\\Taller-1-IDWM\\Taller-1-IDWM.csproj": {
+    "C:\\Users\\nikol\\Documents\\Universidad\\IntroDesarrolloWebMovil\\Taller1\\Taller1IDWM\\Taller-1-IDWM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alberto\\Desktop\\Informatica\\Introduccion al desarrollo web movil\\Taller-1-IDWM\\Taller-1-IDWM.csproj",
+        "projectUniqueName": "C:\\Users\\nikol\\Documents\\Universidad\\IntroDesarrolloWebMovil\\Taller1\\Taller1IDWM\\Taller-1-IDWM.csproj",
         "projectName": "Taller-1-IDWM",
-        "projectPath": "C:\\Users\\Alberto\\Desktop\\Informatica\\Introduccion al desarrollo web movil\\Taller-1-IDWM\\Taller-1-IDWM.csproj",
-        "packagesPath": "C:\\Users\\Alberto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alberto\\Desktop\\Informatica\\Introduccion al desarrollo web movil\\Taller-1-IDWM\\obj\\",
+        "projectPath": "C:\\Users\\nikol\\Documents\\Universidad\\IntroDesarrolloWebMovil\\Taller1\\Taller1IDWM\\Taller-1-IDWM.csproj",
+        "packagesPath": "C:\\Users\\nikol\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nikol\\Documents\\Universidad\\IntroDesarrolloWebMovil\\Taller1\\Taller1IDWM\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Alberto\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\nikol\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -59,7 +59,7 @@
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[8.0.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

@@ -293,7 +293,7 @@
           }
         }
       },
-      "Microsoft.Data.Sqlite.Core/8.0.8": {
+      "Microsoft.Data.Sqlite.Core/8.0.4": {
         "type": "package",
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.6"
@@ -393,10 +393,10 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Sqlite/8.0.8": {
+      "Microsoft.EntityFrameworkCore.Sqlite/8.0.4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Sqlite.Core": "8.0.8",
+          "Microsoft.EntityFrameworkCore.Sqlite.Core": "8.0.4",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.6"
         },
         "compile": {
@@ -406,12 +406,12 @@
           "lib/net8.0/_._": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Sqlite.Core/8.0.8": {
+      "Microsoft.EntityFrameworkCore.Sqlite.Core/8.0.4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "8.0.8",
-          "Microsoft.EntityFrameworkCore.Relational": "8.0.8",
-          "Microsoft.Extensions.DependencyModel": "8.0.1"
+          "Microsoft.Data.Sqlite.Core": "8.0.4",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.4",
+          "Microsoft.Extensions.DependencyModel": "8.0.0"
         },
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Sqlite.dll": {
@@ -1610,10 +1610,10 @@
         "microsoft.codeanalysis.workspaces.common.nuspec"
       ]
     },
-    "Microsoft.Data.Sqlite.Core/8.0.8": {
-      "sha512": "qHInO2EvOcPhjgboP0TGnXM7rASdvWXrw6jAH8Yuz5YP82VTje7d/NKiX1i+dVbE3+G3JuW1kqNVB8yLvsqgYA==",
+    "Microsoft.Data.Sqlite.Core/8.0.4": {
+      "sha512": "x5FE5m1h31UIDEk0j3r38HtYvsa0fxd5jXzvE/SARI7LecXt/jm4z2SUl6TEoJGQOo9Ow2wg3a0MU2E1TVVAdA==",
       "type": "package",
-      "path": "microsoft.data.sqlite.core/8.0.8",
+      "path": "microsoft.data.sqlite.core/8.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1625,7 +1625,7 @@
         "lib/net8.0/Microsoft.Data.Sqlite.xml",
         "lib/netstandard2.0/Microsoft.Data.Sqlite.dll",
         "lib/netstandard2.0/Microsoft.Data.Sqlite.xml",
-        "microsoft.data.sqlite.core.8.0.8.nupkg.sha512",
+        "microsoft.data.sqlite.core.8.0.4.nupkg.sha512",
         "microsoft.data.sqlite.core.nuspec"
       ]
     },
@@ -1706,24 +1706,24 @@
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Sqlite/8.0.8": {
-      "sha512": "IDB7Xs16hN/3VkWFCCa4r3fqoJxMVezwq418gr8dBkRBO0pxH+BX/Kjk/U3PYXDvzVLkXqUgJsHv1XoFrJbZPQ==",
+    "Microsoft.EntityFrameworkCore.Sqlite/8.0.4": {
+      "sha512": "7y0Z7y1SwBNswxlNY9zduqk5I0+pWWzYIFhtJtvo55RcfomIQDmOODG/s5+iOxv0JoVHjFOgAc8AMI3DwAaoig==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlite/8.0.8",
+      "path": "microsoft.entityframeworkcore.sqlite/8.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "PACKAGE.md",
         "lib/net8.0/_._",
-        "microsoft.entityframeworkcore.sqlite.8.0.8.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlite.8.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlite.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Sqlite.Core/8.0.8": {
-      "sha512": "w5k/ENj3+BPbmggqh83RRuPhhKcJmW7CmdJuGwdX1eFrmptJwnzKiHfQCPkJAu9df16PSs5YFeWrDgepfqnltA==",
+    "Microsoft.EntityFrameworkCore.Sqlite.Core/8.0.4": {
+      "sha512": "4XCrL6vdFQSXZY6b89cXvjYNvTKP5azMvgacI2XE+B0D7Lg3zYSjmfLZYWfR3j3izx5X8xCTkHZnaRHHfHcv+w==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlite.core/8.0.8",
+      "path": "microsoft.entityframeworkcore.sqlite.core/8.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1731,7 +1731,7 @@
         "PACKAGE.md",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Sqlite.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Sqlite.xml",
-        "microsoft.entityframeworkcore.sqlite.core.8.0.8.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlite.core.8.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlite.core.nuspec"
       ]
     },
@@ -2979,24 +2979,24 @@
       "Microsoft.AspNetCore.OpenApi >= 8.0.8",
       "Microsoft.EntityFrameworkCore >= 8.0.8",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.8",
-      "Microsoft.EntityFrameworkCore.Sqlite >= 8.0.8",
+      "Microsoft.EntityFrameworkCore.Sqlite >= 8.0.4",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Alberto\\.nuget\\packages\\": {}
+    "C:\\Users\\nikol\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Alberto\\Desktop\\Informatica\\Introduccion al desarrollo web movil\\Taller-1-IDWM\\Taller-1-IDWM.csproj",
+      "projectUniqueName": "C:\\Users\\nikol\\Documents\\Universidad\\IntroDesarrolloWebMovil\\Taller1\\Taller1IDWM\\Taller-1-IDWM.csproj",
       "projectName": "Taller-1-IDWM",
-      "projectPath": "C:\\Users\\Alberto\\Desktop\\Informatica\\Introduccion al desarrollo web movil\\Taller-1-IDWM\\Taller-1-IDWM.csproj",
-      "packagesPath": "C:\\Users\\Alberto\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Alberto\\Desktop\\Informatica\\Introduccion al desarrollo web movil\\Taller-1-IDWM\\obj\\",
+      "projectPath": "C:\\Users\\nikol\\Documents\\Universidad\\IntroDesarrolloWebMovil\\Taller1\\Taller1IDWM\\Taller-1-IDWM.csproj",
+      "packagesPath": "C:\\Users\\nikol\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nikol\\Documents\\Universidad\\IntroDesarrolloWebMovil\\Taller1\\Taller1IDWM\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Alberto\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\nikol\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -3041,7 +3041,7 @@
           },
           "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",
-            "version": "[8.0.8, )"
+            "version": "[8.0.4, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Taller-1-IDWM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57aebbf3aebd2452aaaa5e6b3a5ba37dd4cef17e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa666963f8b2439df4332650f3da273d6b1a68ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("Taller-1-IDWM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Taller-1-IDWM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
