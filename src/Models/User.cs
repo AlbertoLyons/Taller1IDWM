@@ -11,10 +11,13 @@ namespace Taller_1_IDWM.src.Models
         [Key]
         public int Id { get; set; }
         public string Rut { get; set; } = string.Empty;
-        public int Birthdate { get; set; }
-        public int Mail { get; set; }
-        public int MyProperty { get; set; }
-        public int Gender { get; set; }
-        public int Password { get; set; }
+        public DateOnly Birthdate { get; set; }
+        public string Mail { get; set; } = string.Empty;
+        [StringLength(255, MinimumLength = 8)]
+        public string Name { get; set; } = string.Empty;
+         [RegularExpression(@"MASCULINO|FEMENINO|PREFIERO NO DECIRLO|OTRO")]
+        public string Gender { get; set; } = string.Empty;
+        [StringLength(20, MinimumLength = 8)]
+        public string Password { get; set; } = string.Empty;
     }
 }
