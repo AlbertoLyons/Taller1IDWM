@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Taller_1_IDWM.src.Data;
 
 #nullable disable
 
-namespace Taller_1_IDWM.src.Data.Migrations
+namespace Taller_1_IDWM.Migrations.Data
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241012044514_Recepits")]
+    partial class Recepits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
@@ -72,7 +75,7 @@ namespace Taller_1_IDWM.src.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("County")
+                    b.Property<string>("Province")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -90,13 +93,13 @@ namespace Taller_1_IDWM.src.Data.Migrations
 
             modelBuilder.Entity("Taller_1_IDWM.src.Models.ReceiptProduct", b =>
                 {
-                    b.Property<int>("ReceiptId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ReceiptId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("TotalPrice")
@@ -104,8 +107,6 @@ namespace Taller_1_IDWM.src.Data.Migrations
 
                     b.Property<int>("UnitPrice")
                         .HasColumnType("INTEGER");
-
-                    b.HasKey("ReceiptId", "ProductId");
 
                     b.ToTable("ReceiptProducts");
                 });
