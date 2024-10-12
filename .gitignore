@@ -1,0 +1,20 @@
+# Archivos y carpetas generadas por el build
+bin/
+obj/
+
+# Archivos de configuración local
+appsettings.Development.json
+
+# Archivos de bases de datos locales
+customers.db
+admin.db
+
+# Configuraciones del entorno o del IDE
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Otros
+.DS_Store
