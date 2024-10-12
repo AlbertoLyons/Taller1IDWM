@@ -22,7 +22,7 @@ namespace Taller_1_IDWM.src.Models
         [StringLength(256, MinimumLength = 3)]
         public string City { get; set; }
         [StringLength(256, MinimumLength = 3)]
-        public string Province { get; set; }
+        public string County { get; set; }
         [StringLength(256, MinimumLength = 3)]
         public string Address { get; set; }
     }

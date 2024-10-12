@@ -1,4 +1,5 @@
 using Bogus;
+using Taller_1_IDWM.Migrations.Data;
 using Taller_1_IDWM.src.Models;
 
 namespace Taller_1_IDWM.src.Data
@@ -62,6 +63,55 @@ namespace Taller_1_IDWM.src.Data
                 }
 
                 customersContext.SaveChanges();
+
+                if (!customersContext.Receipts.Any()) 
+                {
+                    var receiptFaker = new Faker<Receipt>()
+                    
+                    .RuleFor(p => p.UserId, f => customersContext.Users.ToList()[f.Random.Int(0, customersContext.Users.Count() - 1)].Id)
+                    .RuleFor(p => p.BoughtAt, f => f.Date.Past(18))
+                    .RuleFor(p => p.TotalPrice, f => f.Random.Int(100, 10000))
+                    .RuleFor(p => p.Country, f => f.Address.Country())
+                    .RuleFor(p => p.City, f => f.Address.City())
+                    .RuleFor(p => p.County, f => f.Address.County())
+                    .RuleFor(p => p.Address, f => f.Address.StreetAddress());
+
+                    var receipts = receiptFaker.Generate(100);
+                    customersContext.Receipts.AddRange(receipts);
+                    customersContext.SaveChanges();
+                }
+
+                customersContext.SaveChanges();
+
+                if (!customersContext.ReceiptProducts.Any()) 
+                {
+                    var receiptProductsFaker = new Faker<ReceiptProduct>()
+                    
+                    .RuleFor(p => p.ReceiptId, f => customersContext.Receipts.ToList()[f.Random.Int(0, customersContext.Receipts.Count() - 1)].Id)
+                    .RuleFor(p => p.ProductId, f => customersContext.Products.ToList()[f.Random.Int(0, customersContext.Products.Count() - 1)].ID)
+                    .RuleFor(p => p.UnitPrice, f => f.Random.Int(100, 100000))
+                    .RuleFor(p => p.Quantity, f => f.Random.Int(1, 100))
+                    .RuleFor(p => p.TotalPrice, (f, p) => p.UnitPrice * p.Quantity);
+
+                    var uniqueReceiptProducts = new HashSet<(int ReceiptId, int ProductId)>();
+
+                    var receiptProducts = new List<ReceiptProduct>();
+
+                    while (receiptProducts.Count < 100) 
+                    {
+                        var newReceiptProduct = receiptProductsFaker.Generate();
+                        
+                        // Verificar si ya existe la combinación de ReceiptId y ProductId en el HashSet
+                        if (!uniqueReceiptProducts.Contains((newReceiptProduct.ReceiptId, newReceiptProduct.ProductId))) 
+                        {
+                            uniqueReceiptProducts.Add((newReceiptProduct.ReceiptId, newReceiptProduct.ProductId));
+                            receiptProducts.Add(newReceiptProduct);
+                        }
+                    }
+
+                    customersContext.ReceiptProducts.AddRange(receiptProducts);
+                    customersContext.SaveChanges(); 
+                }
             }
         }
     }
