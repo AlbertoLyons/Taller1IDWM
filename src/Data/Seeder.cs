@@ -61,37 +61,34 @@ namespace Taller_1_IDWM.src.Data
                     customersContext.Products.AddRange(products);
                     customersContext.SaveChanges();
                 }
-
-                customersContext.SaveChanges();
-
-                if (!customersContext.Receipts.Any()) 
+                if (!customersContext.Receipts.Any())
                 {
-                    var receiptFaker = new Faker<Receipt>()
-                    
-                    .RuleFor(p => p.UserId, f => customersContext.Users.ToList()[f.Random.Int(0, customersContext.Users.Count() - 1)].Id)
-                    .RuleFor(p => p.BoughtAt, f => f.Date.Past(18))
-                    .RuleFor(p => p.TotalPrice, f => f.Random.Int(100, 10000))
-                    .RuleFor(p => p.Country, f => f.Address.Country())
-                    .RuleFor(p => p.City, f => f.Address.City())
-                    .RuleFor(p => p.County, f => f.Address.County())
-                    .RuleFor(p => p.Address, f => f.Address.StreetAddress());
+                    var users = customersContext.Users.ToList();
+                    if (users.Count != 0)
+                    {
+                        var receiptFaker = new Faker<Receipt>()
+                            .RuleFor(r => r.UserId, f => users[f.Random.Int(0, users.Count - 1)].Id)
+                            .RuleFor(r => r.BoughtAt, f => f.Date.Past(18))
+                            .RuleFor(r => r.TotalPrice, f => f.Random.Int(100, 10000))
+                            .RuleFor(r => r.Country, f => f.Address.Country())
+                            .RuleFor(r => r.City, f => f.Address.City())
+                            .RuleFor(r => r.County, f => f.Address.County())
+                            .RuleFor(r => r.Address, f => f.Address.StreetAddress());
 
-                    var receipts = receiptFaker.Generate(100);
-                    customersContext.Receipts.AddRange(receipts);
-                    customersContext.SaveChanges();
+                        var receipts = receiptFaker.Generate(100);
+                        customersContext.Receipts.AddRange(receipts);
+                        customersContext.SaveChanges();
+                    }
                 }
-
-                customersContext.SaveChanges();
-
                 if (!customersContext.ReceiptProducts.Any()) 
                 {
                     var receiptProductsFaker = new Faker<ReceiptProduct>()
                     
-                    .RuleFor(p => p.ReceiptId, f => customersContext.Receipts.ToList()[f.Random.Int(0, customersContext.Receipts.Count() - 1)].Id)
-                    .RuleFor(p => p.ProductId, f => customersContext.Products.ToList()[f.Random.Int(0, customersContext.Products.Count() - 1)].ID)
-                    .RuleFor(p => p.UnitPrice, f => f.Random.Int(100, 100000))
-                    .RuleFor(p => p.Quantity, f => f.Random.Int(1, 100))
-                    .RuleFor(p => p.TotalPrice, (f, p) => p.UnitPrice * p.Quantity);
+                    .RuleFor(r => r.ReceiptId, f => customersContext.Receipts.ToList()[f.Random.Int(0, customersContext.Receipts.Count() - 1)].Id)
+                    .RuleFor(r => r.ProductId, f => customersContext.Products.ToList()[f.Random.Int(0, customersContext.Products.Count() - 1)].ID)
+                    .RuleFor(r => r.UnitPrice, f => f.Random.Int(100, 100000))
+                    .RuleFor(r => r.Quantity, f => f.Random.Int(1, 100))
+                    .RuleFor(r => r.TotalPrice, (f, p) => p.UnitPrice * p.Quantity);
 
                     var uniqueReceiptProducts = new HashSet<(int ReceiptId, int ProductId)>();
 
