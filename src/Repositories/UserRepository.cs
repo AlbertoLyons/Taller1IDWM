@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Taller_1_IDWM.src.Repositories
 {
-    public class UserRepositorie : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly DataContext _dataContext;
-        public UserRepositorie(DataContext dataContext) 
+        public UserRepository(DataContext dataContext) 
         {
             _dataContext = dataContext;
         }
