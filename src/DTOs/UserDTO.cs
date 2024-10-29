@@ -1,16 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Taller_1_IDWM.src.Models
-
+namespace Taller_1_IDWM.src.DTOs
 {
-    public class User
+    public class UserDTO
     {
-        [Key]
-        public int Id { get; set; }
         public string Rut { get; set; } = string.Empty;
         public DateTime Birthdate { get; set; }
         public string Mail { get; set; } = string.Empty;
