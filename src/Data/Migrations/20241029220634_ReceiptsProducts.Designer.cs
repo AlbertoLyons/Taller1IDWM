@@ -11,8 +11,8 @@ using Taller_1_IDWM.src.Data;
 namespace Taller_1_IDWM.Migrations.Data
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241012050851_RecepitsChanged")]
-    partial class RecepitsChanged
+    [Migration("20241029220634_ReceiptsProducts")]
+    partial class ReceiptsProducts
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
