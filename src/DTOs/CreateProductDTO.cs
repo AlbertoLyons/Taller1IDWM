@@ -4,12 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Taller_1_IDWM.src.Models
+namespace Taller_1_IDWM.src.DTOs
 {
-    public class Product
+    public class CreateProductDTO
     {
-        [Key]
-        public int ID { get; set; }
         [StringLength(64, MinimumLength = 10)]
         public string Name { get; set; } = string.Empty;
         [RegularExpression(@"Poleras|Gorros|Jugueteria|Alimentacion|Libros")]
@@ -18,7 +16,6 @@ namespace Taller_1_IDWM.src.Models
         public int Price { get; set; }
         [Range(1, 100000)]
         public int Stock { get; set; }
-        [StringLength(256, MinimumLength = 10)]
-        public string ImageUrl { get; set; } = string.Empty;
+        public IFormFile Image { get; set; } = null!;
     }
 }

@@ -1,5 +1,8 @@
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using Microsoft.EntityFrameworkCore;
 using Taller_1_IDWM.src.Data;
+using Taller_1_IDWM.src.DTOs;
 using Taller_1_IDWM.src.Interfaces;
 using Taller_1_IDWM.src.Models;
 
@@ -8,15 +11,39 @@ namespace Taller_1_IDWM.src.Repositories
     public class ProductRepository : IProductRepository
     {
         private readonly DataContext _dataContext;
+        private readonly Cloudinary cloudinary;
         public ProductRepository(DataContext dataContext) 
         {
             _dataContext = dataContext;
         }
         
-        public async Task<bool> AddProductAsync(Product product)
+        public async Task<bool> AddProductAsync(CreateProductDTO productDto)
         {
+            
+            var uploadParams = new ImageUploadParams
+            {
+                File = new FileDescription(productDto.Image.FileName, productDto.Image.OpenReadStream()),
+                Folder = "products_image"
+            };
+
+            var uploadResult = await cloudinary.UploadAsync(uploadParams);
+            if (uploadResult.Error != null)
+            {
+                throw new Exception(uploadResult.Error.Message);
+            }
+
+            var product = new Product
+            {
+                Name = productDto.Name,
+                Type = productDto.Type,
+                Price = productDto.Price,
+                Stock = productDto.Stock,
+                ImageUrl = uploadResult.SecureUrl.AbsoluteUri
+            };
             _dataContext.Products.Add(product);
+
             await _dataContext.SaveChangesAsync();
+
             return true;
         }
 
@@ -35,7 +62,9 @@ namespace Taller_1_IDWM.src.Repositories
             existingProduct.Type = product.Type;
             existingProduct.Price = product.Price;
             existingProduct.Stock = product.Stock;
-            existingProduct.Image = product.Image;
+
+
+            existingProduct.ImageUrl = product.ImageUrl;
             
             _dataContext.Products.Update(existingProduct);
             await _dataContext.SaveChangesAsync();
