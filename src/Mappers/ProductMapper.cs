@@ -3,46 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Taller_1_IDWM.src.DTOs;
+using Taller_1_IDWM.src.DTOs.Products;
 using Taller_1_IDWM.src.Models;
 
 namespace Taller_1_IDWM.src.Mappers
 {
     public static class ProductMapper
     {
-        public static ProductDTO ToUserDTO(this Product userModel)
+        public static ProductDTO ToUserDTO(this Product productModel)
         {
             return new ProductDTO
             {
-                Id = userModel.Id,
-                Rut = userModel.Rut,
-                Name = userModel.Name,
-                Mail = userModel.Mail,
-                Gender = userModel.Gender,
-                Birthdate = userModel.Birthdate,
-                Password = userModel.Password
+                ID = productModel.ID,
+                Type = productModel.Type,
+                Name = productModel.Name,
+                Price = productModel.Price,
+                Stock = productModel.Stock,
+                ImageUrl = productModel.ImageUrl
             };
         }
 
-        public static User ToUserFromCreatedDTO(this CreateProductDTO createUserDto)
+        public static Product ToProductFromCreatedDTO(this CreateProductDTO createProductDto)
         {
-            return new User
+            return new Product
             {
-                Rut = createUserDto.Rut,
-                Name = createUserDto.Name,
-                Mail = createUserDto.Mail,
-                Gender = createUserDto.Gender,
-                Birthdate = createUserDto.Birthdate,
-                Password = createUserDto.Password
+                Type = createProductDto.Type,
+                Name = createProductDto.Name,
+                Price = createProductDto.Price,
+                Stock = createProductDto.Stock
             };
         }
-        public static User ToUserFromUpdateDTO(this UpdateProductDTO updateProductDTO)
+        public static Product ToProductFromUpdateDTO(this UpdateProductDTO updateProductDTO)
         {
-            return new User
+            return new Product
             {
-                Name = createUserDto.Name,
-                Gender = createUserDto.Gender,
-                Birthdate = createUserDto.Birthdate,
-                Password = createUserDto.Password
+                Type = updateProductDTO.Type,
+                Name = updateProductDTO.Name,
+                Price = updateProductDTO.Price,
+                Stock = updateProductDTO.Stock
             };
         }
     }
