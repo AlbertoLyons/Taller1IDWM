@@ -3,6 +3,7 @@ namespace Taller_1_IDWM.src.DTOs
 {
     public class UserDTO
     {
+        public int Id { get; set; }
         public string Rut { get; set; } = string.Empty;
         public DateTime Birthdate { get; set; }
         public string Mail { get; set; } = string.Empty;
