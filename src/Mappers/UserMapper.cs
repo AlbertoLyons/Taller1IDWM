@@ -36,14 +36,14 @@ namespace Taller_1_IDWM.src.Mappers
                 Password = createUserDto.Password
             };
         }
-        public static User ToUserFromUpdateDTO(this CreateUserDTO createUserDto)
+        public static User ToUserFromUpdateDTO(this UpdateUserDTO updateUserDto)
         {
             return new User
             {
-                Name = createUserDto.Name,
-                Gender = createUserDto.Gender,
-                Birthdate = createUserDto.Birthdate,
-                Password = createUserDto.Password
+                Name = updateUserDto.Name,
+                Gender = updateUserDto.Gender,
+                Birthdate = updateUserDto.Birthdate,
+                Password = updateUserDto.Password
             };
         }
     }
