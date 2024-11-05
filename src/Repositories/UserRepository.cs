@@ -8,7 +8,7 @@ namespace Taller_1_IDWM.src.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _dataContext;
-        public UserRepository(DataContext dataContext) 
+        public UserRepository(DataContext dataContext)  
         {
             _dataContext = dataContext;
         }
@@ -26,10 +26,9 @@ namespace Taller_1_IDWM.src.Repositories
             return true;
         }
 
-        public async Task<bool> EditUserAsync(int id, User user)
+        public async Task<bool?> EditUserAsync(int id, User user)
         {
-            var existingUser = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == id);
-
+            var existingUser = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == id) ?? throw new Exception("User not found");
             existingUser.Name = user.Name;
             existingUser.Birthdate = user.Birthdate;
             existingUser.Gender = user.Gender;
@@ -52,9 +51,9 @@ namespace Taller_1_IDWM.src.Repositories
         {
             return await _dataContext.Users.ToListAsync();
         }
-        public Task<User> GetById(int id)
+        public async Task<User?> GetById(int id)
         {
-            return _dataContext.Users.FirstOrDefaultAsync(p => p.Id == id);
+            return await _dataContext.Users.FirstOrDefaultAsync(p => p.Id == id) ?? throw new Exception("User not found");
         }
     
     }
