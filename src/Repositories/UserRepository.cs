@@ -20,11 +20,16 @@ namespace Taller_1_IDWM.src.Repositories
             return true;
         }
 
-        public async Task<bool> DeleteUserAsync(User user)
+        public async Task<User?> DeleteUserAsync(int id)
         {
-            _dataContext.Users.Remove(user);
+            var userModel = await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if(userModel == null)
+            {
+                throw new Exception("Product not found");
+            }
+            _dataContext.Users.Remove(userModel);
             await _dataContext.SaveChangesAsync();
-            return true;
+            return userModel;
         }
 
         public async Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO)

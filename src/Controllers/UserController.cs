@@ -91,7 +91,17 @@ namespace Taller_1_IDWM.src.Controllers
         return Ok(response);
     }
 
-
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try{
+                var user = await _userRepository.DeleteUserAsync(id);
+            }catch
+            {
+                return NotFound("Usuario no encontrado");
+            }
+            return Ok("Usuario eliminado exitosamente");
+        }
 
 
     }

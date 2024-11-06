@@ -11,6 +11,6 @@ namespace Taller_1_IDWM.src.Interfaces
         Task<IEnumerable<User>> GetAllAsync();
         Task<User?> GetById(int id);
         Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO);
-        Task<bool> DeleteUserAsync(User user);
+        Task<User?> DeleteUserAsync(int id);
     }
 }
