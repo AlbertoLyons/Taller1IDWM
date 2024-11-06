@@ -10,7 +10,7 @@ namespace Taller_1_IDWM.src.Mappers
 {
     public static class ProductMapper
     {
-        public static ProductDTO ToUserDTO(this Product productModel)
+        public static ProductDTO ToProductDTO(this Product productModel)
         {
             return new ProductDTO
             {
