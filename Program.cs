@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Taller_1_IDWM.src.Data.Migrations;
 using Taller_1_IDWM.src.Helpers;
 using CloudinaryDotNet;
+using Taller_1_IDWM.src.Interfaces;
+using Taller_1_IDWM.src.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,9 @@ builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite(builder.Configur
 builder.Services.AddDbContext<AdminContext>(opt => opt.UseSqlite(builder.Configuration.GetConnectionString("AdminConnection")));
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<Seeder>();
-
+builder.Services.AddControllers();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 var app = builder.Build();
 
 // Seed the database
@@ -38,7 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
 }
-
+app.MapControllers();
 app.Run();
 
 

@@ -2,6 +2,7 @@ using Taller_1_IDWM.src.Interfaces;
 using Taller_1_IDWM.src.Data;
 using Taller_1_IDWM.src.Models;
 using Microsoft.EntityFrameworkCore;
+using Taller_1_IDWM.src.DTOs.Users;
 
 namespace Taller_1_IDWM.src.Repositories
 {
@@ -26,12 +27,13 @@ namespace Taller_1_IDWM.src.Repositories
             return true;
         }
 
-        public async Task<bool?> EditUserAsync(int id, User user)
+        public async Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO)
         {
             var existingUser = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == id) ?? throw new Exception("User not found");
-            existingUser.Name = user.Name;
-            existingUser.Birthdate = user.Birthdate;
-            existingUser.Gender = user.Gender;
+            existingUser.Name = updateUserDTO.Name;
+            existingUser.Birthdate = updateUserDTO.Birthdate;
+            existingUser.Gender = updateUserDTO.Gender;
+            existingUser.Password = updateUserDTO.Password;
             
             _dataContext.Users.Update(existingUser);
             await _dataContext.SaveChangesAsync();

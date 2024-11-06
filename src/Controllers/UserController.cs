@@ -27,16 +27,12 @@ namespace Taller_1_IDWM.src.Controllers
             bool exist = await _userRepository.ExistsByRut(createUserDTO.Rut);
             EmailAddressAttribute emailAttribute = new EmailAddressAttribute();
             List<string> generosValidos = new List<string> { "masculino", "femenino", "otro", "prefiero no decirlo" };
-            if(exist)
-            {
-                return Conflict("El RUT ya existe");
-            }
+            if(exist){return Conflict("El RUT ya existe");}
             else
             {
                 var userModel = createUserDTO.ToUserFromCreatedDTO();
                 await _userRepository.AddUserAsync(userModel);
                 var uri = Url.Action("GetUser", new { id = userModel.Id });
-
                 var response = new
                 {
                     Message = "Usuario creado exitosamente",
@@ -45,6 +41,58 @@ namespace Taller_1_IDWM.src.Controllers
                 return Created(uri, response);
             }
         }
+
+        [HttpPut]
+        [Route("{id}")]
+
+        public async Task<IActionResult> Put([FromRoute] int id , [FromBody] UpdateUserDTO updateUserDto)
+        { 
+            EmailAddressAttribute emailAttribute = new EmailAddressAttribute();
+            List<string> generosValidos = new List<string> { "masculino", "femenino", "otro", "prefiero no decirlo" };
+            var userModel = await _userRepository.EditUserAsync(id, updateUserDto);
+            if(userModel == null)
+            {
+                return NotFound();
+            }
+            var response = new
+            {
+                Message = "Usuario actualizado exitosamente",
+                User = userModel
+            };
+            return Ok(response);
+        }
+
+     [HttpGet("GetAll")]
+    public async Task<IActionResult> GetAll(int pageNumber = 1)
+    {
+        int pageSize = 10;
+        var users = await _userRepository.GetAllAsync();
+        var totalRecords = users.Count();
+        var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
+
+        pageNumber = pageNumber < 1 ? 1 : pageNumber > totalPages ? totalPages : pageNumber;
+
+        var paginatedUsers = users
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(p => p.ToUserDTO())
+            .ToList();
+
+        var response = new
+        {
+            Message = "Usuarios obtenidos exitosamente",
+            TotalRecords = totalRecords,
+            TotalPages = totalPages,
+            CurrentPage = pageNumber,
+            PageSize = pageSize,
+            Users = paginatedUsers
+        };
+
+        return Ok(response);
+    }
+
+
+
 
     }
 }
