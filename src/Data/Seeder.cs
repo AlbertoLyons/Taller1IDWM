@@ -37,7 +37,7 @@ namespace Taller_1_IDWM.src.Data
                     var userFaker = new Faker<User>()
 
                     .RuleFor(u => u.Rut, f => random.Next(1000000, 25000000).ToString() + "-" + random.Next(0, 9).ToString())
-                    .RuleFor(u => u.Birthdate, f => f.Date.Past(18))
+                    .RuleFor(u => u.Birthdate, f => f.Date.Past(18).Date)
                     .RuleFor(u => u.Mail, f => f.Internet.Email())
                     .RuleFor(u => u.Name, f => f.Name.FullName())
                     .RuleFor(u => u.Gender, f => genders[random.Next(0, genders.Count)])
