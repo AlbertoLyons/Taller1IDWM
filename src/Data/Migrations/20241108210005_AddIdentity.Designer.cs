@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Taller_1_IDWM.src.Data;
 
 #nullable disable
 
-namespace Taller_1_IDWM.src.Data.Migrations
+namespace Taller_1_IDWM.Migrations.Data
 {
-    [DbContext(typeof(AdminContext))]
-    partial class AdminContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DataContext))]
+    [Migration("20241108210005_AddIdentity")]
+    partial class AddIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
@@ -209,6 +212,93 @@ namespace Taller_1_IDWM.src.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Taller_1_IDWM.src.Models.Product", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Taller_1_IDWM.src.Models.Receipt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("BoughtAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("County")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TotalPrice")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Receipts");
+                });
+
+            modelBuilder.Entity("Taller_1_IDWM.src.Models.ReceiptProduct", b =>
+                {
+                    b.Property<int>("ReceiptId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TotalPrice")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UnitPrice")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ReceiptId", "ProductId");
+
+                    b.ToTable("ReceiptProducts");
+                });
+
             modelBuilder.Entity("Taller_1_IDWM.src.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -240,7 +330,7 @@ namespace Taller_1_IDWM.src.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Admin");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

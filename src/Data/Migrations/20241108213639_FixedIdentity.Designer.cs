@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Taller_1_IDWM.src.Data;
 
 #nullable disable
 
-namespace Taller_1_IDWM.src.Data.Migrations
+namespace Taller_1_IDWM.Migrations.Admin
 {
     [DbContext(typeof(AdminContext))]
-    partial class AdminContextModelSnapshot : ModelSnapshot
+    [Migration("20241108213639_FixedIdentity")]
+    partial class FixedIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
