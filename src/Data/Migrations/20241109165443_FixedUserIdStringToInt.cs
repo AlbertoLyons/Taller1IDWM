@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Taller_1_IDWM.Migrations.Admin
+namespace Taller_1_IDWM.src.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class FixedIdentity : Migration
+    public partial class FixedUserIdStringToInt : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

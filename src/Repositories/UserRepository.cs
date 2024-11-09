@@ -3,20 +3,27 @@ using Taller_1_IDWM.src.Data;
 using Taller_1_IDWM.src.Models;
 using Microsoft.EntityFrameworkCore;
 using Taller_1_IDWM.src.DTOs.Users;
+using Microsoft.AspNetCore.Identity;
 
 namespace Taller_1_IDWM.src.Repositories
 {
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _dataContext;
-        public UserRepository(DataContext dataContext)  
+        private readonly UserManager<User> _userManager;
+        public UserRepository(DataContext dataContext, UserManager<User> userManager)
         {
             _dataContext = dataContext;
+            _userManager = userManager;
         }
-        public async Task<bool> AddUserAsync(User user)
+        public async Task<bool> AddUserAsync(User user, string password)
         {
-            _dataContext.Users.Add(user);
-            await _dataContext.SaveChangesAsync();
+            var Password = user.PasswordHash;
+            var result = await _userManager.CreateAsync(user, Password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "User");
+            }
             return true;
         }
 
@@ -38,7 +45,7 @@ namespace Taller_1_IDWM.src.Repositories
             existingUser.Name = updateUserDTO.Name;
             existingUser.Birthdate = updateUserDTO.Birthdate;
             existingUser.Gender = updateUserDTO.Gender;
-            existingUser.Password = updateUserDTO.Password;
+            existingUser.PasswordHash = updateUserDTO.Password;
             
             _dataContext.Users.Update(existingUser);
             await _dataContext.SaveChangesAsync();
@@ -49,6 +56,7 @@ namespace Taller_1_IDWM.src.Repositories
         {
             return await _dataContext.Users.AnyAsync(p => p.Rut == rut);
         }
+
         public async Task<bool> ExistsById(int id)
         {
             return await _dataContext.Users.AnyAsync(p => p.Id == id);
@@ -62,6 +70,10 @@ namespace Taller_1_IDWM.src.Repositories
         {
             return await _dataContext.Users.FirstOrDefaultAsync(p => p.Id == id) ?? throw new Exception("User not found");
         }
-    
+        
+        public Task<User?> GetByRut(string rut)
+        {
+            return _dataContext.Users.FirstOrDefaultAsync(p => p.Rut == rut);
+        }
     }
 }
