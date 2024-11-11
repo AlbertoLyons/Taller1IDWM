@@ -9,7 +9,7 @@ namespace Taller_1_IDWM.src.DTOs.Users
     public class UpdateUserDTO
     {
         [Required(AllowEmptyStrings = true)]
-        public DateTime Birthdate { get; set; }
+        public DateOnly Birthdate { get; set; }
 
         [Required(AllowEmptyStrings = true)]
         [StringLength(255, MinimumLength = 8)]

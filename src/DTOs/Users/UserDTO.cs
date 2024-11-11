@@ -10,7 +10,7 @@ namespace Taller_1_IDWM.src.DTOs
         public string Rut { get; set; } = string.Empty;
 
         [Required]
-        public DateTime Birthdate { get; set; }
+        public DateOnly Birthdate { get; set; }
 
         [Required]
         public string Mail { get; set; } = string.Empty;

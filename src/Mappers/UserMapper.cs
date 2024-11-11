@@ -17,10 +17,10 @@ namespace Taller_1_IDWM.src.Mappers
                 Id = userModel.Id,
                 Rut = userModel.Rut,
                 Name = userModel.Name,
-                Mail = userModel.Mail,
+                Mail = userModel.Email,
                 Gender = userModel.Gender,
                 Birthdate = userModel.Birthdate,
-                Password = userModel.Password
+                Password = userModel.PasswordHash
             };
         }
 
@@ -30,10 +30,10 @@ namespace Taller_1_IDWM.src.Mappers
             {
                 Rut = createUserDto.Rut,
                 Name = createUserDto.Name,
-                Mail = createUserDto.Mail,
+                Email = createUserDto.Mail,
+                UserName = createUserDto.Mail,
                 Gender = createUserDto.Gender,
                 Birthdate = createUserDto.Birthdate,
-                Password = createUserDto.Password
             };
         }
         public static User ToUserFromUpdateDTO(this UpdateUserDTO updateUserDto)
@@ -43,7 +43,7 @@ namespace Taller_1_IDWM.src.Mappers
                 Name = updateUserDto.Name,
                 Gender = updateUserDto.Gender,
                 Birthdate = updateUserDto.Birthdate,
-                Password = updateUserDto.Password
+                PasswordHash = updateUserDto.Password
             };
         }
     }

@@ -12,8 +12,8 @@ namespace Taller_1_IDWM.src.DTOs.Users
         public string Rut { get; set; } = string.Empty;
 
         [Required]
-        [RegularExpression(@"^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\d{4})$")]
-        public DateTime Birthdate { get; set; }
+        //[RegularExpression(@"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$", ErrorMessage = "La fecha debe estar en el formato yyyy-MM-dd.")]
+        public DateOnly Birthdate { get; set; }
 
         [Required]
         public string Mail { get; set; } = string.Empty;

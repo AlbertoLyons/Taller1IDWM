@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Taller_1_IDWM.src.DTOs.Users;
 using Taller_1_IDWM.src.Interfaces;
 using Taller_1_IDWM.src.Mappers;
+using Taller_1_IDWM.src.Models;
 
 namespace Taller_1_IDWM.src.Controllers
 {
@@ -14,24 +13,55 @@ namespace Taller_1_IDWM.src.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        
         private readonly IUserRepository _userRepository;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole<int>> _roleManager;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, UserManager<User> userManager, RoleManager<IdentityRole<int>> roleManager)
         {
             _userRepository = userRepository;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
+        // Metodo solo para desarrollo
+        /*
+        [HttpPost("Dev")]
+        public async Task<IActionResult> AssignRoleToUser(int id, string role)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            var roleExists = await _roleManager.RoleExistsAsync(role);
+
+            if (!roleExists)
+            {
+                return BadRequest($"El rol '{role}' no existe.");
+            }
+
+            if (user != null)
+            {
+                var result = await _userManager.AddToRoleAsync(user, role);
+                if (result.Succeeded)
+                {
+                    return Ok("Rol asignado exitosamente.");
+                }
+                else
+                {
+                    return BadRequest($"No se pudo asignar el rol. Errores: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                }
+            }
+            return BadRequest("Usuario no encontrado.");
+        }
+        */
+        
         [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]CreateUserDTO createUserDTO)
         {
             bool exist = await _userRepository.ExistsByRut(createUserDTO.Rut);
             EmailAddressAttribute emailAttribute = new EmailAddressAttribute();
-            List<string> generosValidos = new List<string> { "masculino", "femenino", "otro", "prefiero no decirlo" };
             if(exist){return Conflict("El RUT ya existe");}
             else
             {
                 var userModel = createUserDTO.ToUserFromCreatedDTO();
-                await _userRepository.AddUserAsync(userModel);
+                await _userRepository.AddUserAsync(userModel, createUserDTO.Password);
                 var uri = Url.Action("GetUser", new { id = userModel.Id });
                 var response = new
                 {
@@ -62,7 +92,8 @@ namespace Taller_1_IDWM.src.Controllers
             return Ok(response);
         }
 
-     [HttpGet("GetAll")]
+    [HttpGet("GetAll")]
+    //[Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetAll(int pageNumber = 1)
     {
         int pageSize = 10;
