@@ -9,6 +9,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
 }
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();

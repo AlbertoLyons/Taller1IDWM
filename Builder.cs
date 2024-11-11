@@ -1,12 +1,15 @@
 using Taller_1_IDWM.src.Data;
-using Taller_1_IDWM.src.Data.Migrations;
 using Microsoft.EntityFrameworkCore;
+using DotNetEnv;
 using Taller_1_IDWM.src.Helpers;
 using CloudinaryDotNet;
 using Taller_1_IDWM.src.Interfaces;
 using Taller_1_IDWM.src.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Taller_1_IDWM.src.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Taller_1_IDWM
 {
@@ -14,20 +17,14 @@ namespace Taller_1_IDWM
     {
         public WebApplication Build(string[] args) 
         {
+            Env.Load();
             // Create a builder
             var builder = WebApplication.CreateBuilder(args);
-            // Add cloudinary settings to the configuration
-            var CloudinarySettings = builder.Configuration.GetSection("CloudinarySettings").Get<CloudinarySettings>();
-            var CloudinaryAccount = new Account(
-                CloudinarySettings!.CloudName, 
-                CloudinarySettings!.ApiKey, 
-                CloudinarySettings!.ApiSecret
-                );
-            var Cloudinary = new Cloudinary(CloudinaryAccount);
+            BuildCloudinary(builder);
             // Add endpoints to the application
             builder.Services.AddEndpointsApiExplorer();
             // Add the database context to the application
-            builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite(builder.Configuration.GetConnectionString("CustomersConnection")));
+            builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite(Environment.GetEnvironmentVariable("DATABASE_URL")));
             // Add swagger to the application
             builder.Services.AddSwaggerGen();
             // Add scoped seeder to the application
@@ -39,6 +36,21 @@ namespace Taller_1_IDWM
             // Add  scoped ProductRepository to the application
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             // Add Identity to the application to DataContext
+            BuildIdentity(builder);
+            // Builds the application
+            var app = builder.Build();
+            // Resolve the RoleManager from the service provider
+            using (var scope = app.Services.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
+                CreateRolesAsync(roleManager);
+            }
+            // Seed the database
+            Seed(app);
+            return app;
+        }
+        void BuildIdentity(WebApplicationBuilder builder)
+        {
             builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -49,19 +61,45 @@ namespace Taller_1_IDWM
             })
             .AddEntityFrameworkStores<DataContext>()
             .AddDefaultTokenProviders();
-            //builder.Services.AddAuthentication();
-            // Builds the application
-            var app = builder.Build();
-            // Resolve the RoleManager from the service provider
-            using (var scope = app.Services.CreateScope())
+            builder.Services.AddAuthentication(
+                opt =>
+                {
+                    opt.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+                    opt.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+                    opt.DefaultForbidScheme =
+                    opt.DefaultScheme =
+                    opt.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
+                    opt.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(opt => {
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                      ValidateIssuer = true,
+                      ValidIssuer = builder.Configuration["JWT:Issuer"],
+                      ValidateAudience = true,
+                      ValidAudience = builder.Configuration["JWT:Audience"],
+                      ValidateIssuerSigningKey = true,
+                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"] ?? throw new ArgumentNullException("JWT:SigninKey"))),
+                    };
+                    
+                });
+        }
+        void BuildCloudinary(WebApplicationBuilder builder)
+        {
+            // Add cloudinary settings to the configuration
+            var cloudinarySettings = new CloudinarySettings
             {
-                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
-                CreateRolesAsync(roleManager);
-            }
+                CloudName = Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME"),
+                ApiKey = Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY"),
+                ApiSecret = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET")
+            };
 
-            // Seed the database
-            Seed(app);
-            return app;
+            var cloudinaryAccount = new Account(
+                cloudinarySettings.CloudName,
+                cloudinarySettings.ApiKey,
+                cloudinarySettings.ApiSecret
+            );
+
+            var cloudinary = new Cloudinary(cloudinaryAccount);
         }
         async void CreateRolesAsync(RoleManager<IdentityRole<int>> roleManager) 
         {
@@ -82,7 +120,6 @@ namespace Taller_1_IDWM
                 }
             }
         }
-
         async void Seed(WebApplication app) 
         {
             // Create a scope to get the services
