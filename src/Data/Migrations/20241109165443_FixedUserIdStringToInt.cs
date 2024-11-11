@@ -5,7 +5,7 @@
 namespace Taller_1_IDWM.src.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class seeders : Migration
+    public partial class FixedUserIdStringToInt : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
