@@ -51,7 +51,7 @@ namespace Taller_1_IDWM.src.Controllers
             return BadRequest("Usuario no encontrado.");
         }
         */
-        
+        /*
         [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]CreateUserDTO createUserDTO)
         {
@@ -71,7 +71,7 @@ namespace Taller_1_IDWM.src.Controllers
                 return Created(uri, response);
             }
         }
-
+        */
         [HttpPut]
         [Route("{id}")]
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Taller_1_IDWM.src.DTOs.Users
 {
-    public class LoginUserDTO
+    public class LoginDTO
     {
         string Email { get; set; }
         string Password { get; set; }

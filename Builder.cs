@@ -35,6 +35,8 @@ namespace Taller_1_IDWM
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             // Add  scoped ProductRepository to the application
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            // Add  scoped AuthRepository to the application
+            builder.Services.AddScoped<IAuthRepository, AuthRepository>();
             // Add Identity to the application to DataContext
             BuildIdentity(builder);
             // Builds the application
@@ -78,7 +80,7 @@ namespace Taller_1_IDWM
                       ValidateAudience = true,
                       ValidAudience = builder.Configuration["JWT:Audience"],
                       ValidateIssuerSigningKey = true,
-                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"] ?? throw new ArgumentNullException("JWT:SigninKey"))),
+                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigninKey"] ?? throw new ArgumentNullException("JWT:SigninKey"))),
                     };
                     
                 });

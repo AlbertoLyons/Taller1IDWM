@@ -16,17 +16,6 @@ namespace Taller_1_IDWM.src.Repositories
             _dataContext = dataContext;
             _userManager = userManager;
         }
-        public async Task<bool> AddUserAsync(User user, string password)
-        {
-            var result = await _userManager.CreateAsync(user, password);
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(user, "User");
-                await _dataContext.SaveChangesAsync();
-            }
-            return true;
-        }
-
         public async Task<User?> DeleteUserAsync(int id)
         {
             var userModel = await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == id);
