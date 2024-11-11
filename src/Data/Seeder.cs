@@ -1,4 +1,5 @@
 using Bogus;
+using Bogus.DataSets;
 using Microsoft.AspNetCore.Identity;
 using Taller_1_IDWM.src.Models;
 
@@ -31,7 +32,7 @@ namespace Taller_1_IDWM.src.Data
                     Random random = new Random();
                     var userFaker = new Faker<User>()
                         .RuleFor(u => u.Rut, f => random.Next(1000000, 25000000).ToString() + "-" + random.Next(0, 9).ToString())
-                        .RuleFor(u => u.Birthdate, f => f.Date.Past(18).Date)
+                        .RuleFor(u => u.Birthdate, f => DateOnly.FromDateTime(f.Date.Past(18)))
                         .RuleFor(u => u.Email, f => f.Internet.Email())
                         .RuleFor(u => u.SecurityStamp, f => Guid.NewGuid().ToString())
                         .RuleFor(u => u.UserName, (f, u) => u.Email)
@@ -41,7 +42,7 @@ namespace Taller_1_IDWM.src.Data
                     var users = userFaker.Generate(100);
                     foreach (var user in users)
                     {
-                        var userResult = await userManager.CreateAsync(user, "DefaultP4ssw0rd!");
+                        var userResult = await userManager.CreateAsync(user, "DefaultP4ssw0rd");
                         if (userResult.Succeeded)
                         {
                             await userManager.AddToRoleAsync(user, "User");
@@ -50,7 +51,7 @@ namespace Taller_1_IDWM.src.Data
                     var adminUser = new User
                     {
                         Rut = "20416699-4",
-                        Birthdate = DateTime.Parse("2000-10-25 00:00:00"),
+                        Birthdate = DateOnly.Parse("2000-10-25"),
                         Email = "admin@idwm.cl",
                         SecurityStamp = Guid.NewGuid().ToString(),
                         UserName = "admin@idwm.cl",

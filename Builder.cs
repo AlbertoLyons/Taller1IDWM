@@ -41,16 +41,15 @@ namespace Taller_1_IDWM
             // Add Identity to the application to DataContext
             builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
             {
-                options.Password.RequireDigit = true; // Debe tener al menos un dígito
-                options.Password.RequireLowercase = true; // Debe tener al menos una letra minúscula
-                options.Password.RequireUppercase = true; // Debe tener al menos una letra mayúscula
-                options.Password.RequireNonAlphanumeric = false; // No se requiere un carácter no alfanumérico
-                options.Password.RequiredLength = 8; // Longitud mínima de 8 caracteres
-                options.Password.RequiredLength = 20;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 8;
             })
             .AddEntityFrameworkStores<DataContext>()
             .AddDefaultTokenProviders();
-
+            //builder.Services.AddAuthentication();
             // Builds the application
             var app = builder.Build();
             // Resolve the RoleManager from the service provider

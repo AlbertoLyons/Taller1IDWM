@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Taller_1_IDWM.src.DTOs.Users;
@@ -22,6 +23,8 @@ namespace Taller_1_IDWM.src.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
+        // Metodo solo para desarrollo
+        /*
         [HttpPost("Dev")]
         public async Task<IActionResult> AssignRoleToUser(int id, string role)
         {
@@ -47,12 +50,13 @@ namespace Taller_1_IDWM.src.Controllers
             }
             return BadRequest("Usuario no encontrado.");
         }
+        */
+        
         [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]CreateUserDTO createUserDTO)
         {
             bool exist = await _userRepository.ExistsByRut(createUserDTO.Rut);
             EmailAddressAttribute emailAttribute = new EmailAddressAttribute();
-            List<string> generosValidos = new List<string> { "masculino", "femenino", "otro", "prefiero no decirlo" };
             if(exist){return Conflict("El RUT ya existe");}
             else
             {
@@ -88,7 +92,8 @@ namespace Taller_1_IDWM.src.Controllers
             return Ok(response);
         }
 
-     [HttpGet("GetAll")]
+    [HttpGet("GetAll")]
+    //[Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetAll(int pageNumber = 1)
     {
         int pageSize = 10;

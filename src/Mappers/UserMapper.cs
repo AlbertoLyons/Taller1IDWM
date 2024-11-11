@@ -31,8 +31,9 @@ namespace Taller_1_IDWM.src.Mappers
                 Rut = createUserDto.Rut,
                 Name = createUserDto.Name,
                 Email = createUserDto.Mail,
+                UserName = createUserDto.Mail,
                 Gender = createUserDto.Gender,
-                Birthdate = DateTime.Parse(createUserDto.Birthdate),
+                Birthdate = createUserDto.Birthdate,
             };
         }
         public static User ToUserFromUpdateDTO(this UpdateUserDTO updateUserDto)

@@ -18,11 +18,11 @@ namespace Taller_1_IDWM.src.Repositories
         }
         public async Task<bool> AddUserAsync(User user, string password)
         {
-            var Password = user.PasswordHash;
-            var result = await _userManager.CreateAsync(user, Password);
+            var result = await _userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, "User");
+                await _dataContext.SaveChangesAsync();
             }
             return true;
         }

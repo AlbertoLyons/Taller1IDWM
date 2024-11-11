@@ -11,7 +11,7 @@ using Taller_1_IDWM.src.Data;
 namespace Taller_1_IDWM.src.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241109174759_UpdatedSeeder2")]
+    [Migration("20241111032218_UpdatedSeeder2")]
     partial class UpdatedSeeder2
     {
         /// <inheritdoc />
@@ -242,7 +242,7 @@ namespace Taller_1_IDWM.src.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Birthdate")
+                    b.Property<DateOnly>("Birthdate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
