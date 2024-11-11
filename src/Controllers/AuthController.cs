@@ -38,7 +38,7 @@ namespace Taller_1_IDWM.src.Controllers
                     {
                         var userModel = registerDTO.ToUserFromRegisteredDTO();
                         await _authRepository.RegisterUserAsync(userModel, registerDTO.Password);
-                        var newUser = userModel.ToNewUserDTO(_tokenService.CreateToken(userModel));
+                        var newUser = userModel.ToNewUserDTO(await _tokenService.CreateToken(userModel));
                         return Ok(newUser);
                         /*
                         var uri = Url.Action("GetUser", new { id = userModel.Id });
@@ -71,7 +71,7 @@ namespace Taller_1_IDWM.src.Controllers
                     var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
                     if (!result.Succeeded) return Unauthorized("Invalid email or password");
 
-                    var loggedUser = user.ToNewUserDTO(_tokenService.CreateToken(user));
+                    var loggedUser = user.ToNewUserDTO(await _tokenService.CreateToken(user));
                     return Ok(loggedUser);
                 }
             }

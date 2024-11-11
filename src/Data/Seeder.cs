@@ -58,7 +58,7 @@ namespace Taller_1_IDWM.src.Data
                         Name = "Ignacio Mancilla",
                         Gender = "Masculino",
                     };
-                    var result = await userManager.CreateAsync(adminUser, "P4ssw0rd!");
+                    var result = await userManager.CreateAsync(adminUser, "P4ssw0rd");
                     if (result.Succeeded)
                     {
                         await userManager.AddToRoleAsync(adminUser, "Admin");

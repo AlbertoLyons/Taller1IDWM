@@ -11,6 +11,7 @@ namespace Taller_1_IDWM.src.Controllers
 {
     [Route("api/user")]
     [ApiController]
+    //[Authorize(Roles = "User")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;

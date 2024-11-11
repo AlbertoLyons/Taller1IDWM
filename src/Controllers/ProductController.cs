@@ -10,7 +10,7 @@ namespace Taller_1_IDWM.src.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
