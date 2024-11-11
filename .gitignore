@@ -6,8 +6,7 @@ obj/
 appsettings.Development.json
 
 # Archivos de bases de datos locales
-customers.db
-admin.db
+*.db
 
 # Configuraciones del entorno o del IDE
 .vscode/
