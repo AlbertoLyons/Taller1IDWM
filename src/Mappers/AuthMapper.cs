@@ -21,5 +21,14 @@ namespace Taller_1_IDWM.src.Mappers
                 Birthdate = registerDTO.Birthdate,
             };
         }
+        public static NewUserDTO ToNewUserDTO(this User userModel, string token)
+        {
+            return new NewUserDTO
+            {
+                Username = userModel.UserName,
+                Email = userModel.Email,
+                Token = token
+            };
+        }
     }
 }

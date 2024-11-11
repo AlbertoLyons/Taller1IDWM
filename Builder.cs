@@ -10,6 +10,8 @@ using Taller_1_IDWM.src.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Taller_1_IDWM.src.Service;
+using Microsoft.OpenApi.Models;
 
 namespace Taller_1_IDWM
 {
@@ -26,7 +28,33 @@ namespace Taller_1_IDWM
             // Add the database context to the application
             builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite(Environment.GetEnvironmentVariable("DATABASE_URL")));
             // Add swagger to the application
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(option =>
+            {
+                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
+                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter a valid token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type=ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            }
+                        },
+                        new string[]{}
+                    }
+                });
+            });
             // Add scoped seeder to the application
             builder.Services.AddScoped<Seeder>();
             // Add controllers to the application
@@ -37,6 +65,8 @@ namespace Taller_1_IDWM
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             // Add  scoped AuthRepository to the application
             builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+            // Add  scoped TokenService to the application
+            builder.Services.AddScoped<ITokenService, TokenService>();
             // Add Identity to the application to DataContext
             BuildIdentity(builder);
             // Builds the application
@@ -66,21 +96,21 @@ namespace Taller_1_IDWM
             builder.Services.AddAuthentication(
                 opt =>
                 {
-                    opt.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-                    opt.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+                    opt.DefaultAuthenticateScheme = 
+                    opt.DefaultChallengeScheme = 
                     opt.DefaultForbidScheme =
                     opt.DefaultScheme =
-                    opt.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
+                    opt.DefaultSignInScheme = 
                     opt.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
                 }).AddJwtBearer(opt => {
                     opt.TokenValidationParameters = new TokenValidationParameters
                     {
                       ValidateIssuer = true,
-                      ValidIssuer = builder.Configuration["JWT:Issuer"],
+                      ValidIssuer = Environment.GetEnvironmentVariable("JWT_IUSSER"),
                       ValidateAudience = true,
-                      ValidAudience = builder.Configuration["JWT:Audience"],
+                      ValidAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
                       ValidateIssuerSigningKey = true,
-                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigninKey"] ?? throw new ArgumentNullException("JWT:SigninKey"))),
+                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_SIGNINKEY") ?? throw new ArgumentNullException("JWT_SIGINKEY"))),
                     };
                     
                 });

@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Sprache;
 using Taller_1_IDWM.src.DTOs.Auth;
 using Taller_1_IDWM.src.Interfaces;
 using Taller_1_IDWM.src.Mappers;
@@ -13,10 +15,14 @@ namespace Taller_1_IDWM.src.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly IAuthRepository _authRepository;
-        public AuthController(UserManager<User> userManager, IAuthRepository authRepository)
+        private readonly ITokenService _tokenService;
+        private readonly SignInManager<User> _signInManager;
+        public AuthController(UserManager<User> userManager, IAuthRepository authRepository, ITokenService tokenService, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _authRepository = authRepository;
+            _tokenService = tokenService;
+            _signInManager = signInManager;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
@@ -32,6 +38,9 @@ namespace Taller_1_IDWM.src.Controllers
                     {
                         var userModel = registerDTO.ToUserFromRegisteredDTO();
                         await _authRepository.RegisterUserAsync(userModel, registerDTO.Password);
+                        var newUser = userModel.ToNewUserDTO(_tokenService.CreateToken(userModel));
+                        return Ok(newUser);
+                        /*
                         var uri = Url.Action("GetUser", new { id = userModel.Id });
                         var response = new
                         {
@@ -39,12 +48,36 @@ namespace Taller_1_IDWM.src.Controllers
                             User = userModel.ToUserDTO() 
                         };
                         return Created(uri, response);
+                        */
                     } 
                 }
             }
             catch
             {
-                return StatusCode(500, "Internal server error ");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                else
+                {
+                    var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDTO.Email);
+                    if(user == null) return Unauthorized("Invalid email or password");
+
+                    var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
+                    if (!result.Succeeded) return Unauthorized("Invalid email or password");
+
+                    var loggedUser = user.ToNewUserDTO(_tokenService.CreateToken(user));
+                    return Ok(loggedUser);
+                }
+            }
+            catch
+            {
+                return StatusCode(500, "Internal server error");
             }
         }
     }
