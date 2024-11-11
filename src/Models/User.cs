@@ -1,24 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Taller_1_IDWM.src.Models
-
 {
-    public class User
+    public class User : IdentityUser<int>
     {
-        [Key]
-        public int Id { get; set; }
         public string Rut { get; set; } = string.Empty;
-        public DateTime Birthdate { get; set; }
-        public string Mail { get; set; } = string.Empty;
-        [StringLength(255, MinimumLength = 8)]
-        public string Name { get; set; } = string.Empty;
-         [RegularExpression(@"Masculino|Femenino|Prefiero no decirlo|otro")]
+        public DateOnly Birthdate { get; set; }
         public string Gender { get; set; } = string.Empty;
-        [StringLength(20, MinimumLength = 8)]
-        public string Password { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
     }
 }
