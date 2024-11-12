@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Taller_1_IDWM.src.DTOs
 {
@@ -23,8 +19,8 @@ namespace Taller_1_IDWM.src.DTOs
         [Required]
         [Range(1, 100000)]
         public int Stock { get; set; }
-
- 
+        [Required]
+        [FileExtensions(Extensions = "jpg,png", ErrorMessage = "Only JPG and PNG images are allowed.")]
         public IFormFile Image { get; set; } = null!;
     }
 }

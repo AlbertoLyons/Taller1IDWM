@@ -90,6 +90,10 @@ namespace Taller_1_IDWM.src.Repositories
         {
             return await _dataContext.Products.ToListAsync();
         }
+        public async Task<IEnumerable<Product>> GetByStock(int stock)
+        {
+            return await _dataContext.Products.Where(p => p.Stock >= stock).ToListAsync();
+        }
 
         public Task<Product?> GetById(int id)
         {

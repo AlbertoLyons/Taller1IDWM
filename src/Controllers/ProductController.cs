@@ -5,12 +5,13 @@ using Taller_1_IDWM.src.DTOs;
 using Taller_1_IDWM.src.DTOs.Products;
 using Taller_1_IDWM.src.Interfaces;
 using Taller_1_IDWM.src.Mappers;
+using Taller_1_IDWM.src.Models;
 
 namespace Taller_1_IDWM.src.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
@@ -62,13 +63,13 @@ namespace Taller_1_IDWM.src.Controllers
         public async Task<IActionResult> GetAll(int pageNumber = 1)
         {
             int pageSize = 10;
-            var products = await _productRepository.GetAllAsync();
+            var products = await _productRepository.GetByStock(0);
             var totalRecords = products.Count();
             var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
 
             pageNumber = pageNumber < 1 ? 1 : pageNumber > totalPages ? totalPages : pageNumber;
 
-            var paginatedUsers = products
+            var paginatedProducts = products
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Select(p => p.ToProductDTO())
@@ -81,7 +82,7 @@ namespace Taller_1_IDWM.src.Controllers
                 TotalPages = totalPages,
                 CurrentPage = pageNumber,
                 PageSize = pageSize,
-                Users = paginatedUsers
+                Products = paginatedProducts
             };
 
             return Ok(response);

@@ -80,6 +80,10 @@ namespace Taller_1_IDWM.src.Controllers
         { 
             EmailAddressAttribute emailAttribute = new EmailAddressAttribute();
             List<string> generosValidos = new List<string> { "masculino", "femenino", "otro", "prefiero no decirlo" };
+            if (updateUserDto.Password != updateUserDto.ConfirmPassword && updateUserDto.Password != null && updateUserDto.ConfirmPassword != null)
+            {
+                return BadRequest("Passwords do not match");
+            }
             var userModel = await _userRepository.EditUserAsync(id, updateUserDto);
             if(userModel == null)
             {

@@ -34,6 +34,8 @@ namespace Taller_1_IDWM.src.Controllers
                 {
                     bool exist = await _userManager.FindByEmailAsync(registerDTO.Mail) != null;
                     if(exist) return Conflict("Email already exists");
+                    if (registerDTO.Birthdate > DateOnly.Parse(DateTime.Today.ToString())) return BadRequest("Birthdate must be before as today");
+                    if (registerDTO.Password != registerDTO.ConfirmPassword) return BadRequest("Passwords do not match");
                     else
                     {
                         var userModel = registerDTO.ToUserFromRegisteredDTO();
