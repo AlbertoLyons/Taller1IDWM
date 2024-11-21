@@ -60,10 +60,22 @@ namespace Taller_1_IDWM.src.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll(int pageNumber = 1)
+        public async Task<IActionResult> GetAll(string AscOrDesc, int pageNumber = 1)
         {
             int pageSize = 10;
             var products = await _productRepository.GetByStock(0);
+            if (AscOrDesc == "asc") 
+            {
+                products = await _productRepository.GetAscSorted(0);
+            }
+            else if (AscOrDesc == "desc")
+            {
+                products = await _productRepository.GetDescSorted(0);
+            }
+            else
+            {
+                return BadRequest("You should type 'asc' or 'desc'");
+            }
             var totalRecords = products.Count();
             var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
 
@@ -72,7 +84,7 @@ namespace Taller_1_IDWM.src.Controllers
             var paginatedProducts = products
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
-                .Select(p => p.ToProductDTO())
+                .Select(p => p.ToProductFromNoAuthDTO())
                 .ToList();
 
             var response = new
@@ -87,7 +99,62 @@ namespace Taller_1_IDWM.src.Controllers
 
             return Ok(response);
         }
+        [HttpGet("Name")]
+        public async Task<IActionResult> GetByName(string name, int pageNumber = 1)
+        {
+            int pageSize = 10;
+            var products = await _productRepository.GetByName(name);
+            if(products == null){return NotFound("Producto no encontrado");}
+            var totalRecords = products.Count();
+            var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
 
+            pageNumber = pageNumber < 1 ? 1 : pageNumber > totalPages ? totalPages : pageNumber;
+
+            var paginatedProducts = products
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(p => p.ToProductDTO())
+                .ToList();
+
+            var response = new
+            {
+                Message = "Producto/s obtenido/s exitosamente",
+                TotalRecords = totalRecords,
+                TotalPages = totalPages,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                Products = paginatedProducts
+            };
+            return Ok(response);
+        }
+        [HttpGet("Type")]
+        public async Task<IActionResult> GetByType(string type, int pageNumber = 1)
+        {
+            int pageSize = 10;
+            var products = await _productRepository.GetByType(type);
+            if(products == null){return NotFound("Producto no encontrado");}
+            var totalRecords = products.Count();
+            var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
+
+            pageNumber = pageNumber < 1 ? 1 : pageNumber > totalPages ? totalPages : pageNumber;
+
+             var paginatedProducts = products
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(p => p.ToProductFromNoAuthDTO())
+                .ToList();
+
+            var response = new
+            {
+                Message = "Producto/s obtenido/s exitosamente",
+                TotalRecords = totalRecords,
+                TotalPages = totalPages,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                Products = paginatedProducts
+            };
+            return Ok(response);
+        }
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

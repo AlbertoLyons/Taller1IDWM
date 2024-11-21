@@ -16,6 +16,10 @@ namespace Taller_1_IDWM.src.Interfaces
         Task<IEnumerable<Product>> GetAllAsync();
         Task<Product?> GetById(int id);
         Task<IEnumerable<Product>> GetByStock(int stock);
+        Task<IEnumerable<Product>> GetByName(string name);
+        Task<IEnumerable<Product>> GetByType(string type);
+        Task<IEnumerable<Product>> GetAscSorted(int stock);
+        Task<IEnumerable<Product>> GetDescSorted(int stock);
         Task<bool> EditProductAsync(int id, UpdateProductDTO updateProductDTO);
         Task<bool> DeleteProductAsync(Product product);
     }

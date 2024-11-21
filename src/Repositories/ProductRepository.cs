@@ -94,7 +94,22 @@ namespace Taller_1_IDWM.src.Repositories
         {
             return await _dataContext.Products.Where(p => p.Stock >= stock).ToListAsync();
         }
-
+        public async Task<IEnumerable<Product>> GetByName(string name)
+        {
+            return await _dataContext.Products.Where(p => p.Name.Contains(name)).ToListAsync();
+        }
+        public async Task<IEnumerable<Product>> GetByType(string type)
+        {
+            return await _dataContext.Products.Where(p => p.Type == type).ToListAsync();
+        }
+        public async Task<IEnumerable<Product>> GetAscSorted(int stock)
+        {
+            return await _dataContext.Products.OrderBy(p => p.Price).Where(p => p.Stock > stock).ToListAsync();
+        }
+        public async Task<IEnumerable<Product>> GetDescSorted(int stock)
+        {
+            return await _dataContext.Products.OrderByDescending(p => p.Price).Where(p => p.Stock > stock).ToListAsync();
+        }
         public Task<Product?> GetById(int id)
         {
             return _dataContext.Products.FirstOrDefaultAsync(p => p.ID == id);

@@ -43,5 +43,16 @@ namespace Taller_1_IDWM.src.Mappers
                 Stock = updateProductDTO.Stock
             };
         }
+        public static GetProductNoAuthDTO ToProductFromNoAuthDTO(this Product product)
+        {
+            return new GetProductNoAuthDTO
+            {
+                Type = product.Type,
+                Name = product.Name,
+                Price = product.Price,
+                Stock = product.Stock,
+                ImageUrl = product.ImageUrl
+            };
+        }
     }
 }
