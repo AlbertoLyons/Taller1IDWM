@@ -17,6 +17,7 @@ namespace Taller_1_IDWM.src.Controllers
         private readonly IAuthRepository _authRepository;
         private readonly ITokenService _tokenService;
         private readonly SignInManager<User> _signInManager;
+        private static readonly List<string> RevokedTokens = new List<string>();
         public AuthController(UserManager<User> userManager, IAuthRepository authRepository, ITokenService tokenService, SignInManager<User> signInManager)
         {
             _userManager = userManager;

@@ -11,7 +11,7 @@ namespace Taller_1_IDWM.src.Controllers
 {
     [Route("api/user")]
     [ApiController]
-    //[Authorize(Roles = "User")]
+    [Authorize(Roles = "Admin")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -24,55 +24,6 @@ namespace Taller_1_IDWM.src.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        // Metodo solo para desarrollo
-        /*
-        [HttpPost("Dev")]
-        public async Task<IActionResult> AssignRoleToUser(int id, string role)
-        {
-            var user = await _userManager.FindByIdAsync(id.ToString());
-            var roleExists = await _roleManager.RoleExistsAsync(role);
-
-            if (!roleExists)
-            {
-                return BadRequest($"El rol '{role}' no existe.");
-            }
-
-            if (user != null)
-            {
-                var result = await _userManager.AddToRoleAsync(user, role);
-                if (result.Succeeded)
-                {
-                    return Ok("Rol asignado exitosamente.");
-                }
-                else
-                {
-                    return BadRequest($"No se pudo asignar el rol. Errores: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-                }
-            }
-            return BadRequest("Usuario no encontrado.");
-        }
-        */
-        /*
-        [HttpPost("")]
-        public async Task<IActionResult> Post([FromBody]CreateUserDTO createUserDTO)
-        {
-            bool exist = await _userRepository.ExistsByRut(createUserDTO.Rut);
-            EmailAddressAttribute emailAttribute = new EmailAddressAttribute();
-            if(exist){return Conflict("El RUT ya existe");}
-            else
-            {
-                var userModel = createUserDTO.ToUserFromCreatedDTO();
-                await _userRepository.AddUserAsync(userModel, createUserDTO.Password);
-                var uri = Url.Action("GetUser", new { id = userModel.Id });
-                var response = new
-                {
-                    Message = "Usuario creado exitosamente",
-                    User = userModel.ToUserDTO() 
-                };
-                return Created(uri, response);
-            }
-        }
-        */
         [HttpPut]
         [Route("{id}")]
 
@@ -96,37 +47,49 @@ namespace Taller_1_IDWM.src.Controllers
             };
             return Ok(response);
         }
-
-    [HttpGet("GetAll")]
-    //[Authorize(Roles = "Admin")]
-    public async Task<IActionResult> GetAll(int pageNumber = 1)
-    {
-        int pageSize = 10;
-        var users = await _userRepository.GetAllAsync();
-        var totalRecords = users.Count();
-        var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
-
-        pageNumber = pageNumber < 1 ? 1 : pageNumber > totalPages ? totalPages : pageNumber;
-
-        var paginatedUsers = users
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .Select(p => p.ToUserDTO())
-            .ToList();
-
-        var response = new
+        [HttpPut("{id}/ActivateDeactivate")]
+        public async Task<IActionResult> ActivateDeactivateUser(int id)
         {
-            Message = "Usuarios obtenidos exitosamente",
-            TotalRecords = totalRecords,
-            TotalPages = totalPages,
-            CurrentPage = pageNumber,
-            PageSize = pageSize,
-            Users = paginatedUsers
-        };
+            var user = await _userRepository.ActivateDeactivateUserAsync(id);
+            if(user == null)
+            {
+                return NotFound("Usuario no encontrado");
+            }
+            var response = new
+            {
+                Message = "Usuario actualizado exitosamente",
+                active = user.Active
+            };
+            return Ok(response);
+        }
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll(int pageNumber = 1)
+        {
+            int pageSize = 10;
+            var users = await _userRepository.GetAllAsync();
+            var totalRecords = users.Count();
+            var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
 
-        return Ok(response);
-    }
+            pageNumber = pageNumber < 1 ? 1 : pageNumber > totalPages ? totalPages : pageNumber;
 
+            var paginatedUsers = users
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(p => p.ToUserDTO())
+                .ToList();
+
+            var response = new
+            {
+                Message = "Usuarios obtenidos exitosamente",
+                TotalRecords = totalRecords,
+                TotalPages = totalPages,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                Users = paginatedUsers
+            };
+
+            return Ok(response);
+        }
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

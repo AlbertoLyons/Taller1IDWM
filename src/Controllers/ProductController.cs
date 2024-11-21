@@ -11,7 +11,7 @@ namespace Taller_1_IDWM.src.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
@@ -20,7 +20,6 @@ namespace Taller_1_IDWM.src.Controllers
         {
             _productRepository = productRepository;
         }
-
         [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]CreateProductDTO createProductDTO)
         {
@@ -41,7 +40,6 @@ namespace Taller_1_IDWM.src.Controllers
                 return Created(uri, response);
             }
         }
-
         [HttpPut]
         [Route("{id}")]
 

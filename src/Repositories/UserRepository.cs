@@ -64,5 +64,17 @@ namespace Taller_1_IDWM.src.Repositories
         {
             return _dataContext.Users.FirstOrDefaultAsync(p => p.Rut == rut);
         }
+        public async Task<User?> ActivateDeactivateUserAsync(int id)
+        {
+            var user = await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if(user == null)
+            {
+                throw new Exception("User not found");
+            }
+            user.Active = !user.Active;
+            _dataContext.Users.Update(user);
+            await _dataContext.SaveChangesAsync();
+            return user;
+        }
     }
 }

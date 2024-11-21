@@ -24,6 +24,7 @@ namespace Taller_1_IDWM.src.Service
         {
             var claims = new List<Claim>
             {
+                new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email!),
                 new Claim(JwtRegisteredClaimNames.GivenName, user.UserName!),
             };
@@ -39,7 +40,7 @@ namespace Taller_1_IDWM.src.Service
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds,
                 Issuer = _config["JWT_IUSSER"],
                 Audience = _config["JWT_AUDIENCE"]

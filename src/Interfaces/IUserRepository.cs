@@ -12,5 +12,6 @@ namespace Taller_1_IDWM.src.Interfaces
         Task<User?> GetByRut(string rut);
         Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO);
         Task<User?> DeleteUserAsync(int id);
+        Task<User?> ActivateDeactivateUserAsync(int id);
     }
 }
