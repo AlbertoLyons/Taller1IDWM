@@ -11,7 +11,7 @@ namespace Taller_1_IDWM.src.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
@@ -21,16 +21,11 @@ namespace Taller_1_IDWM.src.Controllers
             _productRepository = productRepository;
         }
         [HttpPost("")]
-        public async Task<IActionResult> Post([FromBody]CreateProductDTO createProductDTO)
+        public async Task<IActionResult> Post([FromForm]CreateProductDTO createProductDTO)
         {
-            var product = _productRepository.ExistsByNameAndType(createProductDTO.Name, createProductDTO.Type);
-            if(product != null){return Conflict("Ya existe un producto con el mismo nombre y tipo");}
-            else
-            {
+            //try {
                 var newProduct = await _productRepository.AddProductAsync(createProductDTO);
-                if(newProduct == null){
-                    return BadRequest();
-                }
+
                 var uri = Url.Action("GetProduct", new { id = newProduct.ID });
                 var response = new
                 {
@@ -38,7 +33,10 @@ namespace Taller_1_IDWM.src.Controllers
                     Product = newProduct.ToProductDTO() 
                 };
                 return Created(uri, response);
-            }
+            //} catch (Exception e)
+            //{
+            //    return BadRequest(new {message = e.message});
+            //}
         }
         [HttpPut]
         [Route("{id}")]

@@ -20,7 +20,6 @@ namespace Taller_1_IDWM.src.DTOs
         [Range(1, 100000)]
         public int Stock { get; set; }
         [Required]
-        [FileExtensions(Extensions = "jpg,png", ErrorMessage = "Only JPG and PNG images are allowed.")]
         public IFormFile Image { get; set; } = null!;
     }
 }

@@ -11,7 +11,7 @@ namespace Taller_1_IDWM.src.Interfaces
     public interface IProductRepository
     {
         Task<bool> ExistsById(int id);
-        Task<Product?> ExistsByNameAndType(string name, string type);
+        Task<bool> ExistsByNameAndType(string name, string type);
         Task<Product?> AddProductAsync(CreateProductDTO productDto);
         Task<IEnumerable<Product>> GetAllAsync();
         Task<Product?> GetById(int id);

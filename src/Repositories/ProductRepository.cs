@@ -20,7 +20,15 @@ namespace Taller_1_IDWM.src.Repositories
         
         public async Task<Product?> AddProductAsync(CreateProductDTO productDto)
         {
-            
+            var existingproduct = ExistsByNameAndType(productDto.Name, productDto.Type);
+            if(existingproduct.Result){throw new Exception("Already exists a product with this name and type");}
+            Console.WriteLine(productDto.Image.FileName);
+            /*
+            if (!productDto.Image.FileName.EndsWith(".png") || !productDto.Image.FileName.EndsWith(".jpg"))
+            {
+                throw new Exception("Only supports PNG and JPG files");
+            }
+            */
             var uploadParams = new ImageUploadParams
             {
                 File = new FileDescription(productDto.Image.FileName, productDto.Image.OpenReadStream()),
@@ -78,12 +86,9 @@ namespace Taller_1_IDWM.src.Repositories
         {
             return await _dataContext.Products.AnyAsync(p => p.ID == id);
         }
-
-        public async Task<Product?> ExistsByNameAndType(string name, string type)
+        public async Task<bool> ExistsByNameAndType(string name, string type)
         {
-            var products = await _dataContext.Products.FirstOrDefaultAsync(p => p.Name == name && p.Type == type );
-            return products;
-            
+            return await _dataContext.Products.AnyAsync(p => p.Name == name && p.Type == type);
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync()
