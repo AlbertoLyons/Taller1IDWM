@@ -30,34 +30,12 @@ namespace Taller_1_IDWM.src.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return BadRequest(ModelState);
-                else
-                {
-                    bool exist = await _userManager.FindByEmailAsync(registerDTO.Mail) != null;
-                    if(exist) return Conflict("Email already exists");
-                    if (registerDTO.Birthdate > DateOnly.FromDateTime(DateTime.Today)) return BadRequest("Birthdate must be before as today");
-                    if (registerDTO.Password != registerDTO.ConfirmPassword) return BadRequest("Passwords do not match");
-                    else
-                    {
-                        var userModel = registerDTO.ToUserFromRegisteredDTO();
-                        await _authRepository.RegisterUserAsync(userModel, registerDTO.Password);
-                        var newUser = userModel.ToNewUserDTO(await _tokenService.CreateToken(userModel));
-                        return Ok(newUser);
-                        /*
-                        var uri = Url.Action("GetUser", new { id = userModel.Id });
-                        var response = new
-                        {
-                            Message = "User registered successfully",
-                            User = userModel.ToUserDTO() 
-                        };
-                        return Created(uri, response);
-                        */
-                    } 
-                }
+                var token = await _authRepository.RegisterUserAsync(registerDTO, registerDTO.Password);
+                return Ok(token);
             }
-            catch
+            catch (Exception e)
             {
-                return StatusCode(500, "Internal server error");
+                return BadRequest(new { message = e.Message });
             }
         }
         [HttpPost("login")]
@@ -65,22 +43,12 @@ namespace Taller_1_IDWM.src.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return BadRequest(ModelState);
-                else
-                {
-                    var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDTO.Email);
-                    if(user == null) return Unauthorized("Invalid email or password");
-
-                    var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
-                    if (!result.Succeeded) return Unauthorized("Invalid email or password");
-
-                    var loggedUser = user.ToNewUserDTO(await _tokenService.CreateToken(user));
-                    return Ok(loggedUser);
-                }
+                var token = await _authRepository.LoginUserAsync(loginDTO);
+                return Ok(token);
             }
-            catch
+            catch (Exception e)
             {
-                return StatusCode(500, "Internal server error");
+                return BadRequest(new { message = e.Message });
             }
         }
     }
