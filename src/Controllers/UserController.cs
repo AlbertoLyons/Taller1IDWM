@@ -11,7 +11,7 @@ namespace Taller_1_IDWM.src.Controllers
 {
     [Route("api/user")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -63,13 +63,71 @@ namespace Taller_1_IDWM.src.Controllers
             return Ok(response);
         }
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll(int pageNumber = 1)
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAll(int pageNumber = 1, string searchTerm = "", string searchField = "")
         {
             int pageSize = 10;
             var users = await _userRepository.GetAllAsync();
+
+            // Si searchField está vacío, no se aplica ningún filtrado
+            if (!string.IsNullOrEmpty(searchField) && !string.IsNullOrEmpty(searchTerm))
+            {
+                switch (searchField.ToLower())
+                {
+                    case "name":
+                        users = users.Where(u => u.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+                        break;
+                    case "gender":
+                        users = users.Where(u => u.Gender.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+                        break;
+                    case "birthdate":
+                        DateOnly? dateOnly = null;
+
+                        // Intentamos parsear el searchTerm directamente
+                        if (searchTerm.Length == 4 && int.TryParse(searchTerm, out var year))
+                        {
+                            // Buscar todos los usuarios nacidos en ese año (sin importar el mes ni el día)
+                            dateOnly = new DateOnly(year, 1, 1);
+                        }
+                        else if (searchTerm.Length == 7 && DateTime.TryParse(searchTerm + "-01", out var date))
+                        {
+                            // Buscar todos los usuarios nacidos en ese mes del año
+                            dateOnly = DateOnly.FromDateTime(date);
+                        }
+                        else if (searchTerm.Length == 10 && DateTime.TryParse(searchTerm, out var fullDate))
+                        {
+                            // Buscar todos los usuarios nacidos en esa fecha exacta
+                            dateOnly = DateOnly.FromDateTime(fullDate);
+                        }
+
+                        if (dateOnly != null)
+                        {
+                            // Filtrar por año, mes o fecha completa según el caso
+                            if (searchTerm.Length == 4)  // Solo año
+                            {
+                                users = users.Where(u => u.Birthdate.Year == dateOnly.Value.Year).ToList();
+                            }
+                            else if (searchTerm.Length == 7)  // Año y mes
+                            {
+                                users = users.Where(u => u.Birthdate.Year == dateOnly.Value.Year && u.Birthdate.Month == dateOnly.Value.Month).ToList();
+                            }
+                            else if (searchTerm.Length == 10)  // Año, mes y día
+                            {
+                                users = users.Where(u => u.Birthdate == dateOnly.Value).ToList();
+                            }
+                        }
+                        else
+                        {
+                            return BadRequest("Invalid birthdate format.");
+                        }
+                        break;
+                    default:
+                        return BadRequest("Invalid search field.");
+                }
+            }
+
             var totalRecords = users.Count();
             var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
-
             pageNumber = pageNumber < 1 ? 1 : pageNumber > totalPages ? totalPages : pageNumber;
 
             var paginatedUsers = users
@@ -90,6 +148,11 @@ namespace Taller_1_IDWM.src.Controllers
 
             return Ok(response);
         }
+
+
+
+
+
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
