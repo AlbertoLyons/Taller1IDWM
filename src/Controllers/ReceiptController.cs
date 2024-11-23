@@ -88,8 +88,17 @@ namespace Taller_1_IDWM.src.Controllers
             }
         }
 
-
-
-
+        [HttpGet("GetOrderHistory")]
+                public async Task<IActionResult> GetOrderHistory(int id)
+        {
+            try{
+                var receipts = await _receiptRepository.GetOrderHistory(id);
+                return Ok(receipts);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
+        }
     }
 }

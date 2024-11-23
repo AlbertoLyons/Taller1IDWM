@@ -59,5 +59,11 @@ namespace Taller_1_IDWM.src.Repositories
             var receipt = await _dataContext.Receipts.ToListAsync();
             return receipt;  
         }
+
+        public async Task<IEnumerable<Receipt>> GetOrderHistory(int id)
+        {
+            var receipt = await _dataContext.Receipts.Where(x => x.UserId == id).ToListAsync();
+            return receipt;  
+        }
     }
 }
