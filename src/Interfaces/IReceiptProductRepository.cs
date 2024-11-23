@@ -7,8 +7,8 @@ using Taller_1_IDWM.src.Models;
 
 namespace Taller_1_IDWM.src.Interfaces
 {
-    public interface IReceiptRepository
+    public interface IReceiptProductRepository
     {
-        public Task<Receipt> CreateReceipt(List<ProductInCartDTO> products, int userid, AddressDTO address);
+        public Task<IEnumerable<ReceiptProduct>> AddReceiptProduct(List<ProductInCartDTO> products, int receiptId);
     }
 }
