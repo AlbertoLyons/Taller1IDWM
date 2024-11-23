@@ -21,8 +21,8 @@ namespace Taller_1_IDWM.src.Mappers
         {
             return new NewUserDTO
             {
-                Username = userModel.UserName,
-                Email = userModel.Email,
+                Username = userModel.UserName!,
+                Email = userModel.Email!,
                 Token = token
             };
         }

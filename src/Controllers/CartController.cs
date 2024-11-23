@@ -109,7 +109,7 @@ namespace Taller_1_IDWM.src.Controllers
                 return NotFound("Product not found");
             }
 
-            // Eliminar el ticket de la lista de products
+            // Eliminar el producto de la lista de products
             products.Remove(productToRemove);
 
             // Guardar la lista de products en las cookies

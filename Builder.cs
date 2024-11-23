@@ -17,7 +17,7 @@ namespace Taller_1_IDWM
 {
     public class Builder
     {
-        public WebApplication Build(string[] args) 
+        public async Task<WebApplication> Build(string[] args) 
         {
             Env.Load();
             // Create a builder
@@ -75,11 +75,13 @@ namespace Taller_1_IDWM
             // Resolve the RoleManager from the service provider
             using (var scope = app.Services.CreateScope())
             {
+                var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+                context.Database.Migrate();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
                 CreateRolesAsync(roleManager);
             }
             // Seed the database
-            Seed(app);
+            await Seed(app);
             return app;
         }
         void BuildIdentity(WebApplicationBuilder builder)
@@ -154,18 +156,19 @@ namespace Taller_1_IDWM
                 }
             }
         }
-        async void Seed(WebApplication app) 
+        async Task Seed(WebApplication app) 
         {
+
             // Create a scope to get the services
             using (var scope = app.Services.CreateScope())
             {
-            // Get the services
-            var services = scope.ServiceProvider;
-            // Get the DataContext
-            var context = services.GetRequiredService<DataContext>();
-            await context.Database.MigrateAsync();
-            // Initialize the seeder
-            await Seeder.Initialize(services);
+                // Get the services
+                var services = scope.ServiceProvider;
+                // Get the DataContext
+                var context = services.GetRequiredService<DataContext>();
+                await context.Database.MigrateAsync();
+                // Initialize the seeder
+                await Seeder.Initialize(services);
             }
         }
     }
