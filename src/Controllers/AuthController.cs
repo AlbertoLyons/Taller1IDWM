@@ -1,11 +1,6 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Sprache;
 using Taller_1_IDWM.src.DTOs.Auth;
 using Taller_1_IDWM.src.Interfaces;
-using Taller_1_IDWM.src.Mappers;
-using Taller_1_IDWM.src.Models;
 
 namespace Taller_1_IDWM.src.Controllers
 {   
@@ -13,17 +8,11 @@ namespace Taller_1_IDWM.src.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
         private readonly IAuthRepository _authRepository;
-        private readonly ITokenService _tokenService;
-        private readonly SignInManager<User> _signInManager;
         private static readonly List<string> RevokedTokens = new List<string>();
-        public AuthController(UserManager<User> userManager, IAuthRepository authRepository, ITokenService tokenService, SignInManager<User> signInManager)
+        public AuthController(IAuthRepository authRepository)
         {
-            _userManager = userManager;
             _authRepository = authRepository;
-            _tokenService = tokenService;
-            _signInManager = signInManager;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)

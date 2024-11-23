@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Taller_1_IDWM.src.Interfaces;
 using Taller_1_IDWM.src.Mappers;
 using Taller_1_IDWM.src.DTOs.Cart;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 namespace Taller_1_IDWM.src.Controllers
 {
     [ApiController]
@@ -11,11 +13,13 @@ namespace Taller_1_IDWM.src.Controllers
     public class CartController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
+        private readonly ICartRepository _cartRepository;
         private const string ProductCookieKey = "ProductsList";
         private const string UserCookieKey = "UserGUID";
-        public CartController(IProductRepository productRepository)
+        public CartController(IProductRepository productRepository, ICartRepository cartRepository)
         {
             _productRepository = productRepository;
+            _cartRepository = cartRepository;
         }
         [HttpGet]
         public IActionResult GetProducts()
@@ -116,6 +120,26 @@ namespace Taller_1_IDWM.src.Controllers
             SaveProductsToCookies(userGuid, products);
 
             return Ok("Product removed from cart");
+        }
+        [HttpPost("buy")]
+        [Authorize]
+        public async Task<IActionResult> BuyProducts(AddressDTO addressDTO)
+        {
+            try{
+                var userGuid = GetOrCreateUserGuid();
+                var products = GetProductsFromCookies(userGuid);
+                var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                var result = await _cartRepository.BuyProductAsync(products, userId, addressDTO);
+                if (result)
+                {
+                    return Ok("Products bought successfully");
+                }
+                return BadRequest("Error buying products");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
         }
         private string GetOrCreateUserGuid()
         {
