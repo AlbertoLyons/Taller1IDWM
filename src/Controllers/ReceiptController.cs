@@ -40,6 +40,9 @@ namespace Taller_1_IDWM.src.Controllers
                     receipts = receipts.Where(r => r.BoughtAt <= endDate.Value).ToList();
                 }
 
+                // Ordenar los recibos desde los más recientes a los más antiguos
+                receipts = receipts.OrderByDescending(r => r.BoughtAt).ToList();
+
                 // Calcula la cantidad total de registros y páginas después del filtrado
                 var totalRecords = receipts.Count();
                 var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
@@ -71,6 +74,7 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+
 
 
 
