@@ -11,7 +11,6 @@ namespace Taller_1_IDWM.src.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
@@ -21,6 +20,7 @@ namespace Taller_1_IDWM.src.Controllers
             _productRepository = productRepository;
         }
         [HttpPost("")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post([FromForm]CreateProductDTO createProductDTO)
         {
             try {
@@ -40,8 +40,8 @@ namespace Taller_1_IDWM.src.Controllers
         }
         [HttpPut]
         [Route("{id}")]
-
-        public async Task<IActionResult> Put([FromRoute] int id , [FromBody] UpdateProductDTO updateProductDto)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Put([FromRoute] int id , [FromForm] UpdateProductDTO updateProductDto)
         { 
             try{
             var productModel = await _productRepository.EditProductAsync(id, updateProductDto);
@@ -51,9 +51,9 @@ namespace Taller_1_IDWM.src.Controllers
                 Product = productModel
             };
             return Ok(response);
-            }catch 
+            }catch (Exception e)
             {
-                return NotFound("Product not found");
+                return BadRequest(new {message = e.Message});
             }
         }
 
@@ -64,6 +64,39 @@ namespace Taller_1_IDWM.src.Controllers
             int pageSize = 10;
             var products = await _productRepository.GetByStock(0);
             products = await _productRepository.GetAscOrDescSorted(0, AscOrDesc);
+            var totalRecords = products.Count();
+            var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
+
+            pageNumber = pageNumber < 1 ? 1 : pageNumber > totalPages ? totalPages : pageNumber;
+
+            var paginatedProducts = products
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var response = new
+            {
+                Message = "Products obtained succefully",
+                TotalRecords = totalRecords,
+                TotalPages = totalPages,
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                Products = paginatedProducts
+            };
+
+            return Ok(response);
+            }catch (Exception e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
+        }
+        [HttpGet("GetAllAdmin")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAllAdmin(int pageNumber = 1)
+        {
+            try {
+            int pageSize = 10;
+            var products = await _productRepository.GetByStock(-1);
             var totalRecords = products.Count();
             var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
 
@@ -147,6 +180,7 @@ namespace Taller_1_IDWM.src.Controllers
             return Ok(response);
         }
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try{

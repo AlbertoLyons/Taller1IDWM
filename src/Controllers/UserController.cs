@@ -11,7 +11,7 @@ namespace Taller_1_IDWM.src.Controllers
 {
     [Route("api/user")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
@@ -41,6 +41,7 @@ namespace Taller_1_IDWM.src.Controllers
             }
         }
         [HttpPut("{id}/ActivateDeactivate")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ActivateDeactivateUser(int id)
         {
             try 
@@ -58,7 +59,7 @@ namespace Taller_1_IDWM.src.Controllers
 
         }
         [HttpGet("GetAll")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll(int pageNumber = 1, string searchTerm = "", string searchField = "")
         {
             try {
@@ -89,6 +90,7 @@ namespace Taller_1_IDWM.src.Controllers
             }
         }
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try{

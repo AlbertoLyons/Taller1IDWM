@@ -69,15 +69,28 @@ namespace Taller_1_IDWM.src.Repositories
         public async Task<bool> EditProductAsync(int id, UpdateProductDTO updateProductDTO)
         {
             var product = await ExistsByNameAndType(updateProductDTO.Name, updateProductDTO.Type);
-            if(!product){throw new Exception("Already exists a product with this name and type");}
+            if(product){throw new Exception("Already exists a product with this name and type");}
             var existingProduct = await _dataContext.Products.FirstOrDefaultAsync(p => p.ID == id);
             if(existingProduct == null){
-                return false;
+                throw new Exception("Product not found");
+            }
+
+            var uploadParams = new ImageUploadParams
+            {
+                File = new FileDescription(updateProductDTO.Image.FileName, updateProductDTO.Image.OpenReadStream()),
+                Folder = "products_image"
+            };
+            //await _cloudinary.delete
+            var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+            if (uploadResult.Error != null)
+            {
+                throw new Exception(uploadResult.Error.Message);
             }
             existingProduct.Name = updateProductDTO.Name;
             existingProduct.Type = updateProductDTO.Type;
             existingProduct.Price = updateProductDTO.Price;
             existingProduct.Stock = updateProductDTO.Stock;
+            existingProduct.ImageUrl = uploadResult.SecureUrl.AbsoluteUri;
             
             _dataContext.Products.Update(existingProduct);
             await _dataContext.SaveChangesAsync();

@@ -34,7 +34,11 @@ namespace Taller_1_IDWM.src.Repositories
         public async Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO)
         {
             var existingUser = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == id) ?? throw new Exception("User not found");
-
+            if (updateUserDTO.Password == null && updateUserDTO.ConfirmPassword == null)
+            {
+                updateUserDTO.Password = existingUser.PasswordHash!;
+                updateUserDTO.ConfirmPassword = existingUser.PasswordHash!;
+            }
             if (updateUserDTO.Password != updateUserDTO.ConfirmPassword && updateUserDTO.Password != null && updateUserDTO.ConfirmPassword != null)
             {
                 throw new Exception("Passwords do not match");
