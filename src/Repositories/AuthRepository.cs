@@ -34,7 +34,10 @@ namespace Taller_1_IDWM.src.Repositories
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
             if (!result.Succeeded) throw new Exception("Invalid email or password");
-
+            if (!user.Active) 
+            {
+                throw new Exception("User is not active");
+            }
             var newUser = await _tokenService.CreateToken(user);
             return newUser;
         }
