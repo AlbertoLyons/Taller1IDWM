@@ -75,7 +75,18 @@ namespace Taller_1_IDWM.src.Controllers
             }
         }
 
-
+        [HttpGet("GetAllReceiptsProducts")]
+        public async Task<IActionResult> GetAll(int id)
+        {
+            try{
+                var receiptsProducts = await _receiptProductRepository.GetByReceiptId(id);
+                return Ok(receiptsProducts);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
+        }
 
 
 

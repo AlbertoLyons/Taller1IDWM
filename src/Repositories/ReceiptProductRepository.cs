@@ -60,9 +60,9 @@ namespace Taller_1_IDWM.src.Repositories
             return receiptProducts;
         }
 
-        public async Task<IEnumerable<ReceiptProduct>> GetAllAsync()
+        public async Task<IEnumerable<ReceiptProduct>> GetByReceiptId(int receiptId)
         {
-            var receiptProducts = await _dataContext.ReceiptProducts.ToListAsync();
+            var receiptProducts = await _dataContext.ReceiptProducts.Where(x => x.ReceiptId == receiptId).ToListAsync();
             return receiptProducts;  
         }
     }
