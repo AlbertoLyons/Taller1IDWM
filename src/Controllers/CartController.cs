@@ -13,13 +13,15 @@ namespace Taller_1_IDWM.src.Controllers
     public class CartController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
-        private readonly ICartRepository _cartRepository;
+        private readonly IReceiptRepository _receiptRepository;
+        private readonly IReceiptProductRepository _receiptProductRepository;
         private const string ProductCookieKey = "ProductsList";
         private const string UserCookieKey = "UserGUID";
-        public CartController(IProductRepository productRepository, ICartRepository cartRepository)
+        public CartController(IProductRepository productRepository, IReceiptRepository receiptRepository, IReceiptProductRepository receiptProductRepository)
         {
             _productRepository = productRepository;
-            _cartRepository = cartRepository;
+            _receiptRepository = receiptRepository;
+            _receiptProductRepository = receiptProductRepository;
         }
         [HttpGet]
         public IActionResult GetProducts()
@@ -129,10 +131,14 @@ namespace Taller_1_IDWM.src.Controllers
                 var userGuid = GetOrCreateUserGuid();
                 var products = GetProductsFromCookies(userGuid);
                 var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                var result = await _cartRepository.BuyProductAsync(products, userId, addressDTO);
-                if (result)
+                var receipt = await _receiptRepository.CreateReceipt(products, userId, addressDTO);
+                if (receipt != null)
                 {
-                    return Ok("Products bought successfully");
+                    var receiptProducts = await _receiptProductRepository.AddReceiptProduct(products, receipt.Id);
+                    if (receiptProducts != null)
+                    {
+                        return Ok("Products bought successfully");
+                    }
                 }
                 return BadRequest("Error buying products");
             }

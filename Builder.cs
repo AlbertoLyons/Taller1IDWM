@@ -68,8 +68,6 @@ namespace Taller_1_IDWM
             builder.Services.AddScoped<IAuthRepository, AuthRepository>();
             // Add  scoped TokenService to the application
             builder.Services.AddScoped<ITokenService, TokenService>();
-            // Add  scoped CartRepository to the application
-            builder.Services.AddScoped<ICartRepository, CartRepository>();
             // Add  scoped ReceiptRepository to the application
             builder.Services.AddScoped<IReceiptProductRepository, ReceiptProductRepository>();
             // Add  scoped ReceiptRepository to the application
