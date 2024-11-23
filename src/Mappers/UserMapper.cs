@@ -23,19 +23,6 @@ namespace Taller_1_IDWM.src.Mappers
                 Password = userModel.PasswordHash
             };
         }
-
-        public static User ToUserFromCreatedDTO(this CreateUserDTO createUserDto)
-        {
-            return new User
-            {
-                Rut = createUserDto.Rut,
-                Name = createUserDto.Name,
-                Email = createUserDto.Mail,
-                UserName = createUserDto.Mail,
-                Gender = createUserDto.Gender,
-                Birthdate = createUserDto.Birthdate,
-            };
-        }
         public static User ToUserFromUpdateDTO(this UpdateUserDTO updateUserDto)
         {
             return new User

@@ -18,10 +18,14 @@ namespace Taller_1_IDWM.src.DTOs.Users
         [Required]
         [RegularExpression(@"Masculino|Femenino|Prefiero no decirlo|otro")]
         public string Gender { get; set; } = string.Empty;
-
+        
         [Required]
         [StringLength(20, MinimumLength = 8)]
         [RegularExpression(@"^[a-zA-Z0-9]*$")]
         public string Password { get; set; } = string.Empty;
+        [Required]
+        [StringLength(20, MinimumLength = 8)]
+        [RegularExpression(@"^[a-zA-Z0-9]*$")]
+        public string ConfirmPassword { get; set; } = string.Empty;
     }
 }

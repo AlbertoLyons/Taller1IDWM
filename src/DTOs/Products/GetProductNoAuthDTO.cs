@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Taller_1_IDWM.src.DTOs.Products
 {
-    public class UpdateProductDTO
+    public class GetProductNoAuthDTO
     {
         [Required]
         [StringLength(64, MinimumLength = 10)]
@@ -25,6 +21,7 @@ namespace Taller_1_IDWM.src.DTOs.Products
         public int Stock { get; set; }
 
         [Required]
-        public IFormFile Image { get; set; } = null!;
+        [StringLength(256, MinimumLength = 10)]
+        public string ImageUrl { get; set; } = string.Empty;
     }
 }
