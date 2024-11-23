@@ -33,6 +33,7 @@ namespace Taller_1_IDWM.src.Repositories
                 Address = address.Address
             };
             _dataContext.Receipts.Add(receipt);
+            await _dataContext.SaveChangesAsync();
             foreach (var product in products)
             {
                 var receiptProduct = new ReceiptProduct
