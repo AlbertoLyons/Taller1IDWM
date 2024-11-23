@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Taller_1_IDWM.src.Data;
 using Taller_1_IDWM.src.DTOs.Cart;
 using Taller_1_IDWM.src.Interfaces;
@@ -57,6 +58,12 @@ namespace Taller_1_IDWM.src.Repositories
             // Se guardan los cambios en la base de datos
             await _dataContext.SaveChangesAsync();
             return receiptProducts;
+        }
+
+        public async Task<IEnumerable<ReceiptProduct>> GetAllAsync()
+        {
+            var receiptProducts = await _dataContext.ReceiptProducts.ToListAsync();
+            return receiptProducts;  
         }
     }
 }

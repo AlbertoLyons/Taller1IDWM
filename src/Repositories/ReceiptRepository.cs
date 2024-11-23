@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Taller_1_IDWM.src.Data;
 using Taller_1_IDWM.src.DTOs.Cart;
 using Taller_1_IDWM.src.Interfaces;
@@ -51,6 +52,12 @@ namespace Taller_1_IDWM.src.Repositories
             // Guardar los cambios
             await _dataContext.SaveChangesAsync();
             return receipt;
+        }
+
+        public async Task<IEnumerable<Receipt>> GetAllAsync()
+        {
+            var receipt = await _dataContext.Receipts.ToListAsync();
+            return receipt;  
         }
     }
 }

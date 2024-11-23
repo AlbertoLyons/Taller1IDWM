@@ -7,5 +7,7 @@ namespace Taller_1_IDWM.src.Interfaces
     {
         // Método que crea un recibo a partir de una lista de productos, el id del usuario y la dirección de envío
         public Task<Receipt> CreateReceipt(List<ProductInCartDTO> products, int userid, AddressDTO address);
+        Task<IEnumerable<Receipt>> GetAllAsync();
+
     }
 }

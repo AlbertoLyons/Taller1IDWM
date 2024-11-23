@@ -102,6 +102,16 @@ namespace Taller_1_IDWM.src.Controllers
             return Ok("User deleted successfully");
         }
 
-
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try{
+                var user = await _userRepository.GetById(id);
+            }catch (Exception e)
+            {
+                return NotFound(new {error = e.Message});
+            }
+            return Ok("User deleted successfully");
+        }
     }
 }
