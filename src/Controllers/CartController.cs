@@ -122,7 +122,7 @@ namespace Taller_1_IDWM.src.Controllers
             return Ok("Product removed from cart");
         }
         [HttpPost("buy")]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> BuyProducts(AddressDTO addressDTO)
         {
             try{
