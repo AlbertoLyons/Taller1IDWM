@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Taller_1_IDWM.src.DTOs;
 using Taller_1_IDWM.src.DTOs.Products;
 using Taller_1_IDWM.src.Models;
@@ -15,11 +11,10 @@ namespace Taller_1_IDWM.src.Interfaces
         Task<Product?> AddProductAsync(CreateProductDTO productDto);
         Task<IEnumerable<Product>> GetAllAsync();
         Task<Product?> GetById(int id);
-        Task<IEnumerable<Product>> GetByStock(int stock);
+        Task<IEnumerable<GetProductNoAuthDTO>> GetByStock(int stock);
         Task<IEnumerable<Product>> GetByName(string name);
         Task<IEnumerable<Product>> GetByType(string type);
-        Task<IEnumerable<Product>> GetAscSorted(int stock);
-        Task<IEnumerable<Product>> GetDescSorted(int stock);
+        Task <IEnumerable<GetProductNoAuthDTO>> GetAscOrDescSorted(int stock, string ascOrDesc);
         Task<bool> EditProductAsync(int id, UpdateProductDTO updateProductDTO);
         Task<bool> DeleteProductAsync(Product product);
     }

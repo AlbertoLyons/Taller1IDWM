@@ -23,55 +23,47 @@ namespace Taller_1_IDWM.src.Controllers
         [HttpPost("")]
         public async Task<IActionResult> Post([FromForm]CreateProductDTO createProductDTO)
         {
-            //try {
+            try {
                 var newProduct = await _productRepository.AddProductAsync(createProductDTO);
 
                 var uri = Url.Action("GetProduct", new { id = newProduct.ID });
                 var response = new
                 {
-                    Message = "Producto creado exitosamente",
+                    Message = "Product created successfully",
                     Product = newProduct.ToProductDTO() 
                 };
                 return Created(uri, response);
-            //} catch (Exception e)
-            //{
-            //    return BadRequest(new {message = e.message});
-            //}
+            } catch (Exception e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
         }
         [HttpPut]
         [Route("{id}")]
 
         public async Task<IActionResult> Put([FromRoute] int id , [FromBody] UpdateProductDTO updateProductDto)
         { 
-            var product = _productRepository.ExistsByNameAndType(updateProductDto.Name, updateProductDto.Type);
-            if(product != null){return Conflict("Ya existe un producto con el mismo nombre y tipo");}
+            try{
             var productModel = await _productRepository.EditProductAsync(id, updateProductDto);
-            if(!productModel){return NotFound();}
             var response = new
             {
-                Message = "Producto actualizado exitosamente",
+                Message = "Product updated successfully",
                 Product = productModel
             };
             return Ok(response);
+            }catch 
+            {
+                return NotFound("Product not found");
+            }
         }
 
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(string AscOrDesc, int pageNumber = 1)
         {
+            try {
             int pageSize = 10;
             var products = await _productRepository.GetByStock(0);
-            if (AscOrDesc == "asc") 
-            {
-                products = await _productRepository.GetAscSorted(0);
-            }
-            else if (AscOrDesc == "desc")
-            {
-                products = await _productRepository.GetDescSorted(0);
-            }
-            else
-            {
-                return BadRequest("You should type 'asc' or 'desc'");
-            }
+            products = await _productRepository.GetAscOrDescSorted(0, AscOrDesc);
             var totalRecords = products.Count();
             var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
 
@@ -80,12 +72,11 @@ namespace Taller_1_IDWM.src.Controllers
             var paginatedProducts = products
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
-                .Select(p => p.ToProductFromNoAuthDTO())
                 .ToList();
 
             var response = new
             {
-                Message = "Productos obtenidos exitosamente",
+                Message = "Products obtained succefully",
                 TotalRecords = totalRecords,
                 TotalPages = totalPages,
                 CurrentPage = pageNumber,
@@ -94,6 +85,10 @@ namespace Taller_1_IDWM.src.Controllers
             };
 
             return Ok(response);
+            }catch (Exception e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
         }
         [HttpGet("Name")]
         public async Task<IActionResult> GetByName(string name, int pageNumber = 1)
@@ -156,8 +151,7 @@ namespace Taller_1_IDWM.src.Controllers
         {
             try{
                 var product = await _productRepository.GetById(id);
-                if(product == null){return BadRequest("El producto con el id ingresado no existe");}
-                bool productDelete = await _productRepository.DeleteProductAsync(product);
+                bool productDelete = await _productRepository.DeleteProductAsync(product!);
             }catch
             {
                 return NotFound("Producto no encontrado");

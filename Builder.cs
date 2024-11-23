@@ -22,7 +22,8 @@ namespace Taller_1_IDWM
             Env.Load();
             // Create a builder
             var builder = WebApplication.CreateBuilder(args);
-            BuildCloudinary(builder);
+            var cloudinary = BuildCloudinary();
+            builder.Services.AddSingleton(cloudinary);
             // Add endpoints to the application
             builder.Services.AddEndpointsApiExplorer();
             // Add the database context to the application
@@ -115,14 +116,14 @@ namespace Taller_1_IDWM
                     
                 });
         }
-        void BuildCloudinary(WebApplicationBuilder builder)
+        Cloudinary BuildCloudinary()
         {
             // Add cloudinary settings to the configuration
             var cloudinarySettings = new CloudinarySettings
             {
-                CloudName = Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME"),
-                ApiKey = Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY"),
-                ApiSecret = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET")
+                CloudName = Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME")!,
+                ApiKey = Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY")!,
+                ApiSecret = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET")!
             };
 
             var cloudinaryAccount = new Account(
@@ -132,6 +133,7 @@ namespace Taller_1_IDWM
             );
 
             var cloudinary = new Cloudinary(cloudinaryAccount);
+            return cloudinary;
         }
         async void CreateRolesAsync(RoleManager<IdentityRole<int>> roleManager) 
         {
@@ -163,7 +165,7 @@ namespace Taller_1_IDWM
             var context = services.GetRequiredService<DataContext>();
             await context.Database.MigrateAsync();
             // Initialize the seeder
-            Seeder.Initialize(services);
+            await Seeder.Initialize(services);
             }
         }
     }
