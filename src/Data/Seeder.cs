@@ -63,8 +63,8 @@ namespace Taller_1_IDWM.src.Data
                     {
                         await userManager.AddToRoleAsync(adminUser, "Admin");
                     }
+                    customersContext.SaveChanges();
                 }
-                customersContext.SaveChanges();
                 if (!customersContext.Products.Any())
                 {
                     List<string> types = new List<string> { "Poleras", "Gorros", "Jugueteria", "Alimentacion", "Libros" };
@@ -100,7 +100,6 @@ namespace Taller_1_IDWM.src.Data
                         customersContext.SaveChanges();
                     }
                 }
-
                 if (!customersContext.ReceiptProducts.Any())
                 {
                     var receiptProductsFaker = new Faker<ReceiptProduct>()
@@ -109,20 +108,7 @@ namespace Taller_1_IDWM.src.Data
                         .RuleFor(r => r.UnitPrice, f => f.Random.Int(100, 100000))
                         .RuleFor(r => r.Quantity, f => f.Random.Int(1, 100))
                         .RuleFor(r => r.TotalPrice, (f, p) => p.UnitPrice * p.Quantity);
-
-                    var uniqueReceiptProducts = new HashSet<(int ReceiptId, int ProductId)>();
-                    var receiptProducts = new List<ReceiptProduct>();
-
-                    while (receiptProducts.Count < 100)
-                    {
-                        var newReceiptProduct = receiptProductsFaker.Generate();
-                        if (!uniqueReceiptProducts.Contains((newReceiptProduct.ReceiptId, newReceiptProduct.ProductId)))
-                        {
-                            uniqueReceiptProducts.Add((newReceiptProduct.ReceiptId, newReceiptProduct.ProductId));
-                            receiptProducts.Add(newReceiptProduct);
-                        }
-                    }
-
+                    var receiptProducts = receiptProductsFaker.Generate(100);
                     customersContext.ReceiptProducts.AddRange(receiptProducts);
                     customersContext.SaveChanges();
                 }
