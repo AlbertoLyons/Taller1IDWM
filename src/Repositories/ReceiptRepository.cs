@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Taller_1_IDWM.src.Data;
 using Taller_1_IDWM.src.DTOs.Cart;
+using Taller_1_IDWM.src.DTOs.Receipts;
 using Taller_1_IDWM.src.DTOs.Users;
 using Taller_1_IDWM.src.Interfaces;
+using Taller_1_IDWM.src.Mappers;
 using Taller_1_IDWM.src.Models;
 
 namespace Taller_1_IDWM.src.Repositories
@@ -11,13 +13,15 @@ namespace Taller_1_IDWM.src.Repositories
     {
         // El contexto de la base de datos
         private readonly DataContext _dataContext;
+        private readonly IReceiptProductRepository _receiptProductRepository;
         /// <summary>
         /// Constructor para ReceiptRepository.
         /// </summary>
         /// /// <param name="dataContext">El DataContext a usar</param>
-        public ReceiptRepository(DataContext dataContext)
+        public ReceiptRepository(DataContext dataContext, IReceiptProductRepository receiptProductRepository)
         {
             _dataContext = dataContext;
+            _receiptProductRepository = receiptProductRepository;
         }
         /// <summary>
         /// Crea un nuevo recibo dado los productos y la dirección.
@@ -69,10 +73,30 @@ namespace Taller_1_IDWM.src.Repositories
         /// </summary>
         /// <param name="id">El id del usuario.</param>
         /// <returns>Una lista que contiene a todos los recibos del usuario.</returns>
-        public async Task<IEnumerable<Receipt>> GetOrderHistory(int id)
+        public async Task<IEnumerable<ReceiptUserDTO>> GetOrderHistory(int id)
         {
-            var receipt = await _dataContext.Receipts.Where(x => x.UserId == id).ToListAsync();
-            return receipt;  
+            if (id == 0)
+            {
+                throw new Exception("User id is required");
+            }
+            var receipts = await _dataContext.Receipts.Where(x => x.UserId == id).ToListAsync();
+            if (receipts.Count == 0)
+            {
+                throw new Exception("No receipts found");
+            }
+            // Se crea una lista de recibos de usuario
+            List<ReceiptUserDTO> receiptsUserDTO = new List<ReceiptUserDTO>();
+            // Se recorre la lista de recibos
+            foreach (var receipt in receipts)
+            {
+                // Se obtienen los productos de cada recibo
+                List<ReceiptProductUserDTO> receiptProductsUserDTO = (await _receiptProductRepository.GetByReceiptIdUser(receipt.Id)).ToList();
+                var receiptDTO = receipt.ReceiptToReceiptUserDTO();
+                // Se agregan los productos al receiptDTO
+                receiptDTO.ReceiptProducts = receiptProductsUserDTO;
+                receiptsUserDTO.Add(receiptDTO);
+            }
+            return receiptsUserDTO;
         }
         /// <summary>
         /// Obtiene todos los recibos de una lista de usuarios.

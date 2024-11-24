@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -94,10 +95,11 @@ namespace Taller_1_IDWM.src.Controllers
         }
         [HttpGet("GetOrderHistory")]
         [Authorize(Roles = "User")]
-        public async Task<IActionResult> GetOrderHistory(int id)
+        public async Task<IActionResult> GetOrderHistory()
         {
             try{
-                var receipts = await _receiptRepository.GetOrderHistory(id);
+                var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                var receipts = await _receiptRepository.GetOrderHistory(userId);
                 return Ok(receipts);
             }
             catch (Exception e)

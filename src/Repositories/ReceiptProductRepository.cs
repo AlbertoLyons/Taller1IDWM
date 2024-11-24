@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Taller_1_IDWM.src.Data;
 using Taller_1_IDWM.src.DTOs.Cart;
+using Taller_1_IDWM.src.DTOs.Receipts;
 using Taller_1_IDWM.src.Interfaces;
+using Taller_1_IDWM.src.Mappers;
 using Taller_1_IDWM.src.Models;
 
 namespace Taller_1_IDWM.src.Repositories
@@ -68,6 +70,25 @@ namespace Taller_1_IDWM.src.Repositories
         {
             var receiptProducts = await _dataContext.ReceiptProducts.Where(x => x.ReceiptId == receiptId).ToListAsync();
             return receiptProducts;  
+        }
+        public async Task<IEnumerable<ReceiptProductUserDTO>> GetByReceiptIdUser(int receiptId)
+        {
+            List<ReceiptProductUserDTO> receiptProductsUserDTO = [];
+            // Se obtienen los productos asociados al recibo
+            var receiptProducts = await _dataContext.ReceiptProducts.Where(x => x.ReceiptId == receiptId).ToListAsync();
+            // Se recorre el listado de productos
+            foreach (var receiptProduct in receiptProducts)
+            {
+                var productId = receiptProduct.ProductId;
+                var name = _dataContext.Products.Where(x => x.ID == productId).Select(x => x.Name).FirstOrDefault();
+                var type = _dataContext.Products.Where(x => x.ID == productId).Select(x => x.Type).FirstOrDefault();
+                // Se mapea el producto de la factura al DTO
+                var receiptProductUserDTO = receiptProduct.ReceiptProductToReceiptProductUserDTO();
+                receiptProductUserDTO.Name = name!;
+                receiptProductUserDTO.Type = type!;
+                receiptProductsUserDTO.Add(receiptProductUserDTO);
+            }
+            return receiptProductsUserDTO;
         }
     }
 }

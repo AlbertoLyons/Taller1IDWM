@@ -1,4 +1,5 @@
 using Taller_1_IDWM.src.DTOs.Cart;
+using Taller_1_IDWM.src.DTOs.Receipts;
 using Taller_1_IDWM.src.Models;
 
 namespace Taller_1_IDWM.src.Interfaces
@@ -9,5 +10,7 @@ namespace Taller_1_IDWM.src.Interfaces
         public Task<IEnumerable<ReceiptProduct>> AddReceiptProduct(List<ProductInCartDTO> products, int receiptId);
         // Método que obtiene los productos de un recibo dado su id.
         public Task<IEnumerable<ReceiptProduct>> GetByReceiptId(int receiptId);
+        // Método que obtiene los productos de un recibo dado la id del recibo.
+        public Task<IEnumerable<ReceiptProductUserDTO>> GetByReceiptIdUser(int receiptId);
     }
 }
