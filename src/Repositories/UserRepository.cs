@@ -210,5 +210,25 @@ namespace Taller_1_IDWM.src.Repositories
             await _dataContext.SaveChangesAsync();
             return user;
         }
+        /// <summary>
+        /// Obtiene a los usuarios que contengan el <paramref name="username"/> en su nombre.
+        /// </summary>
+        /// <param name="username">El nombre del usuario a obtener.</param>
+        /// <returns>Una lista de <see cref="UserNameDTO"/> que contiene a los usuarios encontrados.</returns>
+        /// <exception cref="Exception">Arroja si el <paramref name="username"/> es nulo o vacío.</exception>
+        public async Task<IEnumerable<UserNameDTO>> GetByUserName(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                throw new Exception("Username is required");
+            }
+            var users = await _dataContext.Users.Where(p => p.Name.Contains(username)).ToListAsync() ?? throw new Exception("User not found");
+            var usersDTO = new List<UserNameDTO>();
+            foreach (var user in users)
+            {
+                usersDTO.Add(user.ToUserNameDTO());
+            }
+            return usersDTO;
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace Taller_1_IDWM.src.Controllers
             try {
                 var newProduct = await _productRepository.AddProductAsync(createProductDTO);
 
-                var uri = Url.Action("GetProduct", new { id = newProduct.ID });
+                var uri = Url.Action("GetProduct", new { id = newProduct!.ID });
                 var response = new
                 {
                     Message = "Product created successfully",

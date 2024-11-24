@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Taller_1_IDWM.src.Interfaces;
 
@@ -9,19 +10,22 @@ namespace Taller_1_IDWM.src.Controllers
 {
     [Route("api/receipts")]
     [ApiController]
+    [Authorize]
     public class ReceiptController : ControllerBase
     {
         private readonly IReceiptRepository _receiptRepository;
         private readonly IReceiptProductRepository _receiptProductRepository;
+        private readonly IUserRepository _userRepository;
 
 
-        public ReceiptController(IReceiptRepository receiptRepository, IReceiptProductRepository receiptProductRepository)
+        public ReceiptController(IReceiptRepository receiptRepository, IReceiptProductRepository receiptProductRepository, IUserRepository userRepository)
         {
             _receiptRepository = receiptRepository;
             _receiptProductRepository = receiptProductRepository;
+            _userRepository = userRepository;
         }
-
         [HttpGet("GetAllReceipts")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll(int pageNumber = 1, int pageSize = 10, DateTime? startDate = null, DateTime? endDate = null)
         {
             try
@@ -76,6 +80,7 @@ namespace Taller_1_IDWM.src.Controllers
         }
 
         [HttpGet("GetAllReceiptsProducts")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll(int id)
         {
             try{
@@ -87,12 +92,26 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new {message = e.Message});
             }
         }
-
         [HttpGet("GetOrderHistory")]
-                public async Task<IActionResult> GetOrderHistory(int id)
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> GetOrderHistory(int id)
         {
             try{
                 var receipts = await _receiptRepository.GetOrderHistory(id);
+                return Ok(receipts);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
+        }
+        [HttpGet("GetByUserName")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetByUserName(string userName)
+        {
+            try{
+                var users = await _userRepository.GetByUserName(userName);
+                var receipts = await _receiptRepository.GetByUserName(users.ToList());
                 return Ok(receipts);
             }
             catch (Exception e)

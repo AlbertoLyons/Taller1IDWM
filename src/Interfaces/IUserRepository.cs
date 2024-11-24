@@ -17,6 +17,7 @@ namespace Taller_1_IDWM.src.Interfaces
         // Método que obtiene a un usuario por su rut
         Task<User?> GetByRut(string rut);
         // Método que actualiza a un usuario dada su id y los datos a actualizar
+        Task<IEnumerable<UserNameDTO>> GetByUserName(string username);
         Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO);
         // Método que elimina a un usuario
         Task<User?> DeleteUserAsync(int id);

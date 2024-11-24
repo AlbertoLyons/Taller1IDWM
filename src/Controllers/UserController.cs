@@ -50,7 +50,7 @@ namespace Taller_1_IDWM.src.Controllers
                 var response = new
                 {
                     Message = "Usuario actualizado exitosamente",
-                    active = user.Active
+                    active = user!.Active
                 };
                 return Ok(response);
             } catch (Exception e){

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Taller_1_IDWM.src.Data;
 using Taller_1_IDWM.src.DTOs.Cart;
+using Taller_1_IDWM.src.DTOs.Users;
 using Taller_1_IDWM.src.Interfaces;
 using Taller_1_IDWM.src.Models;
 
@@ -54,16 +55,47 @@ namespace Taller_1_IDWM.src.Repositories
             return receipt;
         }
 
+        /// <summary>
+        /// Obtiene todos los recibos de la base de datos.
+        /// </summary>
+        /// <returns>Una lista que contiene a todos los recibos.</returns>
         public async Task<IEnumerable<Receipt>> GetAllAsync()
         {
             var receipt = await _dataContext.Receipts.ToListAsync();
             return receipt;  
         }
-
+        /// <summary>
+        /// Obtiene todos los recibos de un usuario en especifico.
+        /// </summary>
+        /// <param name="id">El id del usuario.</param>
+        /// <returns>Una lista que contiene a todos los recibos del usuario.</returns>
         public async Task<IEnumerable<Receipt>> GetOrderHistory(int id)
         {
             var receipt = await _dataContext.Receipts.Where(x => x.UserId == id).ToListAsync();
             return receipt;  
+        }
+        /// <summary>
+        /// Obtiene todos los recibos de una lista de usuarios.
+        /// </summary>
+        /// <param name="users">La lista de usuarios.</param>
+        /// <returns>Una lista que contiene a todos los recibos de los usuarios.</returns>
+        /// <exception cref="Exception">Si no se encontraron recibos.</exception>
+        public async Task<IEnumerable<Receipt>> GetByUserName(List<UserNameDTO> users)
+        {
+            var receipts = new List<Receipt>();
+            // Itera primero sobre los usuarios
+            foreach (var user in users)
+            {
+                // Obtiene los recibos de cada usuario
+                var receiptsDB = await _dataContext.Receipts.Where(r => r.UserId == user.id).ToListAsync();
+                // Agrega los recibos a la lista
+                receipts.AddRange(receiptsDB);
+            }
+            if (receipts.Count == 0)
+            {
+                throw new Exception("No receipts found");
+            }
+            return receipts;  
         }
     }
 }
