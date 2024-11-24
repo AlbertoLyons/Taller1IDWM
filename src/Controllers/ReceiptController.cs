@@ -100,6 +100,7 @@ namespace Taller_1_IDWM.src.Controllers
             try{
                 var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
                 var receipts = await _receiptRepository.GetOrderHistory(userId);
+                receipts = receipts.OrderByDescending(r => r.BoughtAt).ToList();
                 return Ok(receipts);
             }
             catch (Exception e)
