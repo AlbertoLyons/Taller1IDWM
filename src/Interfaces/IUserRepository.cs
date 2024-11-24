@@ -11,11 +11,9 @@ namespace Taller_1_IDWM.src.Interfaces
         // Método que verifica si un usuario existe por su id
         Task<bool> ExistsById(int id);
         // Método que obtiene a todos los usuarios dados ciertos parámetros
-        Task<IEnumerable<UserDTO>> GetAllAsync(string searchTerm = "", string searchField = "");
+        Task<IEnumerable<UserGetAdminDTO>> GetAllAsync(string searchTerm = "", string searchField = "");
         // Método que obtiene a un usuario por su id
-        Task<User?> GetById(int id);
-        // Método que obtiene a un usuario por su rut
-        Task<User?> GetByRut(string rut);
+        Task<UserGetAdminDTO?> GetById(int id);
         // Método que actualiza a un usuario dada su id y los datos a actualizar
         Task<IEnumerable<UserNameDTO>> GetByUserName(string username);
         Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO);
