@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Taller_1_IDWM.src.DTOs;
 using Taller_1_IDWM.src.DTOs.Products;
 using Taller_1_IDWM.src.Models;
@@ -25,6 +21,7 @@ namespace Taller_1_IDWM.src.Mappers
 
         public static Product ToProductFromCreatedDTO(this CreateProductDTO createProductDto)
         {
+
             return new Product
             {
                 Type = createProductDto.Type,
@@ -33,6 +30,7 @@ namespace Taller_1_IDWM.src.Mappers
                 Stock = createProductDto.Stock
             };
         }
+
         public static Product ToProductFromUpdateDTO(this UpdateProductDTO updateProductDTO)
         {
             return new Product
@@ -41,6 +39,17 @@ namespace Taller_1_IDWM.src.Mappers
                 Name = updateProductDTO.Name,
                 Price = updateProductDTO.Price,
                 Stock = updateProductDTO.Stock
+            };
+        }
+        public static GetProductNoAuthDTO ToProductFromNoAuthDTO(this Product product)
+        {
+            return new GetProductNoAuthDTO
+            {
+                Type = product.Type,
+                Name = product.Name,
+                Price = product.Price,
+                Stock = product.Stock,
+                ImageUrl = product.ImageUrl
             };
         }
     }

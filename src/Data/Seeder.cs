@@ -58,7 +58,7 @@ namespace Taller_1_IDWM.src.Data
                         Name = "Ignacio Mancilla",
                         Gender = "Masculino",
                     };
-                    var result = await userManager.CreateAsync(adminUser, "P4ssw0rd!");
+                    var result = await userManager.CreateAsync(adminUser, "P4ssw0rd");
                     if (result.Succeeded)
                     {
                         await userManager.AddToRoleAsync(adminUser, "Admin");
@@ -67,9 +67,11 @@ namespace Taller_1_IDWM.src.Data
                 customersContext.SaveChanges();
                 if (!customersContext.Products.Any())
                 {
+                    List<string> types = new List<string> { "Poleras", "Gorros", "Jugueteria", "Alimentacion", "Libros" };
+                    Random random = new Random();
                     var productFaker = new Faker<Product>()
                         .RuleFor(p => p.Name, f => f.Commerce.ProductName())
-                        .RuleFor(p => p.Type, f => f.Commerce.Categories(1)[0])
+                        .RuleFor(p => p.Type, f => types[random.Next(0, types.Count)])
                         .RuleFor(p => p.Price, f => f.Random.Int(100, 10000))
                         .RuleFor(p => p.Stock, f => f.Random.Int(1, 1000))
                         .RuleFor(p => p.ImageUrl, f => "");

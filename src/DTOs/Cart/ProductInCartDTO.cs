@@ -4,10 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Taller_1_IDWM.src.DTOs.Products
+namespace Taller_1_IDWM.src.DTOs.Cart
 {
-    public class UpdateProductDTO
+    public class ProductInCartDTO
     {
+        [Key]
+        [Required]
+        public int ID { get; set; }
+        
         [Required]
         [StringLength(64, MinimumLength = 10)]
         public string Name { get; set; } = string.Empty;
@@ -19,12 +23,9 @@ namespace Taller_1_IDWM.src.DTOs.Products
         [Required]
         [Range(1, 100000000)]
         public int Price { get; set; }
-
         [Required]
-        [Range(1, 100000)]
-        public int Stock { get; set; }
-
-        [Required]
-        public IFormFile Image { get; set; } = null!;
+        [StringLength(256, MinimumLength = 10)]
+        public string ImageUrl { get; set; } = string.Empty;
+        public int Quantity { get; set; }
     }
 }

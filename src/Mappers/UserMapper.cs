@@ -17,23 +17,10 @@ namespace Taller_1_IDWM.src.Mappers
                 Id = userModel.Id,
                 Rut = userModel.Rut,
                 Name = userModel.Name,
-                Mail = userModel.Email,
+                Mail = userModel.Email!,
                 Gender = userModel.Gender,
                 Birthdate = userModel.Birthdate,
-                Password = userModel.PasswordHash
-            };
-        }
-
-        public static User ToUserFromCreatedDTO(this CreateUserDTO createUserDto)
-        {
-            return new User
-            {
-                Rut = createUserDto.Rut,
-                Name = createUserDto.Name,
-                Email = createUserDto.Mail,
-                UserName = createUserDto.Mail,
-                Gender = createUserDto.Gender,
-                Birthdate = createUserDto.Birthdate,
+                Password = userModel.PasswordHash!
             };
         }
         public static User ToUserFromUpdateDTO(this UpdateUserDTO updateUserDto)
@@ -44,6 +31,14 @@ namespace Taller_1_IDWM.src.Mappers
                 Gender = updateUserDto.Gender,
                 Birthdate = updateUserDto.Birthdate,
                 PasswordHash = updateUserDto.Password
+            };
+        }
+        public static UserNameDTO ToUserNameDTO(this User userModel)
+        {
+            return new UserNameDTO
+            {
+                id = userModel.Id,
+                name = userModel.Name
             };
         }
     }

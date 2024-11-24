@@ -9,7 +9,7 @@ namespace Taller_1_IDWM.src.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<Product> Products { get; set; }
-        public DbSet<User> Users { get; set; }
+        public new DbSet<User> Users { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<ReceiptProduct> ReceiptProducts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
