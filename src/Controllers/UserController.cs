@@ -101,8 +101,8 @@ namespace Taller_1_IDWM.src.Controllers
             }
             return Ok("User deleted successfully");
         }
-
         [HttpGet("GetById")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetById(int id)
         {
             try{
