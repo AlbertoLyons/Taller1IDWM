@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "e29ae7df-6c76-4377-8d7e-50ed2f11febb",
+		"name": "CRUD Products",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34959437"
+	},
+	"item": [
+		{
+			"name": "Add product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0OTI2NDgsImV4cCI6MTczMjU3OTA0OCwiaWF0IjoxNzMyNDkyNjQ4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.0JRqZYqNOgVEEU2qmIp22s8GCbTf5tkzEf2v3WxEX9fn0u41VmPXgo749HpojT4uoY5nXWtflUECi7nXx5QqSQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Hola1234567",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "Alimentacion",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "10000",
+							"type": "text"
+						},
+						{
+							"key": "stock",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/revat/Downloads/Afiche postulaciones (16).png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/products/?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzIzMzM4ODQsImV4cCI6MTczMjQyMDI4NCwiaWF0IjoxNzMyMzMzODg0LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.MfPRUEEF8GQmiCNG-PjNSrKD1gpJt_7UH8I3q1Uzvemgx_2TrAzzOWs2oFs0n-0UxtDtEP6XUk6jhSx-3aX1bQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "alexandersepulveda",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "Poleras",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "1000",
+							"type": "text"
+						},
+						{
+							"key": "stock",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/revat/Downloads/Afiche postulaciones (8).png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get products by asc or desc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/products/GetAll?AscOrDesc=asc&pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						"GetAll"
+					],
+					"query": [
+						{
+							"key": "AscOrDesc",
+							"value": "asc"
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0OTIwODksImV4cCI6MTczMjU3ODQ4OSwiaWF0IjoxNzMyNDkyMDg5LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.5CbkVri1VqPqWBomq0xW9KOhJSC3tg-OMqQOgcaywizwHpPHLCTvr3uW0NZOAMBVstZxNeJLdmu3mYXULvBAMw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/products/GetAllAdmin?pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						"GetAllAdmin"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get products by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/products/Name?name=e&pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						"Name"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "e"
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/products/Type?type=Poleras&pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						"Type"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "Poleras"
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "358ef3cd-c91c-4132-bf79-2c289c41e962",
+		"name": "CRUD Receipt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34959437"
+	},
+	"item": [
+		{
+			"name": "Get all",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "https://web.postman.co/workspace/HackaDisc~f8bbb109-02d4-44c9-9861-a595a63a9f58/request/34959437-7945dc88-330a-450c-9504-22b5bff5d2c4?historyId=34959437-9ead15b0-b446-4dcd-bc74-a0ff34e2ab3f&utm_source=postman&utm_medium=response_tab&utm_campaign=core&utm_content=link",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/receipts/GetAllReceipts?pageNumber=1&pageSize=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"receipts",
+						"GetAllReceipts"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "startDate",
+							"value": "2003-01-01",
+							"disabled": true
+						},
+						{
+							"key": "endDate",
+							"value": "2024-01-01",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all ReceiptProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/receipts/GetAllReceiptsProducts?id=101",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"receipts",
+						"GetAllReceiptsProducts"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "101"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get by user name",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0MTEzNTAsImV4cCI6MTczMjQ5Nzc1MCwiaWF0IjoxNzMyNDExMzUwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.TK618AwbwwMlAnU1PspLGgZGRmwwk0hfBlO2DBi4nQarY52ZLCkLVY8zhHBUxTztiaWxqk-5ub-CV-mlso98Iw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/receipts/GetByUserName?userName=a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"receipts",
+						"GetByUserName"
+					],
+					"query": [
+						{
+							"key": "userName",
+							"value": "a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI5NyIsInVuaXF1ZV9uYW1lIjoiVHJpbml0eTkwQGdtYWlsLmNvbSIsImVtYWlsIjoiVHJpbml0eTkwQGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwibmJmIjoxNzMyNDE4MTk0LCJleHAiOjE3MzI1MDQ1OTQsImlhdCI6MTczMjQxODE5NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI1IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI1In0.BRcxZgphKpJQGduVgGqTHXN6LFcc_zLHZZj-d6CsHE3OYfykdvf2geOGF6-P7HU1sv3FadE0ySfhCKVp_WpjDw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/receipts/GetOrderHistory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"receipts",
+						"GetOrderHistory"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "101",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

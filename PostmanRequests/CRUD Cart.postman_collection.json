@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "3bb79859-a74d-42e1-ad94-997ec1ef64af",
+		"name": "CRUD Cart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34959437"
+	},
+	"item": [
+		{
+			"name": "Get Cart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0IiwidW5pcXVlX25hbWUiOiJKZXJyZWxsNTNAaG90bWFpbC5jb20iLCJlbWFpbCI6IkplcnJlbGw1M0Bob3RtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwibmJmIjoxNzMyNDkzNTMwLCJleHAiOjE3MzI1Nzk5MzAsImlhdCI6MTczMjQ5MzUzMCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI1IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI1In0.JNR4CGp2_AWxFaOzq3Wdu53TVuQMxQjoOPfbk83kiAqrMcUHsWCFY97ZK82AU1EDOft26tx6BLMjdW5cCr7fUg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/Cart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"Cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add product to cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/Cart/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"Cart",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add quantity",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/Cart/1?addOrDecrease=add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"Cart",
+						"1"
+					],
+					"query": [
+						{
+							"key": "addOrDecrease",
+							"value": "add"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/Cart/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"Cart",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0IiwidW5pcXVlX25hbWUiOiJKZXJyZWxsNTNAaG90bWFpbC5jb20iLCJlbWFpbCI6IkplcnJlbGw1M0Bob3RtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwibmJmIjoxNzMyNDkzNTMwLCJleHAiOjE3MzI1Nzk5MzAsImlhdCI6MTczMjQ5MzUzMCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI1IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjI1In0.JNR4CGp2_AWxFaOzq3Wdu53TVuQMxQjoOPfbk83kiAqrMcUHsWCFY97ZK82AU1EDOft26tx6BLMjdW5cCr7fUg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"country\": \"string\",\r\n  \"city\": \"string\",\r\n  \"county\": \"string\",\r\n  \"address\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/Cart/buy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"Cart",
+						"buy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
