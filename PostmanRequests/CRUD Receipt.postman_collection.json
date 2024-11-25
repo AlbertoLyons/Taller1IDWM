@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "358ef3cd-c91c-4132-bf79-2c289c41e962",
+		"_postman_id": "e862934c-3e9c-4945-8bc9-a91248d2e341",
 		"name": "CRUD Receipt",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34959437"
+		"_exporter_id": "34959431"
 	},
 	"item": [
 		{
-			"name": "Get all",
+			"name": "Get all(Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -58,7 +58,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all ReceiptProducts",
+			"name": "Get all ReceiptProducts(Admin)",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -85,7 +85,7 @@
 			"response": []
 		},
 		{
-			"name": "Get by user name",
+			"name": "Get by user name(Admin)",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -122,7 +122,7 @@
 			"response": []
 		},
 		{
-			"name": "Get all User",
+			"name": "Get Order History(User)",
 			"request": {
 				"auth": {
 					"type": "bearer",
