@@ -1,0 +1,6 @@
+@Taller_1_IDWM_HostAddress = http://localhost:5225
+
+GET {{Taller_1_IDWM_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

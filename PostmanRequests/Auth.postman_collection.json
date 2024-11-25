@@ -1,0 +1,421 @@
+{
+	"info": {
+		"_postman_id": "598e500f-901a-422c-a3de-6ee8f63c31d1",
+		"name": "Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34959437"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"rut\": \"2029433-0\",\r\n  \"birthdate\": \"2004-01-01\",\r\n  \"mail\": \"Alexander@gmail.com\",\r\n  \"name\": \"Alexander\",\r\n  \"gender\": \"otro\",\r\n  \"password\": \"P4ssw0rd\",\r\n  \"confirmPassword\": \"P4ssw0rd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/Auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"Auth",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register 400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rut\": \"4029433-0\",\r\n  \"birthdate\": \"2004-01-01\",\r\n  \"mail\": \"string@gmail.com\",\r\n  \"name\": \"stringst\",\r\n  \"gender\": \"otro\",\r\n  \"password\": \"P4ssw0rd\",\r\n  \"confirmPassword\": \"P4ssw0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Auth",
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:16:36 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Email already exists\"\n}"
+				},
+				{
+					"name": "Register 200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rut\": \"2029433-0\",\r\n  \"birthdate\": \"2004-01-01\",\r\n  \"mail\": \"Alexander@gmail.com\",\r\n  \"name\": \"Alexander\",\r\n  \"gender\": \"otro\",\r\n  \"password\": \"P4ssw0rd\",\r\n  \"confirmPassword\": \"P4ssw0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Auth",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:42:45 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDQiLCJ1bmlxdWVfbmFtZSI6IkFsZXhhbmRlckBnbWFpbC5jb20iLCJlbWFpbCI6IkFsZXhhbmRlckBnbWFpbC5jb20iLCJyb2xlIjoiVXNlciIsIm5iZiI6MTczMjUwMjU2NSwiZXhwIjoxNzMyNTg4OTY1LCJpYXQiOjE3MzI1MDI1NjUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTIyNSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTIyNSJ9.Ah2jZ4wpP_Tjp-UJ6KRWjT1MQ2Yj8OeV5RpI7nG-bcZ6zjzvrWNdGyiKIdCujbRLrPGS_xSrgYc6ojHXg5DFyQ"
+				}
+			]
+		},
+		{
+			"name": "Login Admin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"admin@idwm.cl\",\r\n  \"password\": \"P4ssw0rd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/Auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"Auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login Admin 200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@idwm.cl\",\r\n  \"password\": \"P4ssw0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:18:36 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI1MDExMTcsImV4cCI6MTczMjU4NzUxNywiaWF0IjoxNzMyNTAxMTE3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.-c3iFPIxKZuhJ-snpByzjsR5rwGFBNXEYcbeZ2p-MjxrrADlLs_aAnbBWbNPrSnyqdQXaUJZ0poN-gzaxBsErA"
+				},
+				{
+					"name": "Login Admin 400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@idwm.cl\",\r\n  \"password\": \"InvalidP4ssw0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Auth",
+								"login"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:19:54 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Invalid email or password\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"Althea.Larkin@yahoo.com\",\r\n  \"password\": \"DefaultP4ssw0rd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/Auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"Auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login User 400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"Jerrell53@hotmail.com\",\r\n  \"password\": \"DefaultP4ssw0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Auth",
+								"login"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:18:46 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Invalid email or password\"\n}"
+				},
+				{
+					"name": "Login User 200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"Althea.Larkin@yahoo.com\",\r\n  \"password\": \"DefaultP4ssw0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:19:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJBbHRoZWEuTGFya2luQHlhaG9vLmNvbSIsImVtYWlsIjoiQWx0aGVhLkxhcmtpbkB5YWhvby5jb20iLCJyb2xlIjoiVXNlciIsIm5iZiI6MTczMjUwMTE2MSwiZXhwIjoxNzMyNTg3NTYxLCJpYXQiOjE3MzI1MDExNjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTIyNSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTIyNSJ9.1EyZEAjmBoVu4d1-9vkQNZhHmLeNkRZ0HS8FDTq43ajdb87psBS7OlxaOMniqH98ydrdHD-bx9UuECV6ibvo0A"
+				}
+			]
+		}
+	]
+}
