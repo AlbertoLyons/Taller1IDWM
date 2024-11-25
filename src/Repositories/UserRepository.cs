@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Taller_1_IDWM.src.DTOs.Users;
 using Taller_1_IDWM.src.DTOs;
 using Taller_1_IDWM.src.Mappers;
+using Microsoft.AspNetCore.Identity;
 
 namespace Taller_1_IDWM.src.Repositories
 {
@@ -12,16 +13,16 @@ namespace Taller_1_IDWM.src.Repositories
     {
         // El contexto de la base de datos
         private readonly DataContext _dataContext;
-
+        private readonly UserManager<User> _userManager;
         /// <summary>
         /// Constructor para el repositorio de usuarios.
         /// </summary>
         /// <param name="dataContext">El contexto de la base de datos.</param>
-        public UserRepository(DataContext dataContext)
+        public UserRepository(DataContext dataContext, UserManager<User> userManager)
         {
             _dataContext = dataContext;
+            _userManager = userManager;
         }
-        
         /// <summary>
         /// Elimina al usuario de la base de datos dado su id.
         /// </summary>
@@ -38,7 +39,7 @@ namespace Taller_1_IDWM.src.Repositories
                 throw new Exception("User not found");
             }
             // Eliminar el usuario de la base de datos
-            _dataContext.Users.Remove(userModel);
+            await _userManager.DeleteAsync(userModel);
             // Guardar los cambios
             await _dataContext.SaveChangesAsync();
             return userModel;
@@ -73,7 +74,7 @@ namespace Taller_1_IDWM.src.Repositories
             existingUser.Gender = updateUserDTO.Gender;
             existingUser.PasswordHash = updateUserDTO.Password;
             // Guardar los cambios
-            _dataContext.Users.Update(existingUser);
+            await _userManager.UpdateAsync(existingUser);
             await _dataContext.SaveChangesAsync();
             return true;
         }
@@ -93,7 +94,8 @@ namespace Taller_1_IDWM.src.Repositories
         /// <returns>True if the user exists, false otherwise.</returns>
         public async Task<bool> ExistsById(int id)
         {
-            return await _dataContext.Users.AnyAsync(p => p.Id == id);
+            if (await _userManager.FindByIdAsync(id.ToString()) == null) return false;
+            else {return true;}
         }
         /// <summary>
         /// Obtiene todos los usuarios como una lista de UsuariosDTO, con opciones de filtrado por atributos.
@@ -102,10 +104,10 @@ namespace Taller_1_IDWM.src.Repositories
         /// <param name="searchField">El campo a buscar. Pueden ser "name", "gender", o "birthdate".</param>
         /// <returns>Una lista que contiene a los UserDTOs segun los filtros que se aplicaron.</returns>
         /// <exception cref="Exception">Arroja si hay algun parametro invalido o si no se cumple alguno de los filtros.</exception>
-        public async Task<IEnumerable<UserDTO>> GetAllAsync(string searchTerm = "", string searchField = "")
+        public async Task<IEnumerable<UserGetAdminDTO>> GetAllAsync(string searchTerm = "", string searchField = "")
         {
             // Obtener todos los usuarios
-            var users = await _dataContext.Users.ToListAsync();
+            var users = await _userManager.Users.ToListAsync();
             // Si se especificó un campo de búsqueda y un término de búsqueda, filtrar los usuarios
             if (!string.IsNullOrEmpty(searchField) && !string.IsNullOrEmpty(searchTerm))
             {
@@ -165,10 +167,10 @@ namespace Taller_1_IDWM.src.Repositories
                 }
             }
             // Convertir los usuarios a UserDTOs
-            var UsersDTO = new List<UserDTO>();
+            var UsersDTO = new List<UserGetAdminDTO>();
             foreach (var user in users)
             {
-                UsersDTO.Add(user.ToUserDTO());
+                UsersDTO.Add(user.ToUserGetAdminDTO());
             }
             return UsersDTO;
         }
@@ -178,19 +180,10 @@ namespace Taller_1_IDWM.src.Repositories
         /// <param name="id"> El id del usuario a obtener.</param>
         /// <returns>El usuario con la id dada, o nulo si no se encuentra.</returns>
         /// <exception cref="Exception">Arroja si el usuario no se encuentra.</exception>
-        public async Task<User?> GetById(int id)
+        public async Task<UserGetAdminDTO?> GetById(int id)
         {
-            return await _dataContext.Users.FirstOrDefaultAsync(p => p.Id == id) ?? throw new Exception("User not found");
-        }
-        
-        /// <summary>
-        /// Obtiene a un usuario por su Rut.
-        /// </summary>
-        /// <param name="rut">El Rut del usuario a obtener.</param>
-        /// <returns>El usuario con la Rut dada, o nulo si no se encuentra.</returns>
-        public Task<User?> GetByRut(string rut)
-        {
-            return _dataContext.Users.FirstOrDefaultAsync(p => p.Rut == rut) ?? throw new Exception("User not found");
+            var user = await _userManager.FindByIdAsync(id.ToString()) ?? throw new Exception("User not found");
+            return user.ToUserGetAdminDTO();
         }
         /// <summary>
         /// Activa o desactiva al usuario con el id especificado.
@@ -200,13 +193,13 @@ namespace Taller_1_IDWM.src.Repositories
         /// <exception cref="Exception">Arroja si el usuario no se encuentra.</exception>
         public async Task<User?> ActivateDeactivateUserAsync(int id)
         {
-            var user = await _dataContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _userManager.FindByIdAsync(id.ToString());
             if(user == null)
             {
                 throw new Exception("User not found");
             }
             user.Active = !user.Active;
-            _dataContext.Users.Update(user);
+            await _userManager.UpdateAsync(user);
             await _dataContext.SaveChangesAsync();
             return user;
         }
@@ -222,7 +215,7 @@ namespace Taller_1_IDWM.src.Repositories
             {
                 throw new Exception("Username is required");
             }
-            var users = await _dataContext.Users.Where(p => p.Name.Contains(username)).ToListAsync() ?? throw new Exception("User not found");
+            var users = await _userManager.Users.Where(p => p.Name.Contains(username)).ToListAsync() ?? throw new Exception("User not found");
             var usersDTO = new List<UserNameDTO>();
             foreach (var user in users)
             {

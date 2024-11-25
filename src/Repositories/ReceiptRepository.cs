@@ -121,5 +121,32 @@ namespace Taller_1_IDWM.src.Repositories
             }
             return receipts;  
         }
+        /// <summary>
+        /// Obtiene un recibo por su id.
+        /// </summary>
+        /// <param name="id">El id del recibo.</param>
+        /// <returns>El recibo con el id especificado.</returns>
+        /// <exception cref="Exception">Si el recibo no existe.</exception>
+        public async Task<BoughtReceiptDTO> GetById(int id)
+        {
+            var receipt = await _dataContext.Receipts.FirstOrDefaultAsync(x => x.Id == id);
+            if (receipt == null)
+            {
+                throw new Exception("Receipt not found");
+            }
+            var receiptProducts = await _receiptProductRepository.GetByReceiptId(id);
+            List<ReceiptProductUserDTO> receiptsUserDTO = new List<ReceiptProductUserDTO>();
+            // Se recorre la lista de recibos
+            foreach (var receiptProduct in receiptProducts)
+            {
+                // Se obtienen los productos de cada recibo
+                var receiptProductUserDTO = receiptProduct.ReceiptProductToReceiptProductUserDTO();
+                // Se agregan los productos al receiptDTO
+                receiptsUserDTO.Add(receiptProductUserDTO);
+            }
+            var receiptDTO = receipt.ReceiptToBoughtReceiptDTO();
+            receiptDTO.ReceiptProducts = receiptsUserDTO;
+            return receiptDTO;
+        }
     }
 }

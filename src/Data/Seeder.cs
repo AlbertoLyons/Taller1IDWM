@@ -24,7 +24,6 @@ namespace Taller_1_IDWM.src.Data
                         await roleManager.CreateAsync(new IdentityRole<int> { Name = roleName });
                     }
                 }
-
                 if (!customersContext.Users.Any())
                 {
                     
@@ -48,6 +47,10 @@ namespace Taller_1_IDWM.src.Data
                             await userManager.AddToRoleAsync(user, "User");
                         }
                     }
+                    customersContext.SaveChanges();
+                }
+                if (!customersContext.Users.Any(u => u.Email == "admin@idwm.cl"))
+                {
                     var adminUser = new User
                     {
                         Rut = "20416699-4",

@@ -71,6 +71,12 @@ namespace Taller_1_IDWM.src.Repositories
             var receiptProducts = await _dataContext.ReceiptProducts.Where(x => x.ReceiptId == receiptId).ToListAsync();
             return receiptProducts;  
         }
+        /// <summary>
+        /// Obtiene una lista de productos asociados a un recibo específico por su ID, 
+        /// mapeados a un DTO que incluye el nombre y tipo de cada producto.
+        /// </summary>
+        /// <param name="receiptId">El ID del recibo cuyos productos se desean obtener.</param>
+        /// <returns>Una lista de productos asociados al recibo especificado, mapeados a un DTO.</returns>
         public async Task<IEnumerable<ReceiptProductUserDTO>> GetByReceiptIdUser(int receiptId)
         {
             List<ReceiptProductUserDTO> receiptProductsUserDTO = [];

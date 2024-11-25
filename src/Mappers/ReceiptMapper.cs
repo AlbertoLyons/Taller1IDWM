@@ -23,5 +23,17 @@ namespace Taller_1_IDWM.src.Mappers
                 TotalPrice = receipt.TotalPrice,
             };
         }
+        public static BoughtReceiptDTO ReceiptToBoughtReceiptDTO(this Receipt receipt)
+        {
+            return new BoughtReceiptDTO
+            {
+                BoughtAt = receipt.BoughtAt,
+                TotalPrice = receipt.TotalPrice,
+                Country = receipt.Country,
+                City = receipt.City,
+                County = receipt.County,
+                Address = receipt.Address,
+            };
+        }
     }
 }

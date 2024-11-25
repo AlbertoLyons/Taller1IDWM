@@ -26,7 +26,7 @@ namespace Taller_1_IDWM.src.Controllers
         }
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Put([FromRoute] int id , [FromBody] UpdateUserDTO updateUserDto)
+        public async Task<IActionResult> UpdateUser([FromRoute] int id , [FromBody] UpdateUserDTO updateUserDto)
         { 
             try {
                 var userModel = await _userRepository.EditUserAsync(id, updateUserDto);
@@ -107,11 +107,11 @@ namespace Taller_1_IDWM.src.Controllers
         {
             try{
                 var user = await _userRepository.GetById(id);
+                return Ok(user);
             }catch (Exception e)
             {
                 return NotFound(new {error = e.Message});
             }
-            return Ok("User deleted successfully");
         }
     }
 }
