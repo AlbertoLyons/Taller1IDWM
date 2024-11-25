@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "6f01ca07-ce65-4919-ae21-ee43fda68117",
+		"_postman_id": "92f33e16-7a73-4e22-a293-91281219fb64",
 		"name": "CRUD Cart",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34959431"
+		"_exporter_id": "34959437"
 	},
 	"item": [
 		{
@@ -34,7 +34,50 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get Cart(User) 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/Cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Cart"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:21:00 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Awesome Soft Pants\",\n        \"type\": \"Jugueteria\",\n        \"price\": 9456,\n        \"imageUrl\": \"\",\n        \"quantity\": 4\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Awesome Cotton Table\",\n        \"type\": \"Alimentacion\",\n        \"price\": 2194,\n        \"imageUrl\": \"\",\n        \"quantity\": 3\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Tasty Soft Bacon\",\n        \"type\": \"Alimentacion\",\n        \"price\": 5050,\n        \"imageUrl\": \"\",\n        \"quantity\": 1\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "Add product to cart(User)",
@@ -51,7 +94,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5225/api/Cart/3",
+					"raw": "http://localhost:5225/api/Cart/123312",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -60,11 +103,120 @@
 					"path": [
 						"api",
 						"Cart",
-						"3"
+						"123312"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Add product to cart(User) 200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Cart/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Cart",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:21:27 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "ProductsList_0b514314-2cc2-4d5d-81c1-868669a0faa1=%5B%7B%22ID%22%3A1%2C%22Name%22%3A%22Awesome%20Soft%20Pants%22%2C%22Type%22%3A%22Jugueteria%22%2C%22Price%22%3A9456%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A4%7D%2C%7B%22ID%22%3A2%2C%22Name%22%3A%22Awesome%20Cotton%20Table%22%2C%22Type%22%3A%22Alimentacion%22%2C%22Price%22%3A2194%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A3%7D%2C%7B%22ID%22%3A3%2C%22Name%22%3A%22Tasty%20Soft%20Bacon%22%2C%22Type%22%3A%22Alimentacion%22%2C%22Price%22%3A5050%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A2%7D%5D; expires=Mon, 02 Dec 2024 02:21:27 GMT; path=/"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "Product added to cart"
+				},
+				{
+					"name": "Add product to cart(User) 400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Cart/123312",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Cart",
+								"123312"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:23:51 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "Product not found"
+				}
+			]
 		},
 		{
 			"name": "Add quantity(User)",
@@ -81,7 +233,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5225/api/Cart/1?addOrDecrease=add",
+					"raw": "http://localhost:5225/api/Cart/1?addOrDecrease=dec",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -95,12 +247,195 @@
 					"query": [
 						{
 							"key": "addOrDecrease",
-							"value": "add"
+							"value": "dec"
 						}
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Add quantity(User) 200 (add)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Cart/1?addOrDecrease=add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Cart",
+								"1"
+							],
+							"query": [
+								{
+									"key": "addOrDecrease",
+									"value": "add"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:24:49 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "ProductsList_0b514314-2cc2-4d5d-81c1-868669a0faa1=%5B%7B%22ID%22%3A1%2C%22Name%22%3A%22Awesome%20Soft%20Pants%22%2C%22Type%22%3A%22Jugueteria%22%2C%22Price%22%3A9456%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A5%7D%2C%7B%22ID%22%3A2%2C%22Name%22%3A%22Awesome%20Cotton%20Table%22%2C%22Type%22%3A%22Alimentacion%22%2C%22Price%22%3A2194%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A3%7D%2C%7B%22ID%22%3A3%2C%22Name%22%3A%22Tasty%20Soft%20Bacon%22%2C%22Type%22%3A%22Alimentacion%22%2C%22Price%22%3A5050%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A3%7D%5D; expires=Mon, 02 Dec 2024 02:24:49 GMT; path=/"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"Awesome Soft Pants\",\n    \"type\": \"Jugueteria\",\n    \"price\": 9456,\n    \"imageUrl\": \"\",\n    \"quantity\": 5\n}"
+				},
+				{
+					"name": "Add quantity(User) 200 (decrease)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Cart/1?addOrDecrease=decrease",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Cart",
+								"1"
+							],
+							"query": [
+								{
+									"key": "addOrDecrease",
+									"value": "decrease"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:25:10 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "ProductsList_0b514314-2cc2-4d5d-81c1-868669a0faa1=%5B%7B%22ID%22%3A1%2C%22Name%22%3A%22Awesome%20Soft%20Pants%22%2C%22Type%22%3A%22Jugueteria%22%2C%22Price%22%3A9456%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A4%7D%2C%7B%22ID%22%3A2%2C%22Name%22%3A%22Awesome%20Cotton%20Table%22%2C%22Type%22%3A%22Alimentacion%22%2C%22Price%22%3A2194%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A3%7D%2C%7B%22ID%22%3A3%2C%22Name%22%3A%22Tasty%20Soft%20Bacon%22%2C%22Type%22%3A%22Alimentacion%22%2C%22Price%22%3A5050%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A3%7D%5D; expires=Mon, 02 Dec 2024 02:25:10 GMT; path=/"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"Awesome Soft Pants\",\n    \"type\": \"Jugueteria\",\n    \"price\": 9456,\n    \"imageUrl\": \"\",\n    \"quantity\": 4\n}"
+				},
+				{
+					"name": "Add quantity(User) 400 (invalid value)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Cart/1?addOrDecrease=dec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Cart",
+								"1"
+							],
+							"query": [
+								{
+									"key": "addOrDecrease",
+									"value": "dec"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:25:23 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "You should type 'add' or 'decrease'"
+				}
+			]
 		},
 		{
 			"name": "Remove product(User)",
@@ -108,7 +443,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5225/api/Cart/1",
+					"raw": "http://localhost:5225/api/Cart/0",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -117,11 +452,102 @@
 					"path": [
 						"api",
 						"Cart",
-						"1"
+						"0"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Remove product(User) 200",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/Cart/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Cart",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:25:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "ProductsList_0b514314-2cc2-4d5d-81c1-868669a0faa1=%5B%7B%22ID%22%3A2%2C%22Name%22%3A%22Awesome%20Cotton%20Table%22%2C%22Type%22%3A%22Alimentacion%22%2C%22Price%22%3A2194%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A3%7D%2C%7B%22ID%22%3A3%2C%22Name%22%3A%22Tasty%20Soft%20Bacon%22%2C%22Type%22%3A%22Alimentacion%22%2C%22Price%22%3A5050%2C%22ImageUrl%22%3A%22%22%2C%22Quantity%22%3A3%7D%5D; expires=Mon, 02 Dec 2024 02:25:53 GMT; path=/"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "Product removed from cart"
+				},
+				{
+					"name": "Remove product(User) 400",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/Cart/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Cart",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:26:03 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "Product not found"
+				}
+			]
 		},
 		{
 			"name": "Buy products(User)",
@@ -161,7 +587,112 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Buy products(User) 200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"country\": \"string\",\r\n  \"city\": \"string\",\r\n  \"county\": \"string\",\r\n  \"address\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Cart/buy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Cart",
+								"buy"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:26:14 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Products bought successfully\",\n    \"receipt\": {\n        \"id\": 0,\n        \"country\": \"string\",\n        \"city\": \"string\",\n        \"county\": \"string\",\n        \"address\": \"string\",\n        \"boughtAt\": \"2024-11-24T23:26:14.7148752-03:00\",\n        \"totalPrice\": 21732,\n        \"receiptProducts\": [\n            {\n                \"name\": \"\",\n                \"type\": \"\",\n                \"price\": 2194,\n                \"quantity\": 3,\n                \"totalPrice\": 6582\n            },\n            {\n                \"name\": \"\",\n                \"type\": \"\",\n                \"price\": 5050,\n                \"quantity\": 3,\n                \"totalPrice\": 15150\n            }\n        ]\n    }\n}"
+				},
+				{
+					"name": "Buy products(User) 400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"country\": \"string\",\r\n  \"city\": \"string\",\r\n  \"county\": \"string\",\r\n  \"address\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/Cart/buy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"Cart",
+								"buy"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:26:43 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Cart is empty\"\n}"
+				}
+			]
 		}
 	]
 }

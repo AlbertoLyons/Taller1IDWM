@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e862934c-3e9c-4945-8bc9-a91248d2e341",
+		"_postman_id": "db92f85b-91cf-42b6-b563-6d8b3ce1e18d",
 		"name": "CRUD Receipt",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34959431"
+		"_exporter_id": "34959437"
 	},
 	"item": [
 		{
@@ -14,7 +14,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "https://web.postman.co/workspace/HackaDisc~f8bbb109-02d4-44c9-9861-a595a63a9f58/request/34959437-7945dc88-330a-450c-9504-22b5bff5d2c4?historyId=34959437-9ead15b0-b446-4dcd-bc74-a0ff34e2ab3f&utm_source=postman&utm_medium=response_tab&utm_campaign=core&utm_content=link",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI1MDExMTcsImV4cCI6MTczMjU4NzUxNywiaWF0IjoxNzMyNTAxMTE3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.-c3iFPIxKZuhJ-snpByzjsR5rwGFBNXEYcbeZ2p-MjxrrADlLs_aAnbBWbNPrSnyqdQXaUJZ0poN-gzaxBsErA",
 							"type": "string"
 						}
 					]
@@ -55,15 +55,150 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get all(Admin) 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/receipts/GetAllReceipts?pageNumber=1&pageSize=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"receipts",
+								"GetAllReceipts"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "startDate",
+									"value": "2003-01-01",
+									"disabled": true
+								},
+								{
+									"key": "endDate",
+									"value": "2024-01-01",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:38:23 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Registros obtenidos exitosamente.\",\n    \"totalRecords\": 101,\n    \"totalPages\": 11,\n    \"currentPage\": 1,\n    \"pageSize\": 10,\n    \"receipts\": [\n        {\n            \"id\": 101,\n            \"userId\": 4,\n            \"boughtAt\": \"2024-11-24T23:26:14.7148752\",\n            \"totalPrice\": 21732,\n            \"country\": \"string\",\n            \"city\": \"string\",\n            \"county\": \"string\",\n            \"address\": \"string\"\n        },\n        {\n            \"id\": 40,\n            \"userId\": 38,\n            \"boughtAt\": \"2024-08-06T07:06:21.4902589\",\n            \"totalPrice\": 618,\n            \"country\": \"United States of America\",\n            \"city\": \"Muellertown\",\n            \"county\": \"Borders\",\n            \"address\": \"4866 Ankunding Brooks\"\n        },\n        {\n            \"id\": 24,\n            \"userId\": 95,\n            \"boughtAt\": \"2024-05-19T09:05:12.2107475\",\n            \"totalPrice\": 2134,\n            \"country\": \"Malawi\",\n            \"city\": \"West Lavina\",\n            \"county\": \"Buckinghamshire\",\n            \"address\": \"795 Jenkins Street\"\n        },\n        {\n            \"id\": 14,\n            \"userId\": 51,\n            \"boughtAt\": \"2024-04-29T22:25:56.428142\",\n            \"totalPrice\": 5125,\n            \"country\": \"El Salvador\",\n            \"city\": \"Tillmantown\",\n            \"county\": \"Avon\",\n            \"address\": \"130 Marquardt Mews\"\n        },\n        {\n            \"id\": 65,\n            \"userId\": 55,\n            \"boughtAt\": \"2023-12-21T07:19:18.4388585\",\n            \"totalPrice\": 8897,\n            \"country\": \"Nicaragua\",\n            \"city\": \"Schneiderberg\",\n            \"county\": \"Avon\",\n            \"address\": \"8539 Bogisich Meadow\"\n        },\n        {\n            \"id\": 76,\n            \"userId\": 80,\n            \"boughtAt\": \"2023-12-01T13:29:04.03187\",\n            \"totalPrice\": 5163,\n            \"country\": \"Mexico\",\n            \"city\": \"Lake Taliaview\",\n            \"county\": \"Avon\",\n            \"address\": \"43401 Jalen Terrace\"\n        },\n        {\n            \"id\": 47,\n            \"userId\": 6,\n            \"boughtAt\": \"2023-09-13T05:46:56.0245446\",\n            \"totalPrice\": 5457,\n            \"country\": \"Slovakia (Slovak Republic)\",\n            \"city\": \"Hagenesview\",\n            \"county\": \"Bedfordshire\",\n            \"address\": \"37267 Berge Common\"\n        },\n        {\n            \"id\": 72,\n            \"userId\": 12,\n            \"boughtAt\": \"2023-09-05T21:27:52.0107955\",\n            \"totalPrice\": 4630,\n            \"country\": \"Andorra\",\n            \"city\": \"Port Nedfort\",\n            \"county\": \"Bedfordshire\",\n            \"address\": \"9170 Ron Glens\"\n        },\n        {\n            \"id\": 66,\n            \"userId\": 73,\n            \"boughtAt\": \"2023-07-25T16:18:24.8327148\",\n            \"totalPrice\": 4337,\n            \"country\": \"Antarctica (the territory South of 60 deg S)\",\n            \"city\": \"New Maurineland\",\n            \"county\": \"Borders\",\n            \"address\": \"221 Charlene Field\"\n        },\n        {\n            \"id\": 60,\n            \"userId\": 53,\n            \"boughtAt\": \"2023-07-22T13:16:16.4373333\",\n            \"totalPrice\": 238,\n            \"country\": \"Qatar\",\n            \"city\": \"Douglasburgh\",\n            \"county\": \"Berkshire\",\n            \"address\": \"57880 Boyle Tunnel\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "Get all(Admin) 200 (Date limiter)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/receipts/GetAllReceipts?pageNumber=1&pageSize=10&startDate=2003-01-01&endDate=2024-01-01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"receipts",
+								"GetAllReceipts"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "startDate",
+									"value": "2003-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-01-01"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:38:44 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Registros obtenidos exitosamente.\",\n    \"totalRecords\": 97,\n    \"totalPages\": 10,\n    \"currentPage\": 1,\n    \"pageSize\": 10,\n    \"receipts\": [\n        {\n            \"id\": 65,\n            \"userId\": 55,\n            \"boughtAt\": \"2023-12-21T07:19:18.4388585\",\n            \"totalPrice\": 8897,\n            \"country\": \"Nicaragua\",\n            \"city\": \"Schneiderberg\",\n            \"county\": \"Avon\",\n            \"address\": \"8539 Bogisich Meadow\"\n        },\n        {\n            \"id\": 76,\n            \"userId\": 80,\n            \"boughtAt\": \"2023-12-01T13:29:04.03187\",\n            \"totalPrice\": 5163,\n            \"country\": \"Mexico\",\n            \"city\": \"Lake Taliaview\",\n            \"county\": \"Avon\",\n            \"address\": \"43401 Jalen Terrace\"\n        },\n        {\n            \"id\": 47,\n            \"userId\": 6,\n            \"boughtAt\": \"2023-09-13T05:46:56.0245446\",\n            \"totalPrice\": 5457,\n            \"country\": \"Slovakia (Slovak Republic)\",\n            \"city\": \"Hagenesview\",\n            \"county\": \"Bedfordshire\",\n            \"address\": \"37267 Berge Common\"\n        },\n        {\n            \"id\": 72,\n            \"userId\": 12,\n            \"boughtAt\": \"2023-09-05T21:27:52.0107955\",\n            \"totalPrice\": 4630,\n            \"country\": \"Andorra\",\n            \"city\": \"Port Nedfort\",\n            \"county\": \"Bedfordshire\",\n            \"address\": \"9170 Ron Glens\"\n        },\n        {\n            \"id\": 66,\n            \"userId\": 73,\n            \"boughtAt\": \"2023-07-25T16:18:24.8327148\",\n            \"totalPrice\": 4337,\n            \"country\": \"Antarctica (the territory South of 60 deg S)\",\n            \"city\": \"New Maurineland\",\n            \"county\": \"Borders\",\n            \"address\": \"221 Charlene Field\"\n        },\n        {\n            \"id\": 60,\n            \"userId\": 53,\n            \"boughtAt\": \"2023-07-22T13:16:16.4373333\",\n            \"totalPrice\": 238,\n            \"country\": \"Qatar\",\n            \"city\": \"Douglasburgh\",\n            \"county\": \"Berkshire\",\n            \"address\": \"57880 Boyle Tunnel\"\n        },\n        {\n            \"id\": 7,\n            \"userId\": 88,\n            \"boughtAt\": \"2023-02-11T08:17:16.6837717\",\n            \"totalPrice\": 4726,\n            \"country\": \"Guinea\",\n            \"city\": \"Paucekland\",\n            \"county\": \"Bedfordshire\",\n            \"address\": \"21903 Breitenberg Ports\"\n        },\n        {\n            \"id\": 97,\n            \"userId\": 20,\n            \"boughtAt\": \"2023-02-04T08:02:20.4109433\",\n            \"totalPrice\": 2541,\n            \"country\": \"Iraq\",\n            \"city\": \"West Lessiechester\",\n            \"county\": \"Avon\",\n            \"address\": \"71110 Fredrick Pine\"\n        },\n        {\n            \"id\": 52,\n            \"userId\": 75,\n            \"boughtAt\": \"2023-01-24T07:52:45.5599586\",\n            \"totalPrice\": 4780,\n            \"country\": \"San Marino\",\n            \"city\": \"Kovacekton\",\n            \"county\": \"Borders\",\n            \"address\": \"1050 Lloyd Ways\"\n        },\n        {\n            \"id\": 38,\n            \"userId\": 91,\n            \"boughtAt\": \"2022-11-27T05:43:17.7936915\",\n            \"totalPrice\": 968,\n            \"country\": \"Poland\",\n            \"city\": \"Port Bertha\",\n            \"county\": \"Avon\",\n            \"address\": \"581 Lessie Fords\"\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Get all ReceiptProducts(Admin)",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI1MDExMTcsImV4cCI6MTczMjU4NzUxNywiaWF0IjoxNzMyNTAxMTE3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.-c3iFPIxKZuhJ-snpByzjsR5rwGFBNXEYcbeZ2p-MjxrrADlLs_aAnbBWbNPrSnyqdQXaUJZ0poN-gzaxBsErA",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5225/api/receipts/GetAllReceiptsProducts?id=101",
+					"raw": "http://localhost:5225/api/receipts/GetAllReceiptsProducts?id=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -77,12 +212,62 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "101"
+							"value": "2"
 						}
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get all ReceiptProducts(Admin) 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/receipts/GetAllReceiptsProducts?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"receipts",
+								"GetAllReceiptsProducts"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:39:15 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"receiptId\": 2,\n        \"productId\": 49,\n        \"unitPrice\": 2466,\n        \"quantity\": 55,\n        \"totalPrice\": 135630\n    },\n    {\n        \"receiptId\": 2,\n        \"productId\": 62,\n        \"unitPrice\": 19356,\n        \"quantity\": 34,\n        \"totalPrice\": 658104\n    },\n    {\n        \"receiptId\": 2,\n        \"productId\": 87,\n        \"unitPrice\": 11249,\n        \"quantity\": 84,\n        \"totalPrice\": 944916\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "Get by user name(Admin)",
@@ -92,7 +277,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0MTEzNTAsImV4cCI6MTczMjQ5Nzc1MCwiaWF0IjoxNzMyNDExMzUwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.TK618AwbwwMlAnU1PspLGgZGRmwwk0hfBlO2DBi4nQarY52ZLCkLVY8zhHBUxTztiaWxqk-5ub-CV-mlso98Iw",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI1MDExMTcsImV4cCI6MTczMjU4NzUxNywiaWF0IjoxNzMyNTAxMTE3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.-c3iFPIxKZuhJ-snpByzjsR5rwGFBNXEYcbeZ2p-MjxrrADlLs_aAnbBWbNPrSnyqdQXaUJZ0poN-gzaxBsErA",
 							"type": "string"
 						}
 					]
@@ -119,7 +304,57 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get by user name(Admin) 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/receipts/GetByUserName?userName=a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"receipts",
+								"GetByUserName"
+							],
+							"query": [
+								{
+									"key": "userName",
+									"value": "a"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:39:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 9,\n        \"userId\": 1,\n        \"boughtAt\": \"2015-06-21T07:16:18.7472089\",\n        \"totalPrice\": 1718,\n        \"country\": \"Tajikistan\",\n        \"city\": \"South Vincenzahaven\",\n        \"county\": \"Cambridgeshire\",\n        \"address\": \"90739 Leannon Freeway\"\n    },\n    {\n        \"id\": 1,\n        \"userId\": 2,\n        \"boughtAt\": \"2019-05-17T01:45:36.2328881\",\n        \"totalPrice\": 1335,\n        \"country\": \"Tanzania\",\n        \"city\": \"South Effiechester\",\n        \"county\": \"Borders\",\n        \"address\": \"1423 Stoltenberg Skyway\"\n    },\n    {\n        \"id\": 19,\n        \"userId\": 4,\n        \"boughtAt\": \"2015-06-05T17:53:20.4120094\",\n        \"totalPrice\": 6558,\n        \"country\": \"Pakistan\",\n        \"city\": \"Rosenbaumport\",\n        \"county\": \"Borders\",\n        \"address\": \"0758 Adah Flat\"\n    },\n    {\n        \"id\": 101,\n        \"userId\": 4,\n        \"boughtAt\": \"2024-11-24T23:26:14.7148752\",\n        \"totalPrice\": 21732,\n        \"country\": \"string\",\n        \"city\": \"string\",\n        \"county\": \"string\",\n        \"address\": \"string\"\n    },\n    {\n        \"id\": 62,\n        \"userId\": 5,\n        \"boughtAt\": \"2016-04-15T01:09:25.2871159\",\n        \"totalPrice\": 9000,\n        \"country\": \"Virgin Islands, British\",\n        \"city\": \"East Davon\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"45172 Hermann Ports\"\n    },\n    {\n        \"id\": 64,\n        \"userId\": 5,\n        \"boughtAt\": \"2021-05-14T16:10:23.0892258\",\n        \"totalPrice\": 674,\n        \"country\": \"Honduras\",\n        \"city\": \"West Ivoryfort\",\n        \"county\": \"Berkshire\",\n        \"address\": \"364 Moen Plains\"\n    },\n    {\n        \"id\": 47,\n        \"userId\": 6,\n        \"boughtAt\": \"2023-09-13T05:46:56.0245446\",\n        \"totalPrice\": 5457,\n        \"country\": \"Slovakia (Slovak Republic)\",\n        \"city\": \"Hagenesview\",\n        \"county\": \"Bedfordshire\",\n        \"address\": \"37267 Berge Common\"\n    },\n    {\n        \"id\": 30,\n        \"userId\": 8,\n        \"boughtAt\": \"2015-07-12T08:52:05.7081816\",\n        \"totalPrice\": 3033,\n        \"country\": \"Bolivia\",\n        \"city\": \"Littlebury\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"175 Yazmin Divide\"\n    },\n    {\n        \"id\": 71,\n        \"userId\": 8,\n        \"boughtAt\": \"2008-01-25T13:49:27.8470975\",\n        \"totalPrice\": 2239,\n        \"country\": \"Falkland Islands (Malvinas)\",\n        \"city\": \"Port Walterhaven\",\n        \"county\": \"Bedfordshire\",\n        \"address\": \"1965 Cronin Greens\"\n    },\n    {\n        \"id\": 5,\n        \"userId\": 12,\n        \"boughtAt\": \"2015-04-26T20:21:08.845794\",\n        \"totalPrice\": 3602,\n        \"country\": \"Afghanistan\",\n        \"city\": \"New Adolfo\",\n        \"county\": \"Borders\",\n        \"address\": \"824 Maryse Row\"\n    },\n    {\n        \"id\": 21,\n        \"userId\": 12,\n        \"boughtAt\": \"2022-05-31T01:06:12.5683045\",\n        \"totalPrice\": 1639,\n        \"country\": \"Tuvalu\",\n        \"city\": \"East Eloisa\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"599 Trudie Rapids\"\n    },\n    {\n        \"id\": 32,\n        \"userId\": 12,\n        \"boughtAt\": \"2015-07-23T15:36:33.0800646\",\n        \"totalPrice\": 7372,\n        \"country\": \"Tuvalu\",\n        \"city\": \"Lake Hilda\",\n        \"county\": \"Berkshire\",\n        \"address\": \"2743 Cummerata Port\"\n    },\n    {\n        \"id\": 72,\n        \"userId\": 12,\n        \"boughtAt\": \"2023-09-05T21:27:52.0107955\",\n        \"totalPrice\": 4630,\n        \"country\": \"Andorra\",\n        \"city\": \"Port Nedfort\",\n        \"county\": \"Bedfordshire\",\n        \"address\": \"9170 Ron Glens\"\n    },\n    {\n        \"id\": 36,\n        \"userId\": 13,\n        \"boughtAt\": \"2014-11-18T18:22:54.0257094\",\n        \"totalPrice\": 6772,\n        \"country\": \"Malawi\",\n        \"city\": \"Port Sandystad\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"6137 Olson Fields\"\n    },\n    {\n        \"id\": 37,\n        \"userId\": 13,\n        \"boughtAt\": \"2021-05-14T02:08:23.621421\",\n        \"totalPrice\": 3759,\n        \"country\": \"Portugal\",\n        \"city\": \"Charlenebury\",\n        \"county\": \"Avon\",\n        \"address\": \"021 Pouros Forest\"\n    },\n    {\n        \"id\": 49,\n        \"userId\": 13,\n        \"boughtAt\": \"2016-09-21T06:13:05.7570843\",\n        \"totalPrice\": 2458,\n        \"country\": \"Nicaragua\",\n        \"city\": \"West Ashly\",\n        \"county\": \"Berkshire\",\n        \"address\": \"2643 Carroll Wall\"\n    },\n    {\n        \"id\": 44,\n        \"userId\": 14,\n        \"boughtAt\": \"2013-10-24T03:52:05.8343883\",\n        \"totalPrice\": 2765,\n        \"country\": \"Papua New Guinea\",\n        \"city\": \"Lianaport\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"73458 Ellie Square\"\n    },\n    {\n        \"id\": 3,\n        \"userId\": 15,\n        \"boughtAt\": \"2018-02-18T09:30:18.7200624\",\n        \"totalPrice\": 5744,\n        \"country\": \"United Kingdom\",\n        \"city\": \"Jaskolskiton\",\n        \"county\": \"Avon\",\n        \"address\": \"890 Wilhelm Throughway\"\n    },\n    {\n        \"id\": 16,\n        \"userId\": 20,\n        \"boughtAt\": \"2022-03-06T01:38:54.3579205\",\n        \"totalPrice\": 2709,\n        \"country\": \"Tonga\",\n        \"city\": \"Sauerstad\",\n        \"county\": \"Borders\",\n        \"address\": \"456 Mckenzie Neck\"\n    },\n    {\n        \"id\": 97,\n        \"userId\": 20,\n        \"boughtAt\": \"2023-02-04T08:02:20.4109433\",\n        \"totalPrice\": 2541,\n        \"country\": \"Iraq\",\n        \"city\": \"West Lessiechester\",\n        \"county\": \"Avon\",\n        \"address\": \"71110 Fredrick Pine\"\n    },\n    {\n        \"id\": 54,\n        \"userId\": 22,\n        \"boughtAt\": \"2012-11-06T10:17:07.6511364\",\n        \"totalPrice\": 8430,\n        \"country\": \"Holy See (Vatican City State)\",\n        \"city\": \"Port Richie\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"4186 Reinger Field\"\n    },\n    {\n        \"id\": 51,\n        \"userId\": 23,\n        \"boughtAt\": \"2007-06-12T13:27:07.2256628\",\n        \"totalPrice\": 6873,\n        \"country\": \"Tajikistan\",\n        \"city\": \"New Amina\",\n        \"county\": \"Bedfordshire\",\n        \"address\": \"99070 Louisa Garden\"\n    },\n    {\n        \"id\": 35,\n        \"userId\": 24,\n        \"boughtAt\": \"2018-03-26T20:53:39.8100191\",\n        \"totalPrice\": 7717,\n        \"country\": \"Comoros\",\n        \"city\": \"Treutelbury\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"959 Tristian Vista\"\n    },\n    {\n        \"id\": 31,\n        \"userId\": 25,\n        \"boughtAt\": \"2010-12-18T19:42:38.1873214\",\n        \"totalPrice\": 2012,\n        \"country\": \"Netherlands\",\n        \"city\": \"Port Madieborough\",\n        \"county\": \"Cambridgeshire\",\n        \"address\": \"0266 Bernhard Cliff\"\n    },\n    {\n        \"id\": 78,\n        \"userId\": 28,\n        \"boughtAt\": \"2007-03-04T14:18:43.184006\",\n        \"totalPrice\": 1584,\n        \"country\": \"Brunei Darussalam\",\n        \"city\": \"Harveybury\",\n        \"county\": \"Berkshire\",\n        \"address\": \"0817 Juanita Island\"\n    },\n    {\n        \"id\": 46,\n        \"userId\": 34,\n        \"boughtAt\": \"2015-02-01T17:55:20.2467953\",\n        \"totalPrice\": 6186,\n        \"country\": \"Lesotho\",\n        \"city\": \"New Millie\",\n        \"county\": \"Borders\",\n        \"address\": \"9443 Hamill Brook\"\n    },\n    {\n        \"id\": 6,\n        \"userId\": 38,\n        \"boughtAt\": \"2018-01-24T07:27:52.0768754\",\n        \"totalPrice\": 2951,\n        \"country\": \"Australia\",\n        \"city\": \"Funkbury\",\n        \"county\": \"Borders\",\n        \"address\": \"11849 Zboncak Glen\"\n    },\n    {\n        \"id\": 40,\n        \"userId\": 38,\n        \"boughtAt\": \"2024-08-06T07:06:21.4902589\",\n        \"totalPrice\": 618,\n        \"country\": \"United States of America\",\n        \"city\": \"Muellertown\",\n        \"county\": \"Borders\",\n        \"address\": \"4866 Ankunding Brooks\"\n    },\n    {\n        \"id\": 13,\n        \"userId\": 39,\n        \"boughtAt\": \"2017-12-23T08:08:23.7854262\",\n        \"totalPrice\": 1880,\n        \"country\": \"Paraguay\",\n        \"city\": \"South Athena\",\n        \"county\": \"Borders\",\n        \"address\": \"508 Annabelle Course\"\n    },\n    {\n        \"id\": 85,\n        \"userId\": 39,\n        \"boughtAt\": \"2012-06-03T17:28:15.1723948\",\n        \"totalPrice\": 2651,\n        \"country\": \"Germany\",\n        \"city\": \"Katrinestad\",\n        \"county\": \"Avon\",\n        \"address\": \"09973 Wuckert Route\"\n    },\n    {\n        \"id\": 77,\n        \"userId\": 40,\n        \"boughtAt\": \"2009-01-13T18:39:46.4906091\",\n        \"totalPrice\": 9163,\n        \"country\": \"Equatorial Guinea\",\n        \"city\": \"Lake Florencio\",\n        \"county\": \"Bedfordshire\",\n        \"address\": \"79815 Hane Pike\"\n    },\n    {\n        \"id\": 67,\n        \"userId\": 41,\n        \"boughtAt\": \"2016-01-26T02:41:57.6077305\",\n        \"totalPrice\": 2092,\n        \"country\": \"Japan\",\n        \"city\": \"Boganchester\",\n        \"county\": \"Cambridgeshire\",\n        \"address\": \"13698 Hoppe Square\"\n    },\n    {\n        \"id\": 100,\n        \"userId\": 43,\n        \"boughtAt\": \"2020-05-24T20:02:00.0059268\",\n        \"totalPrice\": 6210,\n        \"country\": \"United States of America\",\n        \"city\": \"Volkmanmouth\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"38684 Laney Haven\"\n    },\n    {\n        \"id\": 55,\n        \"userId\": 45,\n        \"boughtAt\": \"2017-01-06T22:09:56.9229006\",\n        \"totalPrice\": 9000,\n        \"country\": \"Tanzania\",\n        \"city\": \"North Luciusmouth\",\n        \"county\": \"Bedfordshire\",\n        \"address\": \"416 Cali Throughway\"\n    },\n    {\n        \"id\": 89,\n        \"userId\": 45,\n        \"boughtAt\": \"2019-08-04T21:58:14.8323636\",\n        \"totalPrice\": 2106,\n        \"country\": \"Hungary\",\n        \"city\": \"East Ruben\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"2054 Arnulfo Creek\"\n    },\n    {\n        \"id\": 81,\n        \"userId\": 46,\n        \"boughtAt\": \"2007-12-05T02:30:38.0910199\",\n        \"totalPrice\": 9089,\n        \"country\": \"Tunisia\",\n        \"city\": \"Sipeschester\",\n        \"county\": \"Borders\",\n        \"address\": \"71661 Heathcote Pass\"\n    },\n    {\n        \"id\": 43,\n        \"userId\": 49,\n        \"boughtAt\": \"2021-10-05T00:46:39.4088168\",\n        \"totalPrice\": 2944,\n        \"country\": \"Gabon\",\n        \"city\": \"East Graysonfort\",\n        \"county\": \"Avon\",\n        \"address\": \"057 Shaun Roads\"\n    },\n    {\n        \"id\": 20,\n        \"userId\": 50,\n        \"boughtAt\": \"2008-08-07T16:49:32.5128387\",\n        \"totalPrice\": 724,\n        \"country\": \"Chile\",\n        \"city\": \"Itzelburgh\",\n        \"county\": \"Berkshire\",\n        \"address\": \"8996 Aurelio Trail\"\n    },\n    {\n        \"id\": 14,\n        \"userId\": 51,\n        \"boughtAt\": \"2024-04-29T22:25:56.428142\",\n        \"totalPrice\": 5125,\n        \"country\": \"El Salvador\",\n        \"city\": \"Tillmantown\",\n        \"county\": \"Avon\",\n        \"address\": \"130 Marquardt Mews\"\n    },\n    {\n        \"id\": 27,\n        \"userId\": 51,\n        \"boughtAt\": \"2012-05-31T07:22:51.9698542\",\n        \"totalPrice\": 8895,\n        \"country\": \"Gibraltar\",\n        \"city\": \"West Savanah\",\n        \"county\": \"Cambridgeshire\",\n        \"address\": \"21123 Macejkovic Terrace\"\n    },\n    {\n        \"id\": 60,\n        \"userId\": 53,\n        \"boughtAt\": \"2023-07-22T13:16:16.4373333\",\n        \"totalPrice\": 238,\n        \"country\": \"Qatar\",\n        \"city\": \"Douglasburgh\",\n        \"county\": \"Berkshire\",\n        \"address\": \"57880 Boyle Tunnel\"\n    },\n    {\n        \"id\": 70,\n        \"userId\": 53,\n        \"boughtAt\": \"2022-02-10T18:08:05.0513359\",\n        \"totalPrice\": 2168,\n        \"country\": \"Cote d'Ivoire\",\n        \"city\": \"Dietrichtown\",\n        \"county\": \"Cambridgeshire\",\n        \"address\": \"6835 Santa Track\"\n    },\n    {\n        \"id\": 65,\n        \"userId\": 55,\n        \"boughtAt\": \"2023-12-21T07:19:18.4388585\",\n        \"totalPrice\": 8897,\n        \"country\": \"Nicaragua\",\n        \"city\": \"Schneiderberg\",\n        \"county\": \"Avon\",\n        \"address\": \"8539 Bogisich Meadow\"\n    },\n    {\n        \"id\": 68,\n        \"userId\": 55,\n        \"boughtAt\": \"2021-01-28T09:21:09.4601721\",\n        \"totalPrice\": 2416,\n        \"country\": \"Saint Pierre and Miquelon\",\n        \"city\": \"East Zettaberg\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"278 Cruickshank Wells\"\n    },\n    {\n        \"id\": 56,\n        \"userId\": 57,\n        \"boughtAt\": \"2019-12-11T05:13:51.5578716\",\n        \"totalPrice\": 8294,\n        \"country\": \"Seychelles\",\n        \"city\": \"Lake Ceceliashire\",\n        \"county\": \"Borders\",\n        \"address\": \"70357 Ramon Meadows\"\n    },\n    {\n        \"id\": 73,\n        \"userId\": 57,\n        \"boughtAt\": \"2016-08-19T05:53:13.6324555\",\n        \"totalPrice\": 7037,\n        \"country\": \"Turks and Caicos Islands\",\n        \"city\": \"North Kevinshire\",\n        \"county\": \"Cambridgeshire\",\n        \"address\": \"25804 Runolfsson Lakes\"\n    },\n    {\n        \"id\": 11,\n        \"userId\": 58,\n        \"boughtAt\": \"2022-07-23T22:42:23.8008889\",\n        \"totalPrice\": 5380,\n        \"country\": \"Monaco\",\n        \"city\": \"Hayleeside\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"1459 Kovacek Vista\"\n    },\n    {\n        \"id\": 2,\n        \"userId\": 60,\n        \"boughtAt\": \"2021-12-21T18:36:18.4546241\",\n        \"totalPrice\": 3083,\n        \"country\": \"American Samoa\",\n        \"city\": \"West Nathanialbury\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"94130 Frances Cliff\"\n    },\n    {\n        \"id\": 10,\n        \"userId\": 60,\n        \"boughtAt\": \"2016-10-01T19:51:20.2970787\",\n        \"totalPrice\": 867,\n        \"country\": \"Trinidad and Tobago\",\n        \"city\": \"Cristianshire\",\n        \"county\": \"Berkshire\",\n        \"address\": \"644 Jaylon Flat\"\n    },\n    {\n        \"id\": 90,\n        \"userId\": 61,\n        \"boughtAt\": \"2007-04-02T10:57:01.4261389\",\n        \"totalPrice\": 4593,\n        \"country\": \"Costa Rica\",\n        \"city\": \"Linaton\",\n        \"county\": \"Berkshire\",\n        \"address\": \"2892 Vladimir Isle\"\n    },\n    {\n        \"id\": 96,\n        \"userId\": 61,\n        \"boughtAt\": \"2010-09-16T10:14:45.6717891\",\n        \"totalPrice\": 2429,\n        \"country\": \"Aruba\",\n        \"city\": \"Port Geovanni\",\n        \"county\": \"Borders\",\n        \"address\": \"8682 Stehr Ridges\"\n    },\n    {\n        \"id\": 79,\n        \"userId\": 64,\n        \"boughtAt\": \"2008-06-15T23:06:33.9089402\",\n        \"totalPrice\": 3920,\n        \"country\": \"Germany\",\n        \"city\": \"Torreyborough\",\n        \"county\": \"Borders\",\n        \"address\": \"9167 Murazik Heights\"\n    },\n    {\n        \"id\": 48,\n        \"userId\": 65,\n        \"boughtAt\": \"2019-02-17T05:43:20.5420759\",\n        \"totalPrice\": 5236,\n        \"country\": \"Suriname\",\n        \"city\": \"Lake Peterberg\",\n        \"county\": \"Borders\",\n        \"address\": \"9833 Sallie Views\"\n    },\n    {\n        \"id\": 4,\n        \"userId\": 68,\n        \"boughtAt\": \"2012-05-12T12:32:43.2071735\",\n        \"totalPrice\": 6512,\n        \"country\": \"Solomon Islands\",\n        \"city\": \"Port Nicoleburgh\",\n        \"county\": \"Berkshire\",\n        \"address\": \"386 Goldner Meadows\"\n    },\n    {\n        \"id\": 12,\n        \"userId\": 68,\n        \"boughtAt\": \"2007-09-16T13:07:52.7425271\",\n        \"totalPrice\": 397,\n        \"country\": \"Andorra\",\n        \"city\": \"North Anika\",\n        \"county\": \"Borders\",\n        \"address\": \"40056 Wunsch Orchard\"\n    },\n    {\n        \"id\": 15,\n        \"userId\": 68,\n        \"boughtAt\": \"2007-10-23T20:38:37.3101955\",\n        \"totalPrice\": 6618,\n        \"country\": \"Timor-Leste\",\n        \"city\": \"Lake Hesterhaven\",\n        \"county\": \"Borders\",\n        \"address\": \"74746 Brook Rue\"\n    },\n    {\n        \"id\": 29,\n        \"userId\": 68,\n        \"boughtAt\": \"2013-10-01T00:43:48.226366\",\n        \"totalPrice\": 3747,\n        \"country\": \"Burkina Faso\",\n        \"city\": \"East Camryntown\",\n        \"county\": \"Avon\",\n        \"address\": \"98017 Amiya Haven\"\n    },\n    {\n        \"id\": 95,\n        \"userId\": 68,\n        \"boughtAt\": \"2016-10-28T04:21:35.253354\",\n        \"totalPrice\": 2893,\n        \"country\": \"Macao\",\n        \"city\": \"West Patricia\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"992 Tatyana Islands\"\n    },\n    {\n        \"id\": 92,\n        \"userId\": 71,\n        \"boughtAt\": \"2020-09-01T12:34:59.8864775\",\n        \"totalPrice\": 1557,\n        \"country\": \"Belgium\",\n        \"city\": \"Volkmanton\",\n        \"county\": \"Berkshire\",\n        \"address\": \"168 White Dam\"\n    },\n    {\n        \"id\": 8,\n        \"userId\": 72,\n        \"boughtAt\": \"2013-12-27T10:33:34.9611944\",\n        \"totalPrice\": 9794,\n        \"country\": \"Morocco\",\n        \"city\": \"Marcoside\",\n        \"county\": \"Cambridgeshire\",\n        \"address\": \"075 Heidenreich Rapid\"\n    },\n    {\n        \"id\": 18,\n        \"userId\": 72,\n        \"boughtAt\": \"2015-04-18T23:08:04.7683244\",\n        \"totalPrice\": 1769,\n        \"country\": \"Austria\",\n        \"city\": \"Astridfurt\",\n        \"county\": \"Avon\",\n        \"address\": \"7148 Lemuel Ways\"\n    },\n    {\n        \"id\": 75,\n        \"userId\": 72,\n        \"boughtAt\": \"2017-12-12T02:01:00.6130113\",\n        \"totalPrice\": 485,\n        \"country\": \"Tonga\",\n        \"city\": \"Wildermanberg\",\n        \"county\": \"Berkshire\",\n        \"address\": \"618 Muller Rapids\"\n    },\n    {\n        \"id\": 94,\n        \"userId\": 74,\n        \"boughtAt\": \"2022-04-27T10:34:01.377003\",\n        \"totalPrice\": 2632,\n        \"country\": \"India\",\n        \"city\": \"Port Antonietta\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"1677 Rosella Centers\"\n    },\n    {\n        \"id\": 52,\n        \"userId\": 75,\n        \"boughtAt\": \"2023-01-24T07:52:45.5599586\",\n        \"totalPrice\": 4780,\n        \"country\": \"San Marino\",\n        \"city\": \"Kovacekton\",\n        \"county\": \"Borders\",\n        \"address\": \"1050 Lloyd Ways\"\n    },\n    {\n        \"id\": 91,\n        \"userId\": 76,\n        \"boughtAt\": \"2016-07-10T15:04:46.000617\",\n        \"totalPrice\": 4642,\n        \"country\": \"Ireland\",\n        \"city\": \"O'Keefeville\",\n        \"county\": \"Borders\",\n        \"address\": \"79989 Lisandro Creek\"\n    },\n    {\n        \"id\": 98,\n        \"userId\": 76,\n        \"boughtAt\": \"2012-07-01T16:21:09.6427494\",\n        \"totalPrice\": 9591,\n        \"country\": \"Cocos (Keeling) Islands\",\n        \"city\": \"Kaylabury\",\n        \"county\": \"Borders\",\n        \"address\": \"0439 Payton Cliff\"\n    },\n    {\n        \"id\": 76,\n        \"userId\": 80,\n        \"boughtAt\": \"2023-12-01T13:29:04.03187\",\n        \"totalPrice\": 5163,\n        \"country\": \"Mexico\",\n        \"city\": \"Lake Taliaview\",\n        \"county\": \"Avon\",\n        \"address\": \"43401 Jalen Terrace\"\n    },\n    {\n        \"id\": 93,\n        \"userId\": 83,\n        \"boughtAt\": \"2009-05-15T15:40:22.830546\",\n        \"totalPrice\": 8506,\n        \"country\": \"Cape Verde\",\n        \"city\": \"Johnsonshire\",\n        \"county\": \"Avon\",\n        \"address\": \"41985 Herta Court\"\n    },\n    {\n        \"id\": 50,\n        \"userId\": 85,\n        \"boughtAt\": \"2007-04-14T17:29:53.1684905\",\n        \"totalPrice\": 9377,\n        \"country\": \"Indonesia\",\n        \"city\": \"Haleyville\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"9624 Lonzo Expressway\"\n    },\n    {\n        \"id\": 33,\n        \"userId\": 86,\n        \"boughtAt\": \"2010-05-22T22:44:21.6031034\",\n        \"totalPrice\": 9156,\n        \"country\": \"Cameroon\",\n        \"city\": \"Schimmelborough\",\n        \"county\": \"Avon\",\n        \"address\": \"58850 Edison Pines\"\n    },\n    {\n        \"id\": 39,\n        \"userId\": 87,\n        \"boughtAt\": \"2018-08-24T10:26:20.5901454\",\n        \"totalPrice\": 9364,\n        \"country\": \"Ireland\",\n        \"city\": \"East Lessieland\",\n        \"county\": \"Borders\",\n        \"address\": \"40641 Ethelyn Hills\"\n    },\n    {\n        \"id\": 7,\n        \"userId\": 88,\n        \"boughtAt\": \"2023-02-11T08:17:16.6837717\",\n        \"totalPrice\": 4726,\n        \"country\": \"Guinea\",\n        \"city\": \"Paucekland\",\n        \"county\": \"Bedfordshire\",\n        \"address\": \"21903 Breitenberg Ports\"\n    },\n    {\n        \"id\": 59,\n        \"userId\": 90,\n        \"boughtAt\": \"2008-06-21T22:02:20.3710063\",\n        \"totalPrice\": 7921,\n        \"country\": \"Peru\",\n        \"city\": \"Faheyville\",\n        \"county\": \"Bedfordshire\",\n        \"address\": \"5503 Nitzsche Islands\"\n    },\n    {\n        \"id\": 28,\n        \"userId\": 92,\n        \"boughtAt\": \"2007-11-16T07:15:04.8691611\",\n        \"totalPrice\": 9167,\n        \"country\": \"Poland\",\n        \"city\": \"Grahambury\",\n        \"county\": \"Avon\",\n        \"address\": \"991 Thompson Creek\"\n    },\n    {\n        \"id\": 23,\n        \"userId\": 94,\n        \"boughtAt\": \"2014-12-12T12:47:38.6698922\",\n        \"totalPrice\": 6250,\n        \"country\": \"Guadeloupe\",\n        \"city\": \"East Jess\",\n        \"county\": \"Borders\",\n        \"address\": \"7128 Henderson Vista\"\n    },\n    {\n        \"id\": 24,\n        \"userId\": 95,\n        \"boughtAt\": \"2024-05-19T09:05:12.2107475\",\n        \"totalPrice\": 2134,\n        \"country\": \"Malawi\",\n        \"city\": \"West Lavina\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"795 Jenkins Street\"\n    },\n    {\n        \"id\": 69,\n        \"userId\": 96,\n        \"boughtAt\": \"2010-03-19T21:35:36.267157\",\n        \"totalPrice\": 6584,\n        \"country\": \"Albania\",\n        \"city\": \"New Hettie\",\n        \"county\": \"Buckinghamshire\",\n        \"address\": \"89767 Javier Creek\"\n    },\n    {\n        \"id\": 86,\n        \"userId\": 97,\n        \"boughtAt\": \"2019-06-18T02:25:15.1128127\",\n        \"totalPrice\": 3064,\n        \"country\": \"Romania\",\n        \"city\": \"Rohanhaven\",\n        \"county\": \"Avon\",\n        \"address\": \"043 Rolfson Ford\"\n    },\n    {\n        \"id\": 34,\n        \"userId\": 98,\n        \"boughtAt\": \"2020-04-29T19:54:04.9092826\",\n        \"totalPrice\": 7750,\n        \"country\": \"Haiti\",\n        \"city\": \"East Khalilmouth\",\n        \"county\": \"Avon\",\n        \"address\": \"103 Nikolaus Keys\"\n    },\n    {\n        \"id\": 74,\n        \"userId\": 100,\n        \"boughtAt\": \"2019-05-15T08:11:36.8470922\",\n        \"totalPrice\": 9455,\n        \"country\": \"Tanzania\",\n        \"city\": \"Ornberg\",\n        \"county\": \"Borders\",\n        \"address\": \"959 Fadel River\"\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "Get Order History(User)",
@@ -157,7 +392,58 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get Order History(User) 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/receipts/GetOrderHistory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"receipts",
+								"GetOrderHistory"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "101",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:40:05 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"boughtAt\": \"2019-06-18T02:25:15.1128127\",\n        \"totalPrice\": 3064,\n        \"receiptProducts\": [\n            {\n                \"name\": \"Awesome Cotton Computer\",\n                \"type\": \"Libros\",\n                \"price\": 9241,\n                \"quantity\": 21,\n                \"totalPrice\": 194061\n            },\n            {\n                \"name\": \"Unbranded Soft Pants\",\n                \"type\": \"Gorros\",\n                \"price\": 69119,\n                \"quantity\": 82,\n                \"totalPrice\": 5667758\n            }\n        ]\n    }\n]"
+				}
+			]
 		}
 	]
 }
