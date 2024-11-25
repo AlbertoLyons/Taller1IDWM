@@ -25,6 +25,16 @@ namespace Taller_1_IDWM.src.Controllers
             _receiptProductRepository = receiptProductRepository;
             _userRepository = userRepository;
         }
+        /// <summary>
+        /// Obtiene los recibos de la base de datos.
+        /// </summary>
+        /// <param name="pageNumber">Numero de paginas</param>
+        /// <param name="pageSize">Tamaño de la pagina</param>
+        /// <param name="startDate">Desde donde empieza las fechas</param>
+        /// <param name="endDate">Hasta donde termina</param>
+        /// <returns>Recibos de la base de datos</returns>
+        /// <status code="200">Si los recibos se obtienen exitosamente.</status>
+        /// <status code="400">Si ocurre un error al obtener los recibos.</status>
         [HttpGet("GetAllReceipts")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll(int pageNumber = 1, int pageSize = 10, DateTime? startDate = null, DateTime? endDate = null)
@@ -79,7 +89,13 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
-
+        /// <summary>
+        /// Obtiene la boleta por Id.
+        /// </summary>
+        /// <param name="id">Id de la boleta</param>
+        /// <returns>Boleta</returns>
+        /// <status code="200">Si la boleta se obtiene exitosamente.</status>
+        /// <status code="400">Si ocurre un error al obtener la boleta.</status>
         [HttpGet("GetAllReceiptsProducts")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll(int id)
@@ -93,6 +109,12 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new {message = e.Message});
             }
         }
+        /// <summary>
+        /// Obtiene el historial de compras del usuario.
+        /// </summary>
+        /// <returns>Las boletas del usuario</returns>
+        /// <status code="200">Si las boletas se obtienen exitosamente.</status>
+        /// <status code="400">Si ocurre un error al obtener las boletas.</status>
         [HttpGet("GetOrderHistory")]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> GetOrderHistory()
@@ -108,6 +130,13 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new {message = e.Message});
             }
         }
+        /// <summary>
+        /// Obitne las boletas por el nombre de usuario.
+        /// </summary>
+        /// <param name="userName">Nombre del usuario</param>
+        /// <returns>Boletas del usuario buscado</returns>
+        /// <status code="200">Si las boletas se obtienen exitosamente.</status>
+        /// <status code="400">Si ocurre un error al obtener las boletas.</status>
         [HttpGet("GetByUserName")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetByUserName(string userName)
