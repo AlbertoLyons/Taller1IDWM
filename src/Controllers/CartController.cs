@@ -137,7 +137,13 @@ namespace Taller_1_IDWM.src.Controllers
                     var receiptProducts = await _receiptProductRepository.AddReceiptProduct(products, receipt.Id);
                     if (receiptProducts != null)
                     {
-                        return Ok("Products bought successfully");
+                        var boughtReceipt = await _receiptRepository.GetById(receipt.Id);
+                        var response = new
+                        {
+                            Message = "Products bought successfully",
+                            Receipt = boughtReceipt,
+                        };
+                        return Ok(response);
                     }
                 }
                 return BadRequest("Error buying products");

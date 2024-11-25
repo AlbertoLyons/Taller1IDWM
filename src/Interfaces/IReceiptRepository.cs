@@ -15,5 +15,6 @@ namespace Taller_1_IDWM.src.Interfaces
         Task<IEnumerable<ReceiptUserDTO>> GetOrderHistory(int id);
         // Método que retorna los recibos por nombre de usuario
         Task<IEnumerable<Receipt>> GetByUserName(List<UserNameDTO> users);
+        Task<BoughtReceiptDTO> GetById(int id);
     }
 }
