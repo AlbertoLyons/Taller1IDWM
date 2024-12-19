@@ -1,0 +1,483 @@
+{
+	"info": {
+		"_postman_id": "6ccfb3c2-c0f8-4021-90da-b98f42e17739",
+		"name": "CRUD Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34959437"
+	},
+	"item": [
+		{
+			"name": "Update user(User)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0OTIwODksImV4cCI6MTczMjU3ODQ4OSwiaWF0IjoxNzMyNDkyMDg5LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.5CbkVri1VqPqWBomq0xW9KOhJSC3tg-OMqQOgcaywizwHpPHLCTvr3uW0NZOAMBVstZxNeJLdmu3mYXULvBAMw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"birthdate\": \"2004-01-01\",\r\n  \"name\": \"stringst\",\r\n  \"gender\": \"Masculino\",\r\n  \"password\": \"xMT9ZvWIUu2N2bkNE2CD\",\r\n  \"confirmPassword\": \"xMT9ZvWIUu2N2bkNE2CD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/user/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"user",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update user(Admin) 200",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"birthdate\": \"2004-01-01\",\r\n  \"name\": \"stringst\",\r\n  \"gender\": \"Masculino\",\r\n  \"password\": \"xMT9ZvWIUu2N2bkNE2CD\",\r\n  \"confirmPassword\": \"xMT9ZvWIUu2N2bkNE2CD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/user/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"user",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:40:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"User updated successfully\",\n    \"user\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Activate/Deactivate user(Admin))",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0OTIwODksImV4cCI6MTczMjU3ODQ4OSwiaWF0IjoxNzMyNDkyMDg5LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.5CbkVri1VqPqWBomq0xW9KOhJSC3tg-OMqQOgcaywizwHpPHLCTvr3uW0NZOAMBVstZxNeJLdmu3mYXULvBAMw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/user/2/ActivateDeactivate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"user",
+						"2",
+						"ActivateDeactivate"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Activate/Deactivate user(Admin)) 200 (false)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/user/2/ActivateDeactivate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"user",
+								"2",
+								"ActivateDeactivate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:41:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Usuario actualizado exitosamente\",\n    \"active\": false\n}"
+				},
+				{
+					"name": "Activate/Deactivate user(Admin)) 200 (true)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/user/2/ActivateDeactivate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"user",
+								"2",
+								"ActivateDeactivate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:41:19 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Usuario actualizado exitosamente\",\n    \"active\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All users (Admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0OTEzNzgsImV4cCI6MTczMjU3Nzc3OCwiaWF0IjoxNzMyNDkxMzc4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.cy23ldyQK7R_LrV9OaCi9xfljNh95ENdFuSr5O1nbpIrUuGNwDT_fMvwPz3WbtJDrmZHzs-w8K_Drp1bcH_UQQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/user/GetAll?pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"user",
+						"GetAll"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All users (Admin) 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/user/GetAll?pageNumber=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"user",
+								"GetAll"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:41:36 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Usuarios obtenidos exitosamente\",\n    \"totalRecords\": 103,\n    \"totalPages\": 11,\n    \"currentPage\": 1,\n    \"pageSize\": 10,\n    \"users\": [\n        {\n            \"id\": 1,\n            \"rut\": \"9823070-6\",\n            \"birthdate\": \"2018-09-15\",\n            \"mail\": \"Althea.Larkin@yahoo.com\",\n            \"name\": \"Darrion Raynor\",\n            \"gender\": \"Prefiero no decirlo\"\n        },\n        {\n            \"id\": 2,\n            \"rut\": \"21183635-8\",\n            \"birthdate\": \"2004-01-01\",\n            \"mail\": \"Samantha59@gmail.com\",\n            \"name\": \"stringst\",\n            \"gender\": \"Masculino\"\n        },\n        {\n            \"id\": 3,\n            \"rut\": \"19476657-5\",\n            \"birthdate\": \"2021-11-18\",\n            \"mail\": \"Deon_Miller@hotmail.com\",\n            \"name\": \"Elna Stehr\",\n            \"gender\": \"Masculino\"\n        },\n        {\n            \"id\": 4,\n            \"rut\": \"23444154-0\",\n            \"birthdate\": \"2012-08-29\",\n            \"mail\": \"Camille.Lueilwitz65@hotmail.com\",\n            \"name\": \"Mathew Reichel\",\n            \"gender\": \"Otro\"\n        },\n        {\n            \"id\": 5,\n            \"rut\": \"13821202-6\",\n            \"birthdate\": \"2012-02-05\",\n            \"mail\": \"Alfred.Brown@hotmail.com\",\n            \"name\": \"Luisa Huels\",\n            \"gender\": \"Masculino\"\n        },\n        {\n            \"id\": 6,\n            \"rut\": \"12890670-2\",\n            \"birthdate\": \"2018-04-18\",\n            \"mail\": \"Whitney11@yahoo.com\",\n            \"name\": \"Jovani Jacobs\",\n            \"gender\": \"Otro\"\n        },\n        {\n            \"id\": 7,\n            \"rut\": \"15598681-7\",\n            \"birthdate\": \"2010-11-19\",\n            \"mail\": \"Clint76@yahoo.com\",\n            \"name\": \"Daron Monahan\",\n            \"gender\": \"Masculino\"\n        },\n        {\n            \"id\": 8,\n            \"rut\": \"7840645-5\",\n            \"birthdate\": \"2007-04-04\",\n            \"mail\": \"Emiliano46@gmail.com\",\n            \"name\": \"Tremaine Kertzmann\",\n            \"gender\": \"Otro\"\n        },\n        {\n            \"id\": 9,\n            \"rut\": \"6629629-0\",\n            \"birthdate\": \"2013-04-01\",\n            \"mail\": \"Alanis_Zieme@yahoo.com\",\n            \"name\": \"Dallas Koch\",\n            \"gender\": \"Femenino\"\n        },\n        {\n            \"id\": 10,\n            \"rut\": \"3376377-1\",\n            \"birthdate\": \"2011-04-18\",\n            \"mail\": \"Piper_Kautzer80@gmail.com\",\n            \"name\": \"Geo Dietrich\",\n            \"gender\": \"Masculino\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete user(Admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0OTEzNzgsImV4cCI6MTczMjU3Nzc3OCwiaWF0IjoxNzMyNDkxMzc4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.cy23ldyQK7R_LrV9OaCi9xfljNh95ENdFuSr5O1nbpIrUuGNwDT_fMvwPz3WbtJDrmZHzs-w8K_Drp1bcH_UQQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/user?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"user"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete user(Admin) 200",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/user?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:41:47 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "User deleted successfully"
+				}
+			]
+		},
+		{
+			"name": "Get by ID(Admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0OTEzNzgsImV4cCI6MTczMjU3Nzc3OCwiaWF0IjoxNzMyNDkxMzc4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.cy23ldyQK7R_LrV9OaCi9xfljNh95ENdFuSr5O1nbpIrUuGNwDT_fMvwPz3WbtJDrmZHzs-w8K_Drp1bcH_UQQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/user/GetById?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"user",
+						"GetById"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get by ID(Admin) 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/user/GetById?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"user",
+								"GetById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:42:00 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"rut\": \"9823070-6\",\n    \"birthdate\": \"2018-09-15\",\n    \"mail\": \"Althea.Larkin@yahoo.com\",\n    \"name\": \"Darrion Raynor\",\n    \"gender\": \"Prefiero no decirlo\"\n}"
+				}
+			]
+		}
+	]
+}

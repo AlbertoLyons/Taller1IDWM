@@ -140,6 +140,7 @@ namespace Taller_1_IDWM.src.Controllers
         /// <status code="200">Si el usuario se obtiene exitosamente.</status>
         /// <status code="400">Si no se encuentra el usuario.</status>
         [HttpGet("GetById")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetById(int id)
         {
             try{

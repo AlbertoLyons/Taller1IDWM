@@ -1,0 +1,1099 @@
+{
+	"info": {
+		"_postman_id": "0c9b63b7-48b0-4ef5-8f88-5392a2d33bc0",
+		"name": "CRUD Products",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34959437"
+	},
+	"item": [
+		{
+			"name": "Add product(Admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0OTI2NDgsImV4cCI6MTczMjU3OTA0OCwiaWF0IjoxNzMyNDkyNjQ4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.0JRqZYqNOgVEEU2qmIp22s8GCbTf5tkzEf2v3WxEX9fn0u41VmPXgo749HpojT4uoY5nXWtflUECi7nXx5QqSQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Platanos1234",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "Alimentacion",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "10000",
+							"type": "text"
+						},
+						{
+							"key": "stock",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/revat/Downloads/borrar-fondo-imagen-1.webp"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add product(Admin) 201",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Hola1234567",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Alimentacion",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "10000",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/revat/Pictures/cyberpunk 2.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:28:15 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Product created successfully\",\n    \"product\": {\n        \"id\": 102,\n        \"name\": \"Hola1234567\",\n        \"type\": \"Alimentacion\",\n        \"price\": 10000,\n        \"stock\": 10,\n        \"imageUrl\": \"https://res.cloudinary.com/dypzcxvts/image/upload/v1732501693/products_image/qqjhyuhzmi4tlk8ghfvy.png\"\n    }\n}"
+				},
+				{
+					"name": "Add product(Admin) 400 (Existing product)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Hola1234567",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Alimentacion",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "10000",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/revat/Downloads/borrar-fondo-imagen-1.webp"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:28:41 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Already exists a product with this name and type\"\n}"
+				},
+				{
+					"name": "Add product(Admin) 400 (Image format)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Platanos1234",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Alimentacion",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "10000",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/revat/Downloads/borrar-fondo-imagen-1.webp"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:29:13 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Image must be a PNG or JPG\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete product(Admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI1MDExMTcsImV4cCI6MTczMjU4NzUxNywiaWF0IjoxNzMyNTAxMTE3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.-c3iFPIxKZuhJ-snpByzjsR5rwGFBNXEYcbeZ2p-MjxrrADlLs_aAnbBWbNPrSnyqdQXaUJZ0poN-gzaxBsErA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/products/?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete product(Admin) 200",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/products/?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:29:59 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "Producto eliminado exitosamente"
+				},
+				{
+					"name": "Delete product(Admin) 400",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/products/?id=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:30:18 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "Producto no encontrado"
+				}
+			]
+		},
+		{
+			"name": "Modify product(Admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI1MDExMTcsImV4cCI6MTczMjU4NzUxNywiaWF0IjoxNzMyNTAxMTE3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.-c3iFPIxKZuhJ-snpByzjsR5rwGFBNXEYcbeZ2p-MjxrrADlLs_aAnbBWbNPrSnyqdQXaUJZ0poN-gzaxBsErA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Manzanas1234",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "Poleras",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "1000",
+							"type": "text"
+						},
+						{
+							"key": "stock",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/revat/Downloads/Afiche postulaciones (16).png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5225/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Modify product(Admin) 200",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Manzanas1234",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Gorros",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/revat/Downloads/Afiche postulaciones (16).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/products/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:32:36 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Product updated successfully\",\n    \"product\": true\n}"
+				},
+				{
+					"name": "Modify product(Admin) 400 (Existing same name and type)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Manzanas1234",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Gorros",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/revat/Downloads/Afiche postulaciones (16).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:32:53 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Already exists a product with this name and type\"\n}"
+				},
+				{
+					"name": "Modify product(Admin) 400 (Not found)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Manzanas1234",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Poleras",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/revat/Downloads/Afiche postulaciones (16).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5225/api/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:33:13 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Product not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All(Users)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/products/GetAll?AscOrDesc=desc&pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						"GetAll"
+					],
+					"query": [
+						{
+							"key": "AscOrDesc",
+							"value": "desc"
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All(Users) 200 (asc)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/products/GetAll?AscOrDesc=asc&pageNumber=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products",
+								"GetAll"
+							],
+							"query": [
+								{
+									"key": "AscOrDesc",
+									"value": "asc"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:34:04 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Products obtained succefully\",\n    \"totalRecords\": 101,\n    \"totalPages\": 11,\n    \"currentPage\": 1,\n    \"pageSize\": 10,\n    \"products\": [\n        {\n            \"name\": \"Unbranded Granite Sausages\",\n            \"type\": \"Jugueteria\",\n            \"price\": 183,\n            \"stock\": 475,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Sleek Granite Sausages\",\n            \"type\": \"Poleras\",\n            \"price\": 298,\n            \"stock\": 24,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Handmade Rubber Car\",\n            \"type\": \"Poleras\",\n            \"price\": 378,\n            \"stock\": 864,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Refined Soft Pants\",\n            \"type\": \"Gorros\",\n            \"price\": 407,\n            \"stock\": 28,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Awesome Wooden Pants\",\n            \"type\": \"Gorros\",\n            \"price\": 713,\n            \"stock\": 729,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Gorgeous Soft Gloves\",\n            \"type\": \"Gorros\",\n            \"price\": 766,\n            \"stock\": 232,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Fantastic Rubber Towels\",\n            \"type\": \"Gorros\",\n            \"price\": 775,\n            \"stock\": 718,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Refined Frozen Gloves\",\n            \"type\": \"Jugueteria\",\n            \"price\": 983,\n            \"stock\": 251,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Manzanas1234\",\n            \"type\": \"Gorros\",\n            \"price\": 1000,\n            \"stock\": 12,\n            \"imageUrl\": \"https://res.cloudinary.com/dypzcxvts/image/upload/v1732501954/products_image/hcezffba4vq587davqnj.png\"\n        },\n        {\n            \"name\": \"Generic Granite Salad\",\n            \"type\": \"Poleras\",\n            \"price\": 1013,\n            \"stock\": 16,\n            \"imageUrl\": \"\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "Get All(Users) 200 (desc)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/products/GetAll?AscOrDesc=desc&pageNumber=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products",
+								"GetAll"
+							],
+							"query": [
+								{
+									"key": "AscOrDesc",
+									"value": "desc"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:35:42 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Products obtained succefully\",\n    \"totalRecords\": 101,\n    \"totalPages\": 11,\n    \"currentPage\": 1,\n    \"pageSize\": 10,\n    \"products\": [\n        {\n            \"name\": \"Platanos123\",\n            \"type\": \"Alimentacion\",\n            \"price\": 10000,\n            \"stock\": 10,\n            \"imageUrl\": \"https://res.cloudinary.com/dypzcxvts/image/upload/v1732500121/products_image/htdocvnaywtceerx5s2h.png\"\n        },\n        {\n            \"name\": \"Hola1234567\",\n            \"type\": \"Alimentacion\",\n            \"price\": 10000,\n            \"stock\": 10,\n            \"imageUrl\": \"https://res.cloudinary.com/dypzcxvts/image/upload/v1732501693/products_image/qqjhyuhzmi4tlk8ghfvy.png\"\n        },\n        {\n            \"name\": \"Practical Fresh Sausages\",\n            \"type\": \"Gorros\",\n            \"price\": 9816,\n            \"stock\": 279,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Small Frozen Computer\",\n            \"type\": \"Jugueteria\",\n            \"price\": 9770,\n            \"stock\": 459,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Licensed Wooden Soap\",\n            \"type\": \"Libros\",\n            \"price\": 9739,\n            \"stock\": 717,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Fantastic Concrete Pizza\",\n            \"type\": \"Gorros\",\n            \"price\": 9607,\n            \"stock\": 635,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Unbranded Concrete Keyboard\",\n            \"type\": \"Jugueteria\",\n            \"price\": 9541,\n            \"stock\": 815,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Handmade Plastic Hat\",\n            \"type\": \"Alimentacion\",\n            \"price\": 9362,\n            \"stock\": 592,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Unbranded Plastic Tuna\",\n            \"type\": \"Jugueteria\",\n            \"price\": 9220,\n            \"stock\": 551,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Awesome Cotton Computer\",\n            \"type\": \"Libros\",\n            \"price\": 8974,\n            \"stock\": 338,\n            \"imageUrl\": \"\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all (admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDEiLCJ1bmlxdWVfbmFtZSI6ImFkbWluQGlkd20uY2wiLCJlbWFpbCI6ImFkbWluQGlkd20uY2wiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MzI0OTIwODksImV4cCI6MTczMjU3ODQ4OSwiaWF0IjoxNzMyNDkyMDg5LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyMjUifQ.5CbkVri1VqPqWBomq0xW9KOhJSC3tg-OMqQOgcaywizwHpPHLCTvr3uW0NZOAMBVstZxNeJLdmu3mYXULvBAMw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/products/GetAllAdmin?pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						"GetAllAdmin"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all (admin) 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/products/GetAllAdmin?pageNumber=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products",
+								"GetAllAdmin"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:36:22 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Products obtained succefully\",\n    \"totalRecords\": 101,\n    \"totalPages\": 11,\n    \"currentPage\": 1,\n    \"pageSize\": 10,\n    \"products\": [\n        {\n            \"name\": \"Manzanas1234\",\n            \"type\": \"Gorros\",\n            \"price\": 1000,\n            \"stock\": 12,\n            \"imageUrl\": \"https://res.cloudinary.com/dypzcxvts/image/upload/v1732501954/products_image/hcezffba4vq587davqnj.png\"\n        },\n        {\n            \"name\": \"Sleek Steel Cheese\",\n            \"type\": \"Alimentacion\",\n            \"price\": 5030,\n            \"stock\": 919,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Gorgeous Plastic Shirt\",\n            \"type\": \"Libros\",\n            \"price\": 2430,\n            \"stock\": 156,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Generic Concrete Car\",\n            \"type\": \"Alimentacion\",\n            \"price\": 2091,\n            \"stock\": 949,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Gorgeous Cotton Gloves\",\n            \"type\": \"Gorros\",\n            \"price\": 6122,\n            \"stock\": 898,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Rustic Fresh Ball\",\n            \"type\": \"Alimentacion\",\n            \"price\": 1809,\n            \"stock\": 628,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Handcrafted Granite Chair\",\n            \"type\": \"Gorros\",\n            \"price\": 6838,\n            \"stock\": 161,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Intelligent Concrete Tuna\",\n            \"type\": \"Libros\",\n            \"price\": 4628,\n            \"stock\": 833,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Licensed Rubber Table\",\n            \"type\": \"Gorros\",\n            \"price\": 5022,\n            \"stock\": 39,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Awesome Cotton Computer\",\n            \"type\": \"Libros\",\n            \"price\": 8974,\n            \"stock\": 338,\n            \"imageUrl\": \"\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get products by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/products/Name?name=&pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						"Name"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": ""
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get products by name 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/products/Name?name=A&pageNumber=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products",
+								"Name"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "A"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:37:04 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Producto/s obtenido/s exitosamente\",\n    \"totalRecords\": 6,\n    \"totalPages\": 1,\n    \"currentPage\": 1,\n    \"pageSize\": 10,\n    \"products\": [\n        {\n            \"id\": 11,\n            \"name\": \"Awesome Cotton Computer\",\n            \"type\": \"Libros\",\n            \"price\": 8974,\n            \"stock\": 338,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"id\": 17,\n            \"name\": \"Awesome Metal Bacon\",\n            \"type\": \"Poleras\",\n            \"price\": 3835,\n            \"stock\": 196,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"id\": 33,\n            \"name\": \"Awesome Frozen Pants\",\n            \"type\": \"Jugueteria\",\n            \"price\": 7732,\n            \"stock\": 726,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"id\": 64,\n            \"name\": \"Awesome Wooden Pants\",\n            \"type\": \"Gorros\",\n            \"price\": 713,\n            \"stock\": 729,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"id\": 65,\n            \"name\": \"Awesome Cotton Towels\",\n            \"type\": \"Libros\",\n            \"price\": 2559,\n            \"stock\": 919,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"id\": 100,\n            \"name\": \"Awesome Rubber Towels\",\n            \"type\": \"Alimentacion\",\n            \"price\": 4926,\n            \"stock\": 801,\n            \"imageUrl\": \"\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get by type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5225/api/products/Type?type=Poleras&pageNumber=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5225",
+					"path": [
+						"api",
+						"products",
+						"Type"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "Poleras"
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get by type 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5225/api/products/Type?type=Poleras&pageNumber=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5225",
+							"path": [
+								"api",
+								"products",
+								"Type"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Poleras"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Nov 2024 02:37:44 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Producto/s obtenido/s exitosamente\",\n    \"totalRecords\": 20,\n    \"totalPages\": 2,\n    \"currentPage\": 1,\n    \"pageSize\": 10,\n    \"products\": [\n        {\n            \"name\": \"Awesome Metal Bacon\",\n            \"type\": \"Poleras\",\n            \"price\": 3835,\n            \"stock\": 196,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Handmade Rubber Car\",\n            \"type\": \"Poleras\",\n            \"price\": 378,\n            \"stock\": 864,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Unbranded Granite Pizza\",\n            \"type\": \"Poleras\",\n            \"price\": 4471,\n            \"stock\": 211,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Ergonomic Frozen Chips\",\n            \"type\": \"Poleras\",\n            \"price\": 3942,\n            \"stock\": 968,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Handmade Plastic Chips\",\n            \"type\": \"Poleras\",\n            \"price\": 3534,\n            \"stock\": 133,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Licensed Granite Computer\",\n            \"type\": \"Poleras\",\n            \"price\": 8077,\n            \"stock\": 58,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Ergonomic Wooden Tuna\",\n            \"type\": \"Poleras\",\n            \"price\": 3322,\n            \"stock\": 265,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Generic Granite Salad\",\n            \"type\": \"Poleras\",\n            \"price\": 1013,\n            \"stock\": 16,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Unbranded Steel Chair\",\n            \"type\": \"Poleras\",\n            \"price\": 1249,\n            \"stock\": 886,\n            \"imageUrl\": \"\"\n        },\n        {\n            \"name\": \"Intelligent Soft Mouse\",\n            \"type\": \"Poleras\",\n            \"price\": 5974,\n            \"stock\": 43,\n            \"imageUrl\": \"\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	]
+}
