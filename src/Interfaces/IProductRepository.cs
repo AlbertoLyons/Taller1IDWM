@@ -23,7 +23,7 @@ namespace Taller_1_IDWM.src.Interfaces
         // Método que obtiene un producto que tenga un tipo dado
         Task<IEnumerable<Product>> GetByType(string type);
         // Método que obtiene productos en orden ascendente o descendente dado un stock
-        Task <IEnumerable<GetProductNoAuthDTO>> GetAscOrDescSorted(int stock, string ascOrDesc);
+        Task <IEnumerable<GetProductNoAuthDTO>> GetAscOrDescSorted(int stock, string ascOrDesc, string type);
         // Método que actualiza un producto dada su id y los datos a actualizar
         Task<bool> EditProductAsync(int id, UpdateProductDTO updateProductDTO);
         // Método que elimina un producto dado el objeto

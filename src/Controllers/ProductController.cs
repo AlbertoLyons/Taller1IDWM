@@ -58,12 +58,12 @@ namespace Taller_1_IDWM.src.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll(string AscOrDesc, int pageNumber = 1)
+        public async Task<IActionResult> GetAll(string AscOrDesc, int pageNumber = 1, string type)
         {
             try {
             int pageSize = 10;
             var products = await _productRepository.GetByStock(0);
-            products = await _productRepository.GetAscOrDescSorted(0, AscOrDesc);
+            products = await _productRepository.GetAscOrDescSorted(0, AscOrDesc, type);
             var totalRecords = products.Count();
             var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
 
