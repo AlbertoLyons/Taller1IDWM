@@ -205,6 +205,7 @@ namespace Taller_1_IDWM.src.Repositories
             // Obtiene la lista de productos en un DTO
             var ProductsDTO = new List<GetProductNoAuthDTO>();
             // Si se tiene que ordenar de manera ascendente
+
             if(ascOrDesc == "asc")
             {
                 var products = await _dataContext.Products.OrderBy(p => p.Price).Where(p => p.Stock > stock).ToListAsync();
@@ -212,7 +213,7 @@ namespace Taller_1_IDWM.src.Repositories
                 {
                     ProductsDTO.Add(product.ToProductFromNoAuthDTO());
                 }
-                if (type != "")
+                if (type != "" && type != "Nada")
                 {
                     ProductsDTO = ProductsDTO.Where(p => p.Type == type).ToList();
                 }
@@ -226,7 +227,7 @@ namespace Taller_1_IDWM.src.Repositories
                 {
                     ProductsDTO.Add(product.ToProductFromNoAuthDTO());
                 }
-                                if (type != "")
+                if (type != "" && type != "Nada")
                 {
                     ProductsDTO = ProductsDTO.Where(p => p.Type == type).ToList();
                 }
