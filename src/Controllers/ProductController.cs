@@ -58,7 +58,7 @@ namespace Taller_1_IDWM.src.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll(string AscOrDesc, int pageNumber = 1, string type)
+        public async Task<IActionResult> GetAll(string AscOrDesc, string type, int pageNumber = 1)
         {
             try {
             int pageSize = 10;

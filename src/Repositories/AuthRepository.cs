@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Taller_1_IDWM.src.Data;
 using Taller_1_IDWM.src.DTOs.Auth;
@@ -38,9 +40,10 @@ namespace Taller_1_IDWM.src.Repositories
         /// <param name="loginDTO">El DTO que contiene el email y la contraseña del usuario.</param>
         /// <returns>El token JWT generado para el usuario.</returns>
         /// <exception cref="Exception">Arroja si el email o la contraseña son inválidos, o si el usuario no está activo.</exception>
-        public async Task<string> LoginUserAsync(LoginDTO loginDTO)
+        public async Task<AuthDTO> LoginUserAsync(LoginDTO loginDTO)
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDTO.Email);
+            string normalizedEmail = loginDTO.Email.ToUpper();
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.NormalizedUserName == normalizedEmail);
             if(user == null) throw new Exception("Invalid email or password");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
@@ -50,7 +53,15 @@ namespace Taller_1_IDWM.src.Repositories
                 throw new Exception("User is not active");
             }
             var newUser = await _tokenService.CreateToken(user);
-            return newUser;
+            var auth = new AuthDTO
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email!,
+                Roles = (List<string>)await _userManager.GetRolesAsync(user),
+                Token = newUser
+            };
+            return auth;
         }
         /// <summary>
         /// Registra un usuario en la base de datos.
@@ -59,7 +70,7 @@ namespace Taller_1_IDWM.src.Repositories
         /// <param name="password">La contraseña del usuario.</param>
         /// <returns>El token JWT del usuario recién registrado.</returns>
         /// <exception cref="Exception">Arroja si el email ya existe, o si la fecha de nacimiento es posterior a la fecha actual, o si las contraseñas no coinciden.</exception>
-        public async Task<string> RegisterUserAsync(RegisterDTO user, string password)
+        public async Task<AuthDTO> RegisterUserAsync(RegisterDTO user, string password)
         {
             bool exist = await _userManager.FindByEmailAsync(user.Mail) != null;
             if(exist) throw new Exception("Email already exists");
@@ -82,7 +93,15 @@ namespace Taller_1_IDWM.src.Repositories
             }
             // Crea un token para el usuario
             var registeredUser = await _tokenService.CreateToken(newUser);
-            return registeredUser;
+            var auth = new AuthDTO
+            {
+                Id = newUser.Id,
+                Name = newUser.Name,
+                Email = newUser.Email!,
+                Roles = (List<string>)await _userManager.GetRolesAsync(newUser),
+                Token = registeredUser
+            };
+            return auth;
         }
     }
 }
