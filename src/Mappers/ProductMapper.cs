@@ -45,6 +45,7 @@ namespace Taller_1_IDWM.src.Mappers
         {
             return new GetProductNoAuthDTO
             {
+                ID = product.ID,
                 Type = product.Type,
                 Name = product.Name,
                 Price = product.Price,

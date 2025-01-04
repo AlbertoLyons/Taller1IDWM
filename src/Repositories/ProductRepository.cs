@@ -200,7 +200,7 @@ namespace Taller_1_IDWM.src.Repositories
         /// <param name="ascOrDesc">El orden en que se van a ordenar los productos. Puede ser "asc" o "desc".</param>
         /// <returns>Una lista que contiene a todos los productos que cumplan con el stock minimo, ordenados por precio.</returns>
         /// <exception cref="Exception">Si el stock es menor o igual a 0, o si el orden especificado no es "asc" ni "desc".</exception>
-        public async Task<IEnumerable<GetProductNoAuthDTO>> GetAscOrDescSorted(int stock, string ascOrDesc, string type)
+        public async Task<IEnumerable<GetProductNoAuthDTO>> GetAscOrDescSorted(int stock, string ascOrDesc, string type, string name)
         {
             // Obtiene la lista de productos en un DTO
             var ProductsDTO = new List<GetProductNoAuthDTO>();
@@ -217,6 +217,10 @@ namespace Taller_1_IDWM.src.Repositories
                 {
                     ProductsDTO = ProductsDTO.Where(p => p.Type == type).ToList();
                 }
+                if(name != null){
+                    ProductsDTO = ProductsDTO.Where(p => p.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                }
                 return ProductsDTO;
             }
             // Si se tiene que ordenar de manera descendente
@@ -230,6 +234,10 @@ namespace Taller_1_IDWM.src.Repositories
                 if (type != "" && type != "Nada")
                 {
                     ProductsDTO = ProductsDTO.Where(p => p.Type == type).ToList();
+                }
+                if(name != null){
+                    ProductsDTO = ProductsDTO.Where(p => p.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+
                 }
                 return ProductsDTO;
             }
