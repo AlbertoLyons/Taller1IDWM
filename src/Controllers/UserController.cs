@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -94,6 +95,23 @@ namespace Taller_1_IDWM.src.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             try{
+                var user = await _userRepository.DeleteUserAsync(id);
+            }catch (Exception e)
+            {
+                return NotFound(new {error = e.Message});
+            }
+            return Ok("User deleted successfully");
+        }
+        [HttpDelete("{id}/DeleteUser")]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            try{
+                int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                if (userId != id)
+                {
+                    return Unauthorized(new {error = "The id must be the same as the logged user id"});
+                }
                 var user = await _userRepository.DeleteUserAsync(id);
             }catch (Exception e)
             {

@@ -37,6 +37,10 @@ namespace Taller_1_IDWM.src.Controllers
             }
             catch (Exception e)
             {
+                if (e.Message == "Invalid email or password")
+                {
+                    return Unauthorized(new { message = e.Message });
+                }
                 return BadRequest(new { message = e.Message });
             }
         }
