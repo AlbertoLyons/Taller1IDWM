@@ -139,8 +139,13 @@ namespace Taller_1_IDWM.src.Repositories
             // Se recorre la lista de recibos
             foreach (var receiptProduct in receiptProducts)
             {
+                var productId = receiptProduct.ProductId;
+                var name = await _dataContext.Products.Where(x => x.ID == productId).Select(x => x.Name).FirstOrDefaultAsync();
+                var type = await _dataContext.Products.Where(x => x.ID == productId).Select(x => x.Type).FirstOrDefaultAsync();
                 // Se obtienen los productos de cada recibo
                 var receiptProductUserDTO = receiptProduct.ReceiptProductToReceiptProductUserDTO();
+                receiptProductUserDTO.Name = name!;
+                receiptProductUserDTO.Type = type!;
                 // Se agregan los productos al receiptDTO
                 receiptsUserDTO.Add(receiptProductUserDTO);
             }

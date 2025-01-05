@@ -86,8 +86,8 @@ namespace Taller_1_IDWM.src.Repositories
             foreach (var receiptProduct in receiptProducts)
             {
                 var productId = receiptProduct.ProductId;
-                var name = _dataContext.Products.Where(x => x.ID == productId).Select(x => x.Name).FirstOrDefault();
-                var type = _dataContext.Products.Where(x => x.ID == productId).Select(x => x.Type).FirstOrDefault();
+                var name = await _dataContext.Products.Where(x => x.ID == productId).Select(x => x.Name).FirstOrDefaultAsync();
+                var type = await _dataContext.Products.Where(x => x.ID == productId).Select(x => x.Type).FirstOrDefaultAsync();
                 // Se mapea el producto de la factura al DTO
                 var receiptProductUserDTO = receiptProduct.ReceiptProductToReceiptProductUserDTO();
                 receiptProductUserDTO.Name = name!;
