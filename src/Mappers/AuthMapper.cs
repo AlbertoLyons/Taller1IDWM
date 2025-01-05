@@ -15,6 +15,7 @@ namespace Taller_1_IDWM.src.Mappers
                 UserName = registerDTO.Mail,
                 Gender = registerDTO.Gender,
                 Birthdate = registerDTO.Birthdate,
+                SecurityStamp = Guid.NewGuid().ToString()
             };
         }
         public static NewUserDTO ToNewUserDTO(this User userModel, string token)

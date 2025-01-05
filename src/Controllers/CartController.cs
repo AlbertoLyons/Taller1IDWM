@@ -63,7 +63,12 @@ namespace Taller_1_IDWM.src.Controllers
             }
 
             SaveProductsToCookies(userGuid, products);
-            return Ok("Product added to cart");
+            var response = new
+            {
+                Message = "Products bought successfully",
+                Receipt = newProductDTO,
+            };
+            return Ok(response);
         }
         [HttpPut("{id}")]
         public IActionResult UpdateProduct(int id, string addOrDecrease)
