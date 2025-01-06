@@ -19,6 +19,13 @@ namespace Taller_1_IDWM.src.Controllers
         {
             _productRepository = productRepository;
         }
+        /// <summary>
+        /// Crea un producto
+        /// </summary>
+        /// <param name="createProductDTO">Producto a crear</param>
+        /// <returns>Url del producto</returns>
+        /// <response code="201">Producto creado exitosamente</response>
+        /// <response code="400">Error al crear el producto</response>
         [HttpPost("")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post([FromForm]CreateProductDTO createProductDTO)
@@ -38,6 +45,14 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new {message = e.Message});
             }
         }
+        /// <summary>
+        /// Actualiza un producto.
+        /// </summary>
+        /// <param name="id">Id del producto a actualizar</param>
+        /// <param name="updateProductDto">Nuevas características del producto</param>
+        /// <returns>Mensaje exitoso</returns>
+        /// <response code="200">Producto actualizado exitosamente</response>
+        /// <response code="400">Error al actualizar el producto</response>
         [HttpPut]
         [Route("{id}")]
         [Authorize(Roles = "Admin")]
@@ -56,7 +71,14 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new {message = e.Message});
             }
         }
-
+        /// <summary>
+        /// Obtener todos los productos.
+        /// </summary>
+        /// <param name="AscOrDesc">Ordenar los productos por el precio</param>
+        /// <param name="pageNumber">Número de paginas</param>
+        /// <returns>Todos los productos</returns>
+        /// <response code="200">Productos obtenidos exitosamente</response>
+        /// <response code="400">Error al obtener los productos</response>
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(string AscOrDesc, string type, string? name , int pageNumber = 1)
         {
@@ -90,6 +112,13 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new {message = e.Message});
             }
         }
+        /// <summary>
+        /// Obtener todos los productos para un usuario admin.
+        /// </summary>
+        /// <param name="pageNumber">Numero de paginas</param>
+        /// <returns>Todos los productos</returns>
+        /// <response code="200">Productos obtenidos exitosamente</response>
+        /// <response code="400">Error al obtener los productos</response>
         [HttpGet("GetAllAdmin")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllAdmin(int pageNumber = 1)
@@ -123,6 +152,14 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new {message = e.Message});
             }
         }
+        /// <summary>
+        /// Obtiene un producto por su nombre.
+        /// </summary>
+        /// <param name="name">Nombre del producto</param>
+        /// <param name="pageNumber">Numero de paginas</param>
+        /// <returns>Producto/s obtenidos</returns>
+        /// <response code="200">Producto/s obtenido/s exitosamente</response>
+        /// <response code="404">Producto no encontrado</response>
         [HttpGet("Name")]
         public async Task<IActionResult> GetByName(string name, int pageNumber = 1)
         {
@@ -151,6 +188,14 @@ namespace Taller_1_IDWM.src.Controllers
             };
             return Ok(response);
         }
+        /// <summary>
+        /// Obtiene un producto por su tipo.
+        /// </summary>
+        /// <param name="type">El tipo del producto</param>
+        /// <param name="pageNumber">nNmero de paginas</param>
+        /// <returns>Producto/s obtenido/s</returns>
+        /// <response code="200">Producto/s obtenido/s exitosamente</response>
+        /// <response code="404">Producto no encontrado</response>
         [HttpGet("Type")]
         public async Task<IActionResult> GetByType(string type, int pageNumber = 1)
         {
@@ -179,6 +224,13 @@ namespace Taller_1_IDWM.src.Controllers
             };
             return Ok(response);
         }
+        /// <summary>
+        /// Remueve un producto.
+        /// </summary>
+        /// <param name="id">Id del producto a remover</param>
+        /// <returns></returns>
+        /// <response code="200">Producto eliminado exitosamente</response>
+        /// <response code="404">Producto no encontrado</response>
         [HttpDelete]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)

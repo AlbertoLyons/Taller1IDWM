@@ -23,6 +23,11 @@ namespace Taller_1_IDWM.src.Controllers
             _receiptRepository = receiptRepository;
             _receiptProductRepository = receiptProductRepository;
         }
+        /// <summary>
+        /// Obtiene los productos del carrito de compras.
+        /// </summary>
+        /// <returns>Productos en el carrito</returns>
+        /// <response code="200">Los productos en el carrito</response>
         [HttpGet]
         public IActionResult GetProducts()
         {
@@ -30,6 +35,13 @@ namespace Taller_1_IDWM.src.Controllers
             var products = GetProductsFromCookies(userGuid);
             return Ok(products);
         }
+        /// <summary>
+        /// Agrega un producto al carrito de compras.
+        /// </summary>
+        /// <param name="newProductID">El producto a agregar al carrito</param>
+        /// <returns></returns>
+        /// <response code="200">Producto agregado al carrito</response>
+        /// <response code="400">Producto sin stock o no es válido</response>
         [HttpPost("{newProductID}")]
         public async Task<IActionResult> AddProduct(int newProductID)
         {
@@ -70,6 +82,14 @@ namespace Taller_1_IDWM.src.Controllers
             };
             return Ok(response);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">Id del producto a actualizar</param>
+        /// <param name="addOrDecrease">Se añade o quita cantidad de producto en el carrito</param>
+        /// <returns>Producto actualizado</returns>
+        /// <response code="200">Producto actualizado correctamente</response>
+        /// <response code="400">Cantidad no puede ser menor a 1, mal ingreso de parámetros o el producto no fue encontrado</response>
         [HttpPut("{id}")]
         public IActionResult UpdateProduct(int id, string addOrDecrease)
         {
@@ -106,6 +126,13 @@ namespace Taller_1_IDWM.src.Controllers
 
             return Ok(existingProduct);
         }
+        /// <summary>
+        /// Elimina un producto del carrito de compras.
+        /// </summary>
+        /// <param name="id">Id del producto a eliminar</param>
+        /// <returns></returns>
+        /// <response code="200">Producto eliminado del carrito de manera correcta</response>
+        /// <response code="404">Producto no encontrado</response>
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
@@ -128,7 +155,7 @@ namespace Taller_1_IDWM.src.Controllers
 
             return Ok("Product removed from cart");
         }
- [HttpPost("buy")]
+[HttpPost("buy")]
 [Authorize(Roles = "User")]
 public async Task<IActionResult> BuyProducts(AddressDTO addressDTO)
 {
@@ -166,7 +193,6 @@ public async Task<IActionResult> BuyProducts(AddressDTO addressDTO)
                 return Ok(response);
             }
         }
-
         return BadRequest("Error buying products");
     }
     catch (Exception e)
@@ -193,6 +219,11 @@ public async Task<IActionResult> BuyProducts(AddressDTO addressDTO)
 
             return userGuid;
         }
+        /// <summary>
+        /// Obtiene los productos del carrito de las cookies del usuario.
+        /// </summary>
+        /// <param name="userGuid">GUID del usuario</param>
+        /// <returns>JSON de productos del carrito</returns>
         private List<ProductInCartDTO> GetProductsFromCookies(string userGuid)
         {
             var cookieValue = Request.Cookies[ProductCookieKey + "_" + userGuid];
@@ -202,6 +233,11 @@ public async Task<IActionResult> BuyProducts(AddressDTO addressDTO)
             }
             return [];
         }
+        /// <summary>
+        /// Guarda los productos del carrito en las cookies del usuario.
+        /// </summary>
+        /// <param name="userGuid">GUID del usuario</param>
+        /// <param name="products">Lista de productos</param>
         private void SaveProductsToCookies(string userGuid, List<ProductInCartDTO> products)
         {
             var serializedProducts = JsonSerializer.Serialize(products);

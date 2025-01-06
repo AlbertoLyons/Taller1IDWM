@@ -25,6 +25,14 @@ namespace Taller_1_IDWM.src.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
+        /// <summary>
+        /// Actualiza un usuario en la base de datos.
+        /// </summary>
+        /// <param name="id">Id del usuario</param>
+        /// <param name="updateUserDto">Nueva informaciómn del usuario</param>
+        /// <returns>Respuesta de la base de datos</returns>
+        /// <status code="200">Si el usuario se actualiza exitosamente.</status>
+        /// <status code="400">Si ocurre un error al actualizar el usuario.</status>
         [HttpPut]
         [Route("{id}/{edit}")]
         public async Task<IActionResult> UpdateUser([FromRoute] int id , [FromRoute] string edit,[FromBody] UpdateUserDTO updateUserDto )
@@ -41,6 +49,13 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new {error = e.Message});
             }
         }
+        /// <summary>
+        /// Activa o desactiva un usuario en la base de datos.
+        /// </summary>
+        /// <param name="id">Usuario a activar o desactivar</param>
+        /// <returns>Nuevo estado del usuario</returns>
+        /// <status code="200">Si el usuario se activa o desactiva exitosamente.</status>
+        /// <status code="400">Si ocurre un error al activar o desactivar el usuario.</status>
         [HttpPut("{id}/ActivateDeactivate")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ActivateDeactivateUser(int id)
@@ -59,6 +74,15 @@ namespace Taller_1_IDWM.src.Controllers
             }
 
         }
+        /// <summary>
+        /// Obtiene todos los usuarios de la base de datos.
+        /// </summary>
+        /// <param name="pageNumber">Numero de pagina</param>
+        /// <param name="searchTerm">Año de la creacion del usuario</param>
+        /// <param name="searchField">Término de busqueda('gender', 'name' o 'birthdate')</param>
+        /// <returns>JSON de usuarios</returns>
+        /// <status code="200">Si los usuarios se obtienen exitosamente.</status>
+        /// <status code="400">Si ocurre un error al obtener los usuarios.</status>
         [HttpGet("GetAll")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll(int pageNumber = 1, string searchTerm = "", string searchField = "")
@@ -90,6 +114,13 @@ namespace Taller_1_IDWM.src.Controllers
                 return BadRequest(new {error = e.Message});
             }
         }
+        /// <summary>
+        /// Borra un usuario de la base de datos.
+        /// </summary>
+        /// <param name="id">Id del usuario</param>
+        /// <returns></returns>
+        /// <status code="200">Si el usuario se borra exitosamente.</status>
+        /// <status code="400">Si ocurre un error al borrar el usuario.</status>
         [HttpDelete]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
@@ -119,8 +150,8 @@ namespace Taller_1_IDWM.src.Controllers
             }
             return Ok("User deleted successfully");
         }
-
         [HttpGet("GetById")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetById(int id)
         {
             try{
