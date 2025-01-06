@@ -26,11 +26,11 @@ namespace Taller_1_IDWM.src.Controllers
             _roleManager = roleManager;
         }
         [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> UpdateUser([FromRoute] int id , [FromBody] UpdateUserDTO updateUserDto)
+        [Route("{id}/{edit}")]
+        public async Task<IActionResult> UpdateUser([FromRoute] int id , [FromRoute] string edit,[FromBody] UpdateUserDTO updateUserDto )
         { 
             try {
-                var userModel = await _userRepository.EditUserAsync(id, updateUserDto);
+                var userModel = await _userRepository.EditUserAsync(id, updateUserDto, edit);
                 var response = new
                 {
                     Message = "User updated successfully",

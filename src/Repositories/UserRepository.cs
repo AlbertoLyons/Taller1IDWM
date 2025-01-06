@@ -14,14 +14,18 @@ namespace Taller_1_IDWM.src.Repositories
         // El contexto de la base de datos
         private readonly DataContext _dataContext;
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+
         /// <summary>
         /// Constructor para el repositorio de usuarios.
         /// </summary>
         /// <param name="dataContext">El contexto de la base de datos.</param>
-        public UserRepository(DataContext dataContext, UserManager<User> userManager)
+        public UserRepository(DataContext dataContext, UserManager<User> userManager,  SignInManager<User> signInManager)
         {
             _dataContext = dataContext;
             _userManager = userManager;
+            _signInManager = signInManager;
+
         }
         /// <summary>
         /// Elimina al usuario de la base de datos dado su id.
@@ -54,29 +58,45 @@ namespace Taller_1_IDWM.src.Repositories
         /// <exception cref="Exception">
         /// Arroja error si el usuario no se encontró o si las contraseñas no coinciden.
         /// </exception>
-        public async Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO)
+        public async Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO, string edit)
         {
+            if (edit == "password")
+            {
             // Buscar el usuario por su id
             var existingUser = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == id) ?? throw new Exception("User not found");
             // Si la contraseña y la confirmación de la contraseña no son nulas y no coinciden, arrojar una excepción
-            if (updateUserDTO.Password == null && updateUserDTO.ConfirmPassword == null)
+            var result = await _signInManager.CheckPasswordSignInAsync(existingUser, updateUserDTO.ActualPassword, false);
+            if (!result.Succeeded) throw new Exception("password");
+            if (!existingUser.Active) 
             {
-                updateUserDTO.Password = existingUser.PasswordHash!;
-                updateUserDTO.ConfirmPassword = existingUser.PasswordHash!;
+                throw new Exception("User is not active");
             }
-            if (updateUserDTO.Password != updateUserDTO.ConfirmPassword && updateUserDTO.Password != null && updateUserDTO.ConfirmPassword != null)
+            if (updateUserDTO.NewPassword != updateUserDTO.ConfirmPassword)
             {
                 throw new Exception("Passwords do not match");
             }
+            var changePassword = await _userManager.ChangePasswordAsync(existingUser, updateUserDTO.ActualPassword, updateUserDTO.NewPassword);
+            if (!changePassword.Succeeded) throw new Exception("passwordd");
             // Actualizar los campos del usuario
-            existingUser.Name = updateUserDTO.Name;
-            existingUser.Birthdate = updateUserDTO.Birthdate;
-            existingUser.Gender = updateUserDTO.Gender;
-            existingUser.PasswordHash = updateUserDTO.Password;
-            // Guardar los cambios
-            await _userManager.UpdateAsync(existingUser);
+
             await _dataContext.SaveChangesAsync();
             return true;
+            }
+
+            else{
+            
+                var existingUser = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == id) ?? throw new Exception("User not found");
+                if (!existingUser.Active) 
+                {
+                    throw new Exception("User is not active");
+                }
+                existingUser.Name = updateUserDTO.Name;
+                existingUser.Birthdate = (DateOnly)updateUserDTO.Birthdate;
+                existingUser.Gender = updateUserDTO.Gender;
+                _dataContext.Users.Update(existingUser);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
         }
         /// <summary>
         /// Verifica si existe un usuario con el rut especificado.

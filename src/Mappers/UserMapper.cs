@@ -41,8 +41,8 @@ namespace Taller_1_IDWM.src.Mappers
             {
                 Name = updateUserDto.Name,
                 Gender = updateUserDto.Gender,
-                Birthdate = updateUserDto.Birthdate,
-                PasswordHash = updateUserDto.Password
+                Birthdate = (DateOnly)updateUserDto.Birthdate,
+                PasswordHash = updateUserDto.NewPassword
             };
         }
         public static UserNameDTO ToUserNameDTO(this User userModel)
