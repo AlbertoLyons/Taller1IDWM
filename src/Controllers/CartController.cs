@@ -75,7 +75,12 @@ namespace Taller_1_IDWM.src.Controllers
             }
 
             SaveProductsToCookies(userGuid, products);
-            return Ok("Product added to cart");
+            var response = new
+            {
+                Message = "Products bought successfully",
+                Receipt = newProductDTO,
+            };
+            return Ok(response);
         }
         /// <summary>
         /// 
@@ -150,47 +155,51 @@ namespace Taller_1_IDWM.src.Controllers
 
             return Ok("Product removed from cart");
         }
-        /// <summary>
-        /// Compra los productos del carrito.
-        /// </summary>
-        /// <param name="addressDTO">Direcciones de entrega de los productos comprados</param>
-        /// <returns>La boleta</returns>
-        /// <response code="200">Productos comprados correctamente</response>
-        /// <response code="400">Error al comprar los productos</response>
-        [HttpPost("buy")]
-        [Authorize(Roles = "User")]
-        public async Task<IActionResult> BuyProducts(AddressDTO addressDTO)
+[HttpPost("buy")]
+[Authorize(Roles = "User")]
+public async Task<IActionResult> BuyProducts(AddressDTO addressDTO)
+{
+    try
+    {
+        var userGuid = GetOrCreateUserGuid();
+        var products = GetProductsFromCookies(userGuid);
+        
+        // Si no hay productos en el carrito, retornar un error
+        if (products.Count == 0)
         {
-            try{
-                var userGuid = GetOrCreateUserGuid();
-                var products = GetProductsFromCookies(userGuid);
-                var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                var receipt = await _receiptRepository.CreateReceipt(products, userId, addressDTO);
-                if (receipt != null)
-                {
-                    var receiptProducts = await _receiptProductRepository.AddReceiptProduct(products, receipt.Id);
-                    if (receiptProducts != null)
-                    {
-                        var boughtReceipt = await _receiptRepository.GetById(receipt.Id);
-                        var response = new
-                        {
-                            Message = "Products bought successfully",
-                            Receipt = boughtReceipt,
-                        };
-                        return Ok(response);
-                    }
-                }
-                return BadRequest("Error buying products");
-            }
-            catch (Exception e)
+            return BadRequest("No products in cart.");
+        }
+
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var receipt = await _receiptRepository.CreateReceipt(products, userId, addressDTO);
+
+        if (receipt != null)
+        {
+            var receiptProducts = await _receiptProductRepository.AddReceiptProduct(products, receipt.Id);
+            if (receiptProducts != null)
             {
-                return BadRequest(new { message = e.Message });
+                // Crear la respuesta con los detalles de la compra
+                var boughtReceipt = await _receiptRepository.GetById(receipt.Id);
+                var response = new
+                {
+                    Message = "Products bought successfully",
+                    Receipt = boughtReceipt,
+                };
+
+                // Vaciar la cookie de productos después de la compra
+                SaveProductsToCookies(userGuid, new List<ProductInCartDTO>());
+
+                // Devolver la respuesta con la boleta y mensaje
+                return Ok(response);
             }
         }
-        /// <summary>
-        /// Crea u obtiene el GUID del usuario.
-        /// </summary>
-        /// <returns>Retorna el GUID</returns>
+        return BadRequest("Error buying products");
+    }
+    catch (Exception e)
+    {
+        return BadRequest(new { message = e.Message });
+    }
+}
         private string GetOrCreateUserGuid()
         {
             var userGuid = Request.Cookies[UserCookieKey];

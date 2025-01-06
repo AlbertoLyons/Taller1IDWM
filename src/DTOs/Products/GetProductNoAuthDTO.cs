@@ -4,6 +4,9 @@ namespace Taller_1_IDWM.src.DTOs.Products
 {
     public class GetProductNoAuthDTO
     {
+        [Key]
+        [Required]
+        public int ID { get; set; }
         [Required]
         [StringLength(64, MinimumLength = 10)]
         public string Name { get; set; } = string.Empty;

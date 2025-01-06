@@ -26,8 +26,8 @@ namespace Taller_1_IDWM.src.Controllers
         {
             try
             {
-                var token = await _authRepository.RegisterUserAsync(registerDTO, registerDTO.Password);
-                return Ok(token);
+                var auth = await _authRepository.RegisterUserAsync(registerDTO, registerDTO.Password);
+                return Ok(auth);
             }
             catch (Exception e)
             {
@@ -46,11 +46,15 @@ namespace Taller_1_IDWM.src.Controllers
         {
             try
             {
-                var token = await _authRepository.LoginUserAsync(loginDTO);
-                return Ok(token);
+                var auth = await _authRepository.LoginUserAsync(loginDTO);
+                return Ok(auth);
             }
             catch (Exception e)
             {
+                if (e.Message == "Invalid email or password")
+                {
+                    return Unauthorized(new { message = e.Message });
+                }
                 return BadRequest(new { message = e.Message });
             }
         }

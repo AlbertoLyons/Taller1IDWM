@@ -77,7 +77,7 @@ namespace Taller_1_IDWM.src.Data
                         .RuleFor(p => p.Type, f => types[random.Next(0, types.Count)])
                         .RuleFor(p => p.Price, f => f.Random.Int(100, 10000))
                         .RuleFor(p => p.Stock, f => f.Random.Int(1, 1000))
-                        .RuleFor(p => p.ImageUrl, f => "");
+                        .RuleFor(p => p.ImageUrl, f => f.Image.PicsumUrl());
 
                     var products = productFaker.Generate(100);
                     customersContext.Products.AddRange(products);

@@ -81,10 +81,22 @@ namespace Taller_1_IDWM
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IReceiptProductRepository, ReceiptProductRepository>();
             builder.Services.AddScoped<IReceiptRepository, ReceiptRepository>();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("allowAll", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                });
+            });
             // Añade Identity de Microsoft a la aplicación
             BuildIdentity(builder);
             // Construye la aplicación
             var app = builder.Build();
+            // Configura la aplicación
+            app.UseCors("allowAll");
             // Utiliza gestión por roles y se añade a la base de datos
             using (var scope = app.Services.CreateScope())
             {
@@ -109,7 +121,7 @@ namespace Taller_1_IDWM
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 8;
             })

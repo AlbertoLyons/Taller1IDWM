@@ -20,11 +20,11 @@ namespace Taller_1_IDWM.src.DTOs.Auth
         public string Gender { get; set; } = string.Empty;
         [Required]
         [StringLength(20, MinimumLength = 8)]
-        [RegularExpression(@"^[a-zA-Z0-9]*$")]
+        [RegularExpression(@"^[a-zA-Z0-9]{8,20}$")]
         public string Password { get; set; } = string.Empty;
         [Required]
         [StringLength(20, MinimumLength = 8)]
-        [RegularExpression(@"^[a-zA-Z0-9]*$")]
+        [RegularExpression(@"^[a-zA-Z0-9]{8,20}$")]
         public string ConfirmPassword { get; set; } = string.Empty;
     }
 }

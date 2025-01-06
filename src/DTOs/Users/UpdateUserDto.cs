@@ -8,24 +8,14 @@ namespace Taller_1_IDWM.src.DTOs.Users
 {
     public class UpdateUserDTO
     {
-        [Required(AllowEmptyStrings = true)]
-        public DateOnly Birthdate { get; set; }
+        public DateOnly? Birthdate { get; set; }
 
-        [Required(AllowEmptyStrings = true)]
-        [StringLength(255, MinimumLength = 8)]
-        public string Name { get; set; } = string.Empty;
+        public string? Name { get; set; } = string.Empty;
 
-        [Required]
-        [RegularExpression(@"Masculino|Femenino|Prefiero no decirlo|otro")]
-        public string Gender { get; set; } = string.Empty;
+        public string? Gender { get; set; } = string.Empty;
         
-        [Required]
-        [StringLength(20, MinimumLength = 8)]
-        [RegularExpression(@"^[a-zA-Z0-9]*$")]
-        public string Password { get; set; } = string.Empty;
-        [Required]
-        [StringLength(20, MinimumLength = 8)]
-        [RegularExpression(@"^[a-zA-Z0-9]*$")]
-        public string ConfirmPassword { get; set; } = string.Empty;
+        public string? ActualPassword { get; set; } = string.Empty;
+        public string? NewPassword { get; set; } = string.Empty;
+        public string? ConfirmPassword { get; set; } = string.Empty;
     }
 }

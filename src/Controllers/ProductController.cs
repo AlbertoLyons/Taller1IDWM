@@ -80,12 +80,12 @@ namespace Taller_1_IDWM.src.Controllers
         /// <response code="200">Productos obtenidos exitosamente</response>
         /// <response code="400">Error al obtener los productos</response>
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll(string AscOrDesc, int pageNumber = 1)
+        public async Task<IActionResult> GetAll(string AscOrDesc, string type, string? name , int pageNumber = 1)
         {
             try {
             int pageSize = 10;
             var products = await _productRepository.GetByStock(0);
-            products = await _productRepository.GetAscOrDescSorted(0, AscOrDesc);
+            products = await _productRepository.GetAscOrDescSorted(0, AscOrDesc, type, name);
             var totalRecords = products.Count();
             var totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
 

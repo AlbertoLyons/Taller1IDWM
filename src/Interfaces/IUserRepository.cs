@@ -16,7 +16,7 @@ namespace Taller_1_IDWM.src.Interfaces
         Task<UserGetAdminDTO?> GetById(int id);
         // Método que actualiza a un usuario dada su id y los datos a actualizar
         Task<IEnumerable<UserNameDTO>> GetByUserName(string username);
-        Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO);
+        Task<bool?> EditUserAsync(int id, UpdateUserDTO updateUserDTO, string edit);
         // Método que elimina a un usuario
         Task<User?> DeleteUserAsync(int id);
         // Método que activa o desactiva a un usuario

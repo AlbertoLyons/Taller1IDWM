@@ -102,7 +102,12 @@ namespace Taller_1_IDWM.src.Controllers
         {
             try{
                 var receiptsProducts = await _receiptProductRepository.GetByReceiptId(id);
-                return Ok(receiptsProducts);
+                var response = new
+                {
+                    Message = "Registros obtenidos exitosamente.",
+                    Receipts = receiptsProducts
+                };
+                return Ok(response);
             }
             catch (Exception e)
             {
@@ -123,7 +128,12 @@ namespace Taller_1_IDWM.src.Controllers
                 var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
                 var receipts = await _receiptRepository.GetOrderHistory(userId);
                 receipts = receipts.OrderByDescending(r => r.BoughtAt).ToList();
-                return Ok(receipts);
+                var response = new
+                {
+                    Message = "Registros obtenidos exitosamente.",
+                    Receipts = receipts
+                };
+                return Ok(response);
             }
             catch (Exception e)
             {
@@ -144,7 +154,12 @@ namespace Taller_1_IDWM.src.Controllers
             try{
                 var users = await _userRepository.GetByUserName(userName);
                 var receipts = await _receiptRepository.GetByUserName(users.ToList());
-                return Ok(receipts);
+                var response = new
+                {
+                    Message = "Registros obtenidos exitosamente.",
+                    Receipts = receipts
+                };
+                return Ok(response);
             }
             catch (Exception e)
             {

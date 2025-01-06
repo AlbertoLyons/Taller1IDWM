@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -33,11 +34,11 @@ namespace Taller_1_IDWM.src.Controllers
         /// <status code="200">Si el usuario se actualiza exitosamente.</status>
         /// <status code="400">Si ocurre un error al actualizar el usuario.</status>
         [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> UpdateUser([FromRoute] int id , [FromBody] UpdateUserDTO updateUserDto)
+        [Route("{id}/{edit}")]
+        public async Task<IActionResult> UpdateUser([FromRoute] int id , [FromRoute] string edit,[FromBody] UpdateUserDTO updateUserDto )
         { 
             try {
-                var userModel = await _userRepository.EditUserAsync(id, updateUserDto);
+                var userModel = await _userRepository.EditUserAsync(id, updateUserDto, edit);
                 var response = new
                 {
                     Message = "User updated successfully",
@@ -132,13 +133,23 @@ namespace Taller_1_IDWM.src.Controllers
             }
             return Ok("User deleted successfully");
         }
-        /// <summary>
-        /// Obtiene un usuario por su id.
-        /// </summary>
-        /// <param name="id">Id del usuario a obtener</param>
-        /// <returns>El usuario obtenido</returns>
-        /// <status code="200">Si el usuario se obtiene exitosamente.</status>
-        /// <status code="400">Si no se encuentra el usuario.</status>
+        [HttpDelete("{id}/DeleteUser")]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            try{
+                int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+                if (userId != id)
+                {
+                    return Unauthorized(new {error = "The id must be the same as the logged user id"});
+                }
+                var user = await _userRepository.DeleteUserAsync(id);
+            }catch (Exception e)
+            {
+                return NotFound(new {error = e.Message});
+            }
+            return Ok("User deleted successfully");
+        }
         [HttpGet("GetById")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetById(int id)
