@@ -1,0 +1,27 @@
+CREATE TABLE Articulo (codigo_articulo int(255) NOT NULL AUTO_INCREMENT, detalle_articulo varchar(255) NOT NULL, precio_compra float NOT NULL, 
+precio_venta float NOT NULL, en_stock int(1) NOT NULL, Pais_Origenid_pais int(255) NOT NULL, PRIMARY KEY (codigo_articulo));
+CREATE TABLE Articulo_facturado (id_articulo_facturado int(255) NOT NULL AUTO_INCREMENT, detalle_articulo_facturado varchar(255) NOT NULL, 
+cantidad_venta float NOT NULL, precio_unitario float NOT NULL, precio_total float NOT NULL, Articulocodigo_articulo int(255) NOT NULL, 
+Facturaid_factura int(255) NOT NULL, PRIMARY KEY (id_articulo_facturado));
+CREATE TABLE Empresa (id_empresa int(255) NOT NULL AUTO_INCREMENT, codigo_empresa int(255) NOT NULL UNIQUE, nombre_empresa varchar(255) NOT NULL, 
+direccion_empresa varchar(255) NOT NULL, PRIMARY KEY (id_empresa));
+CREATE TABLE Estado_Factura (id_estado int(255) NOT NULL AUTO_INCREMENT, estado varchar(255) NOT NULL, PRIMARY KEY (id_estado));
+CREATE TABLE Factura (id_modalidad int(10) NOT NULL, id_estado int(255) NOT NULL, id_usuario int(255), id_empresa int(255) NOT NULL, 
+id_factura int(255) NOT NULL AUTO_INCREMENT, numero_factura int(255) NOT NULL UNIQUE, nombre_cliente varchar(255) NOT NULL, 
+forma_pago varchar(255) NOT NULL, fecha_emision date NOT NULL, fecha_entrega date NOT NULL, precio_total float NOT NULL, 
+precio_descontado float NOT NULL, PRIMARY KEY (id_factura));
+CREATE TABLE Modalidad_Entrega (id_modalidad int(10) NOT NULL AUTO_INCREMENT, tipo_modalidad varchar(255) NOT NULL, valor_entrega float NOT NULL, 
+PRIMARY KEY (id_modalidad));
+CREATE TABLE Pais_Origen (id_pais int(255) NOT NULL AUTO_INCREMENT, pais varchar(255) NOT NULL, PRIMARY KEY (id_pais));
+CREATE TABLE Rol (Id_rol int(10) NOT NULL AUTO_INCREMENT, nombre_rol varchar(255) NOT NULL, PRIMARY KEY (Id_rol));
+CREATE TABLE Usuario (Id_rol int(10) NOT NULL, id_usuario int(255) NOT NULL AUTO_INCREMENT, rut_usuario varchar(13) NOT NULL UNIQUE, 
+nombre_completo varchar(255) NOT NULL, fecha_nacimiento date NOT NULL, nombre_usuario varchar(255) NOT NULL, contraseña varchar(255) NOT NULL, 
+PRIMARY KEY (id_usuario));
+ALTER TABLE Usuario ADD CONSTRAINT FKUsuario371930 FOREIGN KEY (Id_rol) REFERENCES Rol (Id_rol);
+ALTER TABLE Factura ADD CONSTRAINT FKFactura953982 FOREIGN KEY (id_estado) REFERENCES Estado_Factura (id_estado);
+ALTER TABLE Factura ADD CONSTRAINT FKFactura862524 FOREIGN KEY (id_modalidad) REFERENCES Modalidad_Entrega (id_modalidad);
+ALTER TABLE Factura ADD CONSTRAINT FKFactura394032 FOREIGN KEY (id_usuario) REFERENCES Usuario (id_usuario);
+ALTER TABLE Factura ADD CONSTRAINT FKFactura592721 FOREIGN KEY (id_empresa) REFERENCES Empresa (id_empresa);
+ALTER TABLE Articulo_facturado ADD CONSTRAINT FKArticulo_f488042 FOREIGN KEY (Articulocodigo_articulo) REFERENCES Articulo (codigo_articulo);
+ALTER TABLE Articulo_facturado ADD CONSTRAINT FKArticulo_f922467 FOREIGN KEY (Facturaid_factura) REFERENCES Factura (id_factura);
+ALTER TABLE Articulo ADD CONSTRAINT FKArticulo223351 FOREIGN KEY (Pais_Origenid_pais) REFERENCES Pais_Origen (id_pais);

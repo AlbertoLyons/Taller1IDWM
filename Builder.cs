@@ -85,10 +85,9 @@ namespace Taller_1_IDWM
             {
                 options.AddPolicy("allowAll", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200")
+                    policy.AllowAnyOrigin()
                         .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials();
+                        .AllowAnyHeader();
                 });
             });
             // Añade Identity de Microsoft a la aplicación
